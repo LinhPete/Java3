@@ -32,15 +32,15 @@ public class NewsServlet extends HttpServlet {
 		  String id = request.getParameter("id");
 
         if (page == null || page.equals("home")) {
-            request.getRequestDispatcher("/views/home.jsp").forward(request, response);
+            request.getRequestDispatcher("/user/views/home.jsp").forward(request, response);
         } else if (page.equals("culture")) {
-            request.getRequestDispatcher("/views/listCultureNews.jsp").forward(request, response);
+            request.getRequestDispatcher("/user/views/listCultureNews.jsp").forward(request, response);
         } else if (page.equals("law")) {
-            request.getRequestDispatcher("/views/listLawNews.jsp").forward(request, response);
+            request.getRequestDispatcher("/user/views/listLawNews.jsp").forward(request, response);
         } else if (page.equals("sports")) {
-            request.getRequestDispatcher("/views/listSportsNews.jsp").forward(request, response);
+            request.getRequestDispatcher("/user/views/listSportsNews.jsp").forward(request, response);
         } else if (page.equals("travel")) {
-            request.getRequestDispatcher("/views/listTravelNews.jsp").forward(request, response);
+            request.getRequestDispatcher("/user/views/listTravelNews.jsp").forward(request, response);
         }
 	}
 
