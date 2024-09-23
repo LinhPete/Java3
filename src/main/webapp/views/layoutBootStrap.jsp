@@ -17,11 +17,11 @@
 
 	<!-- Nav -->
 	<nav class="bg-light text-center py-2">
-		<a href="#" class="text-decoration-none mx-2">Trang chủ</a> <a
-			href="#" class="text-decoration-none mx-2">Văn hóa</a> <a href="#"
-			class="text-decoration-none mx-2">Pháp luật</a> <a href="#"
-			class="text-decoration-none mx-2">Thể thao</a> <a href="#"
-			class="text-decoration-none mx-2">...</a>
+		<a href="#" class="text-decoration-none mx-2">Trang chủ</a> 
+		<a href="#" class="text-decoration-none mx-2">Văn hóa</a> 
+		<a href="#" class="text-decoration-none mx-2">Pháp luật</a> 
+		<a href="#" class="text-decoration-none mx-2">Thể thao</a> 
+		<a href="#" class="text-decoration-none mx-2">Du lịch</a>
 	</nav>
 
 	<!-- Main Content -->
@@ -37,12 +37,9 @@
 			<!-- Sidebar -->
 			<div class="col-md-3">
 				<div class="d-flex flex-column">
-					<div class="bg-warning text-white text-center py-3 mb-3">
-					5 bản tin được xem nhiều</div>
-					<div class="bg-secondary text-white text-center py-3 mb-3">
-					5 bản tin mới nhất</div>
-					<div class="bg-success text-white text-center py-3 mb-3">
-					5 bản tin đã bạn đã xem</div>
+					<div class="bg-warning text-white text-center py-3 mb-3">5 bản tin được xem nhiều</div>
+					<div class="bg-secondary text-white text-center py-3 mb-3">5 bản tin mới nhất</div>
+					<div class="bg-success text-white text-center py-3 mb-3">5 bản tin đã bạn đã xem</div>
 					<div class="bg-light text-center py-3">Newsletter</div>
 				</div>
 			</div>
