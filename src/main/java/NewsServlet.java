@@ -30,7 +30,7 @@ public class NewsServlet extends HttpServlet {
 			throws ServletException, IOException {
 //		List<News> newsList = NewsDAO.getAllNews();
 //		request.setAttribute("newsList", newsList);
-		request.getRequestDispatcher("listNews.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/listNews.jsp").forward(request, response);
 	}
 
 	/**
@@ -44,6 +44,6 @@ public class NewsServlet extends HttpServlet {
 //			News news = NewsDAO.getNewsById(Integer.parseInt(id));
 //			request.setAttribute("news", news);
 		}
-		request.getRequestDispatcher("/newsDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/newsDetail.jsp").forward(request, response);
 	}
 }
