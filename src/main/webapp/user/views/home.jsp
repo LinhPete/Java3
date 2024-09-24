@@ -26,9 +26,9 @@
 			<!-- Sidebar -->
 			<div class="col-md-3">
 				<div class="d-flex flex-column">
-					<div class="bg-warning text-white text-center py-3 mb-3">5 bản tin được xem nhiều</div>
-					<div class="bg-secondary text-white text-center py-3 mb-3">5 bản tin mới nhất</div>
-					<div class="bg-success text-white text-center py-3 mb-3">5 bản tin đã bạn đã xem</div>
+					<a class="bg-warning text-white text-center py-3 mb-3 nav-link" href="#">5 bản tin được xem nhiều</a>
+					<a class="bg-secondary text-white text-center py-3 mb-3 nav-link" href="#">5 bản tin mới nhất</a>
+					<a class="bg-success text-white text-center py-3 mb-3 nav-link" href="#">5 bản tin đã bạn đã xem</a>
 					<div class="bg-light text-center py-3">Newsletter</div>
 				</div>
 			</div>
