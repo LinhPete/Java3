@@ -19,9 +19,9 @@
 			<a class="nav-link" href="AdminServlet?dst=home">Trang chủ</a> <span
 				class="nav-link">:</span> <a class="nav-link"
 				href="AdminServlet?dst=news">Tin tức</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="#">Loại tin</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="#">Người dùng</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="#">Newsletter</a>
+			<a class="nav-link" href="AdminServlet?dst=category">Loại tin</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="AdminServlet?dst=user">Người dùng</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="AdminServlet?dst=letter">Newsletter</a>
 		</nav>
 	</div>
 	<c:choose>
@@ -30,6 +30,15 @@
 		</c:when>
 		<c:when test="${param.dst=='news'}">
 			<%@ include file="/admin/views/news.jsp"%>
+		</c:when>
+		<c:when test="${param.dst=='category'}">
+			<%@ include file="/admin/views/category.jsp"%>
+		</c:when>
+		<c:when test="${param.dst=='user'}">
+			<%@ include file="/admin/views/user.jsp"%>
+		</c:when>
+		<c:when test="${param.dst=='letter'}">
+			<%@ include file="/admin/views/letter.jsp"%>
 		</c:when>
 		<c:otherwise><%@ include file="/admin/views/home.jsp"%></c:otherwise>
 	</c:choose>
