@@ -21,12 +21,12 @@
             </div>
             
             <div class="col-md-10">
-            	<a href="NewsServlet?id=${news.id}">Tiêu đề bản tin
+            	<h5><a href="NewsServlet?id=${news.id}">Vinicius bị miệt thị là 'cặn bã'</h5>
             	<!-- 	<h5 class="text-primary">${news.title}</h5> -->
                 </a>
                 <!-- <p>${news.excerpt}</p> -->
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 1.
+                   Theo cựu chủ tịch của Valencia Paco Roig, màu da không phải là lý do khiến Vinicius bị tẩy chay ở Tây Ban Nha.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 01-09-2024 | Tác giả: Tác giả 1
@@ -41,10 +41,10 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail2.html" class="text-primary">Tiêu đề bản tin 2</a>
+                    <a href="news-detail2.html" class="text-primary">Lê Tuấn Minh - người hùng thầm lặng của Việt Nam ở Olympiad cờ vua</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 2.
+                    Đại kiện tướng Lê Tuấn Minh lần đầu dự Olympiad cờ vua ở tuổi 28, nhưng đoạt HC đồng và nhiều lần giành điểm quyết định cho Việt Nam.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 02-09-2024 | Tác giả: Tác giả 2
@@ -59,10 +59,10 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail3.html" class="text-primary">Tiêu đề bản tin 3</a>
+                    <a href="news-detail3.html" class="text-primary">Pháp, Iran bị tố 'không muốn thắng' để gặp Thái Lan ở Futsal World Cup</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 3.
+                    Pháp và Iran bị chỉ trích về thái độ thi đấu, khi gặp nhau ở lượt cuối bảng F FIFA futsal World Cup 2024 ở Uzbekistan tối 22/9.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 03-09-2024 | Tác giả: Tác giả 3
@@ -77,10 +77,10 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail3.html" class="text-primary">Tiêu đề bản tin 4</a>
+                    <a href="news-detail3.html" class="text-primary">Tân binh Mazraoui: 'Man Utd danh tiếng hơn Bayern'</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 4
+                    Hậu vệ Noussair Mazraoui giải thích việc chia tay Bayern Munich sau hai năm để chuyển tới Man Utd vì muốn tìm kiếm thử thách mới.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 03-09-2024 | Tác giả: Tác giả 4
@@ -95,10 +95,10 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail3.html" class="text-primary">Tiêu đề bản tin 5</a>
+                    <a href="news-detail3.html" class="text-primary">Quyết Chiến, Phương Vinh ra quân World Championship</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 5
+                    Các cơ thủ hàng đầu Việt Nam sẽ ra quân ở giải billiards carom 3 băng vô địch thế giới - World Championship 2024 tại Phan Thiết, hôm nay.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 03-09-2024 | Tác giả: Tác giả 5

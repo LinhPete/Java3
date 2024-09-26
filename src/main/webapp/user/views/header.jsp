@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="bg-primary text-white text-center py-3">
-		<h1>Header</h1>
+		<h1>Báo Dân Trí</h1>
 	</div>
 
 	<!-- Nav -->

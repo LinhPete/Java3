@@ -15,14 +15,14 @@
 
         <div class="row mb-3">
             <div class="col-md-2">
-                <img src="path/to/image1.jpg" class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
+                <img src="/SOF203_ASM/photo/travel1.jpg" class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail1.html" class="text-primary">Tiêu đề bản tin </a>
+                    <a href="news-detail1.html" class="text-primary">Thưởng thức món Thái Michelin trên xe buýt ở Bangkok</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 1.
+                    Tour xe buýt ở Bangkok thu hút khách quốc tế nhờ kết hợp vừa tham quan vừa thưởng thức những món Thái nổi tiếng, được Michelin tuyển chọn.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 01-09-2024 | Tác giả: Tác giả 1
@@ -33,14 +33,14 @@
 
         <div class="row mb-3">
             <div class="col-md-2">
-                <img src="path/to/image2.jpg" class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
+                <img src="/SOF203_ASM/photo/travel2.jpg" class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail2.html" class="text-primary">Tiêu đề bản tin 2</a>
+                    <a href="news-detail2.html" class="text-primary">Đi máy bay riêng đắt thế nào</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 2.
+                    Chuyến bay riêng tư được nhiều du khách cân nhắc vì các lợi ích như tránh đông đúc, thuận tiện nhưng chi phí lên tới 15.000 USD mỗi giờ.
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 02-09-2024 | Tác giả: Tác giả 2
@@ -51,14 +51,14 @@
 
         <div class="row mb-3">
             <div class="col-md-2">
-                <img src="path/to/image3.jpg" class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
+                <img src="/SOF203_ASM/photo/travel3.jpg" class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail3.html" class="text-primary">Tiêu đề bản tin 3</a>
+                    <a href="news-detail3.html" class="text-primary">Quê Hồ Xuân Hương được công nhận là điểm du lịch</a>
                 </h5>
                 <p class="text-muted">
-                    Trích lấy phần đầu (số ký tự phù hợp) của nội dung bản tin 3.
+                    Làng Quỳnh Đôi - quê hương "bà chúa thơ Nôm" Hồ Xuân Hương, được công nhận là điểm du lịch nhằm phát huy giá trị điểm đến, phục vụ khách tốt hơn
                 </p>
                 <small class="text-muted">
                     Ngày đăng: 03-09-2024 | Tác giả: Tác giả 3
