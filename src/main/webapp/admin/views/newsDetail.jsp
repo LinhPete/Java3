@@ -11,6 +11,11 @@
 	<h1>Thêm tin tức</h1>
 	<c:url value="/AdminServlet" var="url"/>
 	<form action="${url}" method="post" enctype="multipart/form-data" target="_blank">
+		<select name="category">
+		<c:forEach var="cate" items="categories">
+			<option value="${cate.Id}">cate.Name</option>
+		</c:forEach>
+		</select>
 		<label for="title">Tiêu đề </label><input name="title" type="text" id="title"><br>
 		<label for="img">Chọn ảnh</label><br>
 		<input type="file" name="img" id="file"><br>

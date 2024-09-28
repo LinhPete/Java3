@@ -24,7 +24,7 @@
 	</div>
 	<c:choose>
 		<c:when test="${param.dst=='news'}">
-			<%@ include file="/admin/views/news.jsp"%>
+			<%@ include file="/admin/views/newsDetail.jsp"%>
 		</c:when>
 		<c:when test="${param.dst=='category'}">
 			<%@ include file="/admin/views/category.jsp"%>
@@ -35,7 +35,7 @@
 		<c:when test="${param.dst=='letter'}">
 			<%@ include file="/admin/views/letter.jsp"%>
 		</c:when>
-		<c:otherwise><%@ include file="/admin/views/news.jsp"%></c:otherwise>
+		<c:otherwise><%@ include file="/admin/views/newsDetail.jsp"%></c:otherwise>
 	</c:choose>
 	<div class="footer text-center">
 		<h2>Welcome [Họ và tên]</h2>
