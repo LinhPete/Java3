@@ -4,6 +4,8 @@
  */
 package util.encrypt;
 
+import org.eclipse.tags.shaded.org.apache.xpath.operations.String;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
