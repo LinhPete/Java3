@@ -4,18 +4,20 @@
  */
 package util.auth;
 
+import Entity.Users;
+
 /**
  *
  * @author ndhlt
  */
 public class Auth {
-	private static User user;
+	private static Users user;
 
-	public static User getUser() {
+	public static Users getUser() {
 		return user;
 	}
 
-	public static void setUser(User user) {
+	public static void setUser(Users user) {
 		Auth.user = user;
 	}
 
@@ -28,6 +30,6 @@ public class Auth {
 	}
 
 	public static boolean isAdmin() {
-		return Auth.isLogin() && Auth.user.getRole() == User.ADMIN;
+		return Auth.isLogin() && Auth.user.isRole();
 	}
 }

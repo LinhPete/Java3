@@ -12,7 +12,7 @@
 	<c:url value="/AdminServlet" var="url"/>
 	<form action="${url}" method="post" enctype="multipart/form-data" target="_blank">
 		<select name="category">
-		<c:forEach var="cate" items="categories">
+		<c:forEach var="cate" items="${categories}">
 			<option value="${cate.Id}">cate.Name</option>
 		</c:forEach>
 		</select>
@@ -22,6 +22,6 @@
 		<label for="content">Nội dung</label><br>
 		<textarea rows="50" cols="50" name="content" id="content"></textarea>
 		<input type="submit" value="Đăng bài">
-	</form>	
+	</form>
 </body>
 </html>

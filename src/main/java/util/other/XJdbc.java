@@ -18,6 +18,8 @@ import java.sql.*;
 import java.util.ArrayList;
 //import java.util.HashMap;
 import java.util.List;
+
+import com.zaxxer.hikari.HikariDataSource;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 //import javax.crypto.BadPaddingException;
@@ -60,6 +62,11 @@ public final class XJdbc {
 //            Logger.getLogger(XJdbc.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+    public static void openConnection(HikariDataSource dataSource) throws ClassNotFoundException, SQLException {
+        if (con == null || con.isClosed()) {
+            con = dataSource.getConnection();
+        }
+    }
 
     public static void openConnection(String Url, String username, String password) throws ClassNotFoundException, SQLException {
         if (con == null || con.isClosed()) {

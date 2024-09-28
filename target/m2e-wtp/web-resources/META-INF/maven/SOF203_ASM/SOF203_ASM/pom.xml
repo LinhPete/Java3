@@ -29,11 +29,15 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
+			<groupId>org.apache.tomcat</groupId>	
 			<artifactId>tomcat-jdbc</artifactId>
 			<version>10.1.7</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>5.0.1</version> <!-- Kiểm tra phiên bản mới nhất -->
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
