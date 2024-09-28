@@ -6,11 +6,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import DAO.NewsDAO;
+import Entity.News;
 
 /**
  * Servlet implementation class NewsCrudServlet
  */
-@WebServlet({"/crud/news/*"})
+@WebServlet()
 public class NewsCrudServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +32,15 @@ public class NewsCrudServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		try {
+			List<News> list = NewsDAO.getAllNews();
+			request.setAttribute("list", list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("dst", "news");
+		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
 	}
 
 	/**
