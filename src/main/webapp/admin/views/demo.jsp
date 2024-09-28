@@ -7,6 +7,8 @@
 <title>${title}</title>
 </head>
 <body>
-	${body}
+	<h1>${title}</h1>
+	<img src="/SOF203_ASM${img}" style="float: left;max-width: 300px;max-height: 300px">
+	<p>${content}</p>
 </body>
 </html>

@@ -43,53 +43,20 @@ public class AdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String title = request.getParameter("title");
-		Part filePart = request.getPart("file"); // Lấy file từ form
+		String content = request.getParameter("content");
+		Part img = request.getPart("img");
 		File saveDir = new File(request.getServletContext().getRealPath("/uploads"));
-		if (!saveDir.exists()) {
+		if(!saveDir.exists()) {
 			saveDir.mkdirs();
 		}
-		String fileName = filePart.getSubmittedFileName();
-		String filePath = saveDir.getAbsolutePath() + fileName;
-
-		// Lưu file vào hệ thống
-		filePart.write(filePath);
-
-		// Chuyển đổi file Word thành HTML
-		String pdfContent = readPdfContent(filePath);
-		String content = convertToHtml(pdfContent);
-		request.setAttribute("body", content);
-//		WordToHtmlConverter.convertWordToHtml(filePath, htmlPath);
-//		try {
-//			// Đường dẫn đến file HTML
-//			File inputFile = new File("path/to/your/file.html");
-//			// Phân tích cú pháp file HTML
-//			Document doc = Jsoup.parse(inputFile, "UTF-8");
-//
-//			// Truy xuất nội dung trong thẻ <body>
-//			Element body = doc.body();
-//			String bodyContent = body.html(); // Hoặc body.text() để lấy nội dung văn bản
-//			// Đặt nội dung HTML vào request attribute
-//			request.setAttribute("body", bodyContent);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		String path = "/uploads/" + img.getSubmittedFileName();
+		String fileName = request.getServletContext().getRealPath(path);
+		img.write(fileName);
 
 		request.setAttribute("title", title);
+		request.setAttribute("content", content);
+		request.setAttribute("img", path);
 		request.getRequestDispatcher("/admin/views/demo.jsp").forward(request, response);
+//		request.getRequestDispatcher("/admin/views/demo.jsp").include(request, response);
 	}
-	
-	private String readPdfContent(String filePath) throws IOException {
-        StringBuilder content = new StringBuilder();
-        try (PDDocument document = PDDocument.load(new File(filePath))) {
-            PDFTextStripper pdfStripper = new PDFTextStripper();
-            content.append(pdfStripper.getText(document));
-        }
-        return content.toString();
-    }
-	
-	private String convertToHtml(String pdfContent) {
-        // Chuyển đổi nội dung văn bản thành HTML
-        return "<pre>" + pdfContent.replaceAll("\n", "<br>") + "</pre>";
-    }
-
 }

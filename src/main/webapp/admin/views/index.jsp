@@ -16,18 +16,13 @@
 	</div>
 	<div class="container mt-3">
 		<nav class="nav justify-content-center mb-4">
-			<a class="nav-link" href="AdminServlet?dst=home">Trang chủ</a> <span
-				class="nav-link">:</span> <a class="nav-link"
-				href="AdminServlet?dst=news">Tin tức</a> <span class="nav-link">:</span>
+			<a class="nav-link"	href="AdminServlet?dst=news">Tin tức</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=category">Loại tin</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=user">Người dùng</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=letter">Newsletter</a>
 		</nav>
 	</div>
 	<c:choose>
-		<c:when test="${param.dst=='home'}">
-			<%@ include file="/admin/views/home.jsp"%>
-		</c:when>
 		<c:when test="${param.dst=='news'}">
 			<%@ include file="/admin/views/news.jsp"%>
 		</c:when>
@@ -40,11 +35,11 @@
 		<c:when test="${param.dst=='letter'}">
 			<%@ include file="/admin/views/letter.jsp"%>
 		</c:when>
-		<c:otherwise><%@ include file="/admin/views/home.jsp"%></c:otherwise>
+		<c:otherwise><%@ include file="/admin/views/news.jsp"%></c:otherwise>
 	</c:choose>
 	<div class="footer text-center">
 		<h2>Welcome [Họ và tên]</h2>
-		<a href="NewsServlet">Về trang chính</a>
+		<a href="NewsServlet">Về trang chủ</a>
 	</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
