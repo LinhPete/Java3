@@ -13,7 +13,11 @@ public class News {
     private String categoryId;
     private boolean home;
 
-    public News(String id, String title, String content, String image, Date postedDate, String author, int viewCount, String categoryId, boolean home) {
+    public News() {
+		super();
+	}
+
+	public News(String id, String title, String content, String image, Date postedDate, String author, int viewCount, String categoryId, boolean home) {
         this.id = id;
         this.title = title;
         this.content = content;

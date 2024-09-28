@@ -6,6 +6,7 @@ import java.util.List;
 
 import Entity.News;
 import util.other.DataSourceFactory;
+import util.other.XJdbc;
 
 public class NewsDAO {
 //    private Connection connection;
