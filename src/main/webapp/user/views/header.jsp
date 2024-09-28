@@ -10,14 +10,20 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <style>
-.dropdown:hover .dropdown-menu {
+.dropdown:hover 
+    .dropdown-menu {
 	display: block;
+	min-width: auto;
+	width: max-content;
+	padding: 0;
 }
 
-.account-icon:hover svg,
-.bell-icon:hover svg {
-	fill: #007bff; 
-	transition: fill 0.3s ease;
+.dropdown-item {
+	display: block;
+	width: 100%;
+	padding: 8px 16px;
+	text-align: left;
+	white-space: nowrap;
 }
 </style>
 </head>
@@ -48,8 +54,8 @@
 			<div class="col-md-4 text-end">
 				<!-- User Icon -->
 				<div class="dropdown d-inline-block mx-2">
-					<button class="btn btn-light account-icon"
-						type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+					<button class="btn btn-light account-icon" type="button"
+						id="dropdownMenuButton" data-bs-toggle="dropdown"
 						aria-expanded="false">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 							fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -58,8 +64,8 @@
                         </svg>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<li><a class="dropdown-item" href="#">Đăng nhập</a></li>
-						<li><a class="dropdown-item" href="#">Đăng ký</a></li>
+						<li><a class="dropdown-item" href="NewsServlet?page=login">Đăng nhập</a></li>
+						<li><a class="dropdown-item" href="NewsServlet?page=register">Đăng ký</a></li>
 					</ul>
 				</div>
 
@@ -77,14 +83,11 @@
 
 	<!-- Nav -->
 	<nav class="bg-light text-center py-2">
-		<a href="NewsServlet?page=home" class="text-decoration-none mx-2">Trang
-			chủ</a> <a href="NewsServlet?page=culture"
-			class="text-decoration-none mx-2">Văn hóa</a> <a
-			href="NewsServlet?page=law" class="text-decoration-none mx-2">Pháp
-			luật</a> <a href="NewsServlet?page=sports"
-			class="text-decoration-none mx-2">Thể thao</a> <a
-			href="NewsServlet?page=travel" class="text-decoration-none mx-2">Du
-			lịch</a>
+		<a href="NewsServlet?page=home" class="text-decoration-none mx-2">Trang chủ</a> 
+		<a href="NewsServlet?page=culture" class="text-decoration-none mx-2">Văn hóa</a> 
+		<a href="NewsServlet?page=law" class="text-decoration-none mx-2">Pháp luật</a> 
+		<a href="NewsServlet?page=sports" class="text-decoration-none mx-2">Thể thao</a> 
+		<a href="NewsServlet?page=travel" class="text-decoration-none mx-2">Du lịch</a>
 	</nav>
 
 </body>

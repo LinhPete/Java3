@@ -41,6 +41,10 @@ public class NewsServlet extends HttpServlet {
             request.getRequestDispatcher("/user/views/listSportsNews.jsp").forward(request, response);
         } else if (page.equals("travel")) {
             request.getRequestDispatcher("/user/views/listTravelNews.jsp").forward(request, response);
+        } else if (page.equals("register")){
+            request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
+        }else if (page.equals("login")){
+            request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
         }
 	}
 
