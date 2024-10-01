@@ -34,8 +34,8 @@ public class DataSourceFactory {
 		}
 		HikariConfig config = new HikariConfig();
 		config.setJdbcUrl("jdbc:sqlserver://localhost:1433;database=SOF203_ASM;encrypt=false;");
-		config.setUsername("sa");
-		config.setPassword("123456789");
+		config.setUsername(Accounts.SQL_ACC.getUsername());
+		config.setPassword(Accounts.SQL_ACC.getPassword());
 		config.setMaximumPoolSize(10); // Số lượng kết nối tối đa
 		config.setMinimumIdle(2); // Số lượng kết nối rảnh tối thiểu
 		config.setIdleTimeout(30000); // Thời gian kết nối không sử dụng trước khi bị đóng
