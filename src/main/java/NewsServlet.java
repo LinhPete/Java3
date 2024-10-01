@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import DAO.NewsDAO;
+
 /**
  * Servlet implementation class NewsServlet
  */
@@ -56,7 +58,7 @@ public class NewsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 		if (id != null) {
-//			News news = NewsDAO.getNewsById(Integer.parseInt(id));
+//			NewsServlet news = NewsDAO.getNewsById(Integer.parseInt(id));
 //			request.setAttribute("news", news);
 		}
 		request.getRequestDispatcher("/views/newsDetail.jsp").forward(request, response);
