@@ -1,7 +1,7 @@
 package util.other;
 
 public enum Accounts {
-	SQL_ACC("sa","1234");
+	SQL_ACC("","");
 	
 	private final String username;
 	private final String password;
