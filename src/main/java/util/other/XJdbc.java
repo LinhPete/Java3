@@ -36,8 +36,6 @@ import com.zaxxer.hikari.HikariDataSource;
 public final class XJdbc {
 
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private static String username = "sa";
-	private static String password = "kuroneko1215";
 	private static String url = "jdbc:sqlserver://localhost:1433;database=SOF203_ASM;encrypt=false;";
 
 	static {
@@ -51,7 +49,7 @@ public final class XJdbc {
 	public static final List<Map<String, Object>> select(String sql, Object... args)
 			throws SQLException, ClassNotFoundException {
 		List<Map<String, Object>> maps = new ArrayList<>();
-		try (Connection connection = DriverManager.getConnection(url, username, password)) {
+		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
 			try (PreparedStatement pst = connection.prepareStatement(sql)) {
 				if (args.length > 0) {
 					for (int i = 0; i < args.length; i++) {
@@ -82,7 +80,7 @@ public final class XJdbc {
 	}
 
 	public static final int IUD(String sql, Object... args) throws SQLException, ClassNotFoundException {
-		try (Connection connection = DriverManager.getConnection(url, username, password)) {
+		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
 			try (PreparedStatement pst = connection.prepareStatement(sql)) {
 				if (args.length > 0) {
 					for (int i = 0; i < args.length; i++) {
@@ -96,7 +94,7 @@ public final class XJdbc {
 
 	public static final Object callNoOutput(String sql, Object... args) throws SQLException, ClassNotFoundException {
 		boolean result;
-		try (Connection connection = DriverManager.getConnection(url, username, password)) {
+		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
 			try (CallableStatement cst = connection.prepareCall(sql)) {
 				if (args.length > 0) {
 					for (int i = 0; i < args.length; i++) {
@@ -114,7 +112,7 @@ public final class XJdbc {
 	public static final Object callWithOutput(String sql, Object[] args, int output, SQLType sqlType)
 			throws SQLException, ClassNotFoundException {
 		boolean result;
-		try (Connection connection = DriverManager.getConnection(url, username, password)) {
+		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
 			try (CallableStatement cst = connection.prepareCall(sql)) {
 				if (args.length > 0) {
 					for (int i = 0; i < args.length; i++) {
