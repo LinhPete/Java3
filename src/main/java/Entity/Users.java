@@ -98,6 +98,10 @@ public class Users {
 	public boolean isRole() {
 		return role;
 	}
+	
+	public boolean getRole() {
+		return role;
+	}
 
 	public void setRole(boolean role) {
 		this.role = role;

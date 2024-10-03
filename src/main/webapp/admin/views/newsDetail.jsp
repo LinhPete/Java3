@@ -10,19 +10,24 @@
 	<form action="${url}" method="post" enctype="multipart/form-data"
 		target="_blank">
 		<div class="mb-3">
-			<label for="category" class="form-label">Chọn loại tin</label> <select
-				name="category" id="category" class="form-select">
-				<c:forEach var="cate" items="${categories}">
-					<option value="${cate.id}"
-						${news.categoryId==cate.id?'selected':''}>${cate.name}</option>
-				</c:forEach>
-			</select>
+			<c:if test="${user==null || user.role=='true'}">
+				<h4>Loại tin: ${news.categoryName}</h4>
+			</c:if>
+			<c:if test="${user.role=='false'}">
+				<label for="category" class="form-label">Chọn loại tin</label>
+				<select name="category" id="category" class="form-select">
+					<c:forEach var="cate" items="${categories}">
+						<option value="${cate.id}"
+							${news.categoryId==cate.id?'selected':''}>${cate.name}</option>
+					</c:forEach>
+				</select>
+			</c:if>
 		</div>
 
 		<div class="mb-3">
 			<label for="title" class="form-label">Tiêu đề</label> <input
 				name="title" type="text" id="title" class="form-control"
-				value="${news.title}">
+				value="${news.title}" ${user==null||user.role=='true'?'readonly':''}>
 		</div>
 
 		<div class="mb-3">
@@ -42,9 +47,19 @@
 
 		<div class="mb-3">
 			<label for="content" class="form-label">Nội dung</label>
-			<textarea rows="10" name="content" id="content" class="form-control">${news.content}</textarea>
+			<textarea rows="10" name="content" id="content" class="form-control"
+				${user==null||user.role=='true'?'readonly':''}>${news.content}</textarea>
 		</div>
-
-		<button type="submit" class="btn btn-primary">Đăng bài</button>
+		<c:if test="${user==null||user.role=='true'}">
+			<input type="checkbox" name="home">
+			<label>Cho phép lên trang chủ?</label>
+			<br>
+		</c:if>
+		<c:if test="${user.role=='false'}">
+			<button formaction="${url}/insert" class="btn btn-primary">Đăng
+				bài</button>
+		</c:if>
+		<button formaction="${url}/update?id=${news.id}"
+			class="btn btn-primary">Cập nhật</button>
 	</form>
 </div>

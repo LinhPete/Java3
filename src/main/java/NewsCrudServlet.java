@@ -40,11 +40,17 @@ public class NewsCrudServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		user = (Users) request.getSession().getAttribute("user");
+		setUser((Users) request.getSession().getAttribute("user"));
 		String id = request.getParameter("id");
 		if(id==null || id.isBlank()) {
 			try {
-				List<News> list = NewsDAO.getAllNews();
+				List<News> list;
+				if(user==null||user.getRole()) {
+					list = NewsDAO.getAllNews();
+				}
+				else {
+					list = NewsDAO.getAllNewsByAuthor(user.getId());
+				}
 				request.setAttribute("list", list);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -96,6 +102,14 @@ public class NewsCrudServlet extends HttpServlet {
 		}
 		request.setAttribute("dst", "newsList");
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
 }
