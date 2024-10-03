@@ -15,8 +15,8 @@ public class NewsDAO {
 //        this.connection = connection;
 //    }
 
-    public static void addNews(String id, String title, String content, String image, Date postedDate, String author, int viewCount, String categoryId, boolean home) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO NEWS (Id, Title, Content, Image, PostedDate, Author, ViewCount, CategoryId, Home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public static void addNews(News news) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO NEWS (Title, Content, Image, PostedDate, Author, ViewCount, CategoryId, Home) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, id);
 //            stmt.setString(2, title);
@@ -29,10 +29,10 @@ public class NewsDAO {
 //            stmt.setBoolean(9, home);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id, title, content, image, postedDate, author, viewCount, categoryId, home);
+        DataSourceFactory.IUD(sql, news.toInsertData());
     }
 
-    public static void updateNews(String id, String title, String content, String image, Date postedDate, String author, int viewCount, String categoryId, boolean home) throws SQLException, ClassNotFoundException {
+    public static void updateNews(News news) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE NEWS SET Title = ?, Content = ?, Image = ?, PostedDate = ?, Author = ?, ViewCount = ?, CategoryId = ?, Home = ? WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, title);
@@ -46,10 +46,10 @@ public class NewsDAO {
 //            stmt.setString(9, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, title, content, image, postedDate, author, viewCount, categoryId, home, id);
+        DataSourceFactory.IUD(sql, news.toUpdateData());
     }
 
-    public static void deleteNews(String id) throws SQLException, ClassNotFoundException {
+    public static void deleteNews(int id) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM NEWS WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, id);
@@ -57,10 +57,49 @@ public class NewsDAO {
 //        }
         DataSourceFactory.IUD(sql, id);
     }
+    
+    public static News getNewsById(int id) throws SQLException {
+    	String sql = "SELECT * FROM NEWS WHERE Id=?";
+    	News news = DataSourceFactory.getSingleResult(News.class, sql, id);
+        
+//        try (PreparedStatement stmt = connection.prepareStatement(sql);
+//             ResultSet rs = stmt.executeQuery()) {
+//            while (rs.next()) {
+//                newsList.add(rs.getString("Title"));
+//            }
+//        }
+        return news;
+    }
 
     public static List<News> getAllNews() throws SQLException {
     	String sql = "SELECT * FROM NEWS";
     	List<News> newsList = DataSourceFactory.getResultList(News.class, sql);
+        
+//        try (PreparedStatement stmt = connection.prepareStatement(sql);
+//             ResultSet rs = stmt.executeQuery()) {
+//            while (rs.next()) {
+//                newsList.add(rs.getString("Title"));
+//            }
+//        }
+        return newsList;
+    }
+    
+    public static List<News> getAllHomeNews() throws SQLException {
+    	String sql = "SELECT * FROM NEWS WHERE HOME = 1";
+    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql);
+        
+//        try (PreparedStatement stmt = connection.prepareStatement(sql);
+//             ResultSet rs = stmt.executeQuery()) {
+//            while (rs.next()) {
+//                newsList.add(rs.getString("Title"));
+//            }
+//        }
+        return newsList;
+    }
+    
+    public static List<News> getAllNewsByAuthor(int authorID) throws SQLException {
+    	String sql = "SELECT * FROM NEWS WHERE Author = ?";
+    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql, authorID);
         
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {

@@ -18,7 +18,7 @@ import java.io.IOException;
  * Servlet implementation class AdminServlet
  */
 @MultipartConfig()
-@WebServlet({ "/admin", "/upload" })
+@WebServlet({ "/admin"})
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,21 +39,7 @@ public class AdminServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		Part img = request.getPart("img");
-		File saveDir = new File(request.getServletContext().getRealPath("/uploads"));
-		if(!saveDir.exists()) {
-			saveDir.mkdirs();
-		}
-		String path = "/uploads/" + img.getSubmittedFileName();
-		String fileName = request.getServletContext().getRealPath(path);
-		img.write(fileName);
-
-		request.setAttribute("title", title);
-		request.setAttribute("content", content);
-		request.setAttribute("img", path);
-		request.getRequestDispatcher("/admin/views/demo.jsp").forward(request, response);
+		
 //		request.getRequestDispatcher("/admin/views/demo.jsp").include(request, response);
 	}
 }

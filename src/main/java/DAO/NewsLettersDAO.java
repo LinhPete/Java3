@@ -3,6 +3,7 @@ package DAO;
 import java.sql.*;
 import java.util.List;
 
+import Entity.Newsletters;
 import util.other.DataSourceFactory;
 
 public class NewsLettersDAO {
@@ -12,24 +13,24 @@ public class NewsLettersDAO {
 //        this.connection = connection;
 //    }
 
-    public static void addNewsletter(String email, boolean enabled) throws SQLException, ClassNotFoundException {
+    public static void addNewsletter(Newsletters letter) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO NEWSLETTERS (Email, Enabled) VALUES (?, ?)";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, email);
 //            stmt.setBoolean(2, enabled);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, email, enabled);
+        DataSourceFactory.IUD(sql, letter.toInsertData());
     }
 
-    public static void updateNewsletter(String email, boolean enabled) throws SQLException, ClassNotFoundException {
+    public static void updateNewsletter(Newsletters letter) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE NEWSLETTERS SET Enabled = ? WHERE Email = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setBoolean(1, enabled);
 //            stmt.setString(2, email);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, enabled, email);
+        DataSourceFactory.IUD(sql, letter.toUpdateData());
     }
 
     public static void deleteNewsletter(String email) throws SQLException, ClassNotFoundException {

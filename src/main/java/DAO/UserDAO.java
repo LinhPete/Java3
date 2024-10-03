@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import Entity.News;
 import Entity.Users;
 import util.other.DataSourceFactory;
 
@@ -14,8 +15,8 @@ public class UserDAO {
 //        this.connection = connection;
 //    }
 
-    public static void addUser(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO USERS (Id, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    public static void addUser(Users user) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO USERS (Username, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, id);
 //            stmt.setString(2, password);
@@ -27,11 +28,11 @@ public class UserDAO {
 //            stmt.setBoolean(8, role);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id, password, fullname, birthday, gender, mobile, email, role);
+        DataSourceFactory.IUD(sql, user.toInsertData());
     }
 
-    public static void updateUser(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE USERS SET Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
+    public static void updateUser(Users user) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE USERS SET Username = ?, Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, password);
 //            stmt.setString(2, fullname);
@@ -43,16 +44,29 @@ public class UserDAO {
 //            stmt.setString(8, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, password, fullname, birthday, gender, mobile, email, role, id);
+        DataSourceFactory.IUD(sql, user.toUpdateData());
     }
 
-    public static void deleteUser(String id) throws SQLException, ClassNotFoundException {
+    public static void deleteUser(int id) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM USERS WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, id);
 //            stmt.executeUpdate();
 //        }
         DataSourceFactory.IUD(sql, id);
+    }
+    
+    public static Users getUserById(int id) throws SQLException {
+    	String sql = "SELECT * FROM USERS WHERE Id=?";
+    	Users user = DataSourceFactory.getSingleResult(Users.class, sql, id);
+        
+//        try (PreparedStatement stmt = connection.prepareStatement(sql);
+//             ResultSet rs = stmt.executeQuery()) {
+//            while (rs.next()) {
+//                newsList.add(rs.getString("Title"));
+//            }
+//        }
+        return user;
     }
 
     public static List<Users> getAllUsers() throws SQLException {

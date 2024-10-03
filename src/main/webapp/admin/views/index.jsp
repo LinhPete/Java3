@@ -23,8 +23,11 @@
 		</nav>
 	</div>
 	<c:choose>
-		<c:when test="${dst=='news'}">
+		<c:when test="${dst=='newsList'}">
 			<%@ include file="/admin/views/newsList.jsp"%>
+		</c:when>
+		<c:when test="${dst=='newsDetail'}">
+			<%@ include file="/admin/views/newsDetail.jsp"%>
 		</c:when>
 		<c:when test="${dst=='category'}">
 			<%@ include file="/admin/views/categoryList.jsp"%>

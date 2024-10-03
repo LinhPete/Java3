@@ -1,27 +1,45 @@
 package Entity;
 
 public class Categories {
-    private String id;
-    private String name;
+	private int id;
+	private String name;
 
-    public Categories(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+	public Categories() {
+		super();
+	}
 
-    public String getId() {
-        return id;
-    }
+	public Categories(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getRepId() {
+		return "CT" + id;
+	}
+
+	public Object[] toInsertData() {
+		Object[] data = { name };
+		return data;
+	}
+
+	public Object[] toUpdateData() {
+		Object[] data = { name, id };
+		return data;
+	}
 }

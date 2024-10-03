@@ -22,4 +22,14 @@
     <servlet-name>NewsServlet</servlet-name>
     <url-pattern>/NewsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewsCrudServlet</display-name>
+    <servlet-name>NewsCrudServlet</servlet-name>
+    <servlet-class>NewsCrudServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsCrudServlet</servlet-name>
+    <url-pattern>/NewsCrudServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
