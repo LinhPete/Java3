@@ -55,8 +55,9 @@ public class DataSourceFactory {
 		}
 	}
 
-	public static final List<Map<String,Object>> select(String sql, Object... args) throws SQLException, ClassNotFoundException {
-		List<Map<String,Object>> maps = new ArrayList<>();
+	public static final List<Map<String, Object>> select(String sql, Object... args)
+			throws SQLException, ClassNotFoundException {
+		List<Map<String, Object>> maps = new ArrayList<>();
 		try (Connection connection = dataSource.getConnection()) {
 			try (PreparedStatement pst = connection.prepareStatement(sql)) {
 				if (args.length > 0) {
@@ -64,12 +65,12 @@ public class DataSourceFactory {
 						pst.setObject(i + 1, args[i]);
 					}
 				}
-				try(ResultSet rs = pst.executeQuery()){
-					while(rs.next()) {
-						Map<String,Object> map = new HashMap<>();
+				try (ResultSet rs = pst.executeQuery()) {
+					while (rs.next()) {
+						Map<String, Object> map = new HashMap<>();
 						ResultSetMetaData data = rs.getMetaData();
-						for(int i=0;i<data.getColumnCount();i++) {
-							map.put(data.getColumnName(i+1), rs.getObject(i+1));
+						for (int i = 0; i < data.getColumnCount(); i++) {
+							map.put(data.getColumnName(i + 1), rs.getObject(i + 1));
 						}
 						maps.add(map);
 					}
@@ -80,11 +81,11 @@ public class DataSourceFactory {
 	}
 
 	public static final Object getValue(String sql, Object... args) throws SQLException, ClassNotFoundException {
-	    List<Map<String, Object>> list = select(sql, args);
-	    if (!list.isEmpty()) {
-	        return list.get(0).values().iterator().next(); // Lấy giá trị đầu tiên từ bản ghi đầu tiên
-	    }
-	    throw new SQLException("No results found for query: " + sql); // Ném ngoại lệ nếu không có kết quả
+		List<Map<String, Object>> list = select(sql, args);
+		if (!list.isEmpty()) {
+			return list.get(0).values().iterator().next(); // Lấy giá trị đầu tiên từ bản ghi đầu tiên
+		}
+		throw new SQLException("No results found for query: " + sql); // Ném ngoại lệ nếu không có kết quả
 	}
 
 	public static final int IUD(String sql, Object... args) throws SQLException, ClassNotFoundException {
@@ -149,7 +150,7 @@ public class DataSourceFactory {
 	 * }
 	 * </pre>
 	 */
-	private static <T> T getBean(Class<T> beanClass, Map<String,Object> map) {
+	private static <T> T getBean(Class<T> beanClass, Map<String, Object> map) {
 		try {
 			T bean = beanClass.getDeclaredConstructor().newInstance();
 //			BeanUtils.populate(bean, map);
@@ -182,7 +183,7 @@ public class DataSourceFactory {
 		try {
 			List<T> entities = new ArrayList<>();
 			List<Map<String, Object>> list = select(sql, values);
-			for(Map<String, Object> map: list) {
+			for (Map<String, Object> map : list) {
 				entities.add(getBean(beanClass, map));
 			}
 			return entities;

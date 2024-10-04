@@ -3,91 +3,121 @@ package Entity;
 import java.sql.Date;
 
 public class Users {
-    private String id;
-    private String password;
-    private String fullname;
-    private Date birthday;
-    private boolean gender;
-    private String mobile;
-    private String email;
-    private boolean role; // true = Admin, false = Reporter
+	private int id;
+	private String username;
+	private String password;
+	private String fullname;
+	private Date birthday;
+	private boolean gender;
+	private String mobile;
+	private String email;
+	private boolean role; // true = Admin, false = Reporter
 
-    public Users() {
+	public Users() {
 		super();
 	}
 
-	public Users(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) {
-        this.id = id;
-        this.password = password;
-        this.fullname = fullname;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.mobile = mobile;
-        this.email = email;
-        this.role = role;
-    }
+	public Users(int id, String username, String password, String fullname, Date birthday, boolean gender,
+			String mobile, String email, boolean role) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.fullname = fullname;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.mobile = mobile;
+		this.email = email;
+		this.role = role;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getFullname() {
-        return fullname;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public Date getBirthday() {
-        return birthday;
-    }
+	public String getFullname() {
+		return fullname;
+	}
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
-    public boolean isGender() {
-        return gender;
-    }
+	public Date getBirthday() {
+		return birthday;
+	}
 
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
 
-    public String getMobile() {
-        return mobile;
-    }
+	public boolean isGender() {
+		return gender;
+	}
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
+	public void setGender(boolean gender) {
+		this.gender = gender;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getMobile() {
+		return mobile;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 
-    public boolean isRole() {
-        return role;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setRole(boolean role) {
-        this.role = role;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isRole() {
+		return role;
+	}
+
+	public boolean getRole() {
+		return role;
+	}
+
+	public void setRole(boolean role) {
+		this.role = role;
+	}
+
+	public String getRepId() {
+		return "UR" + id;
+	}
+
+	public Object[] toInsertData() {
+		Object[] data = { password, fullname, birthday, gender, mobile, email, role };
+		return data;
+	}
+
+	public Object[] toUpdateData() {
+		Object[] data = { password, fullname, birthday, gender, mobile, email, role, id };
+		return data;
+	}
 }

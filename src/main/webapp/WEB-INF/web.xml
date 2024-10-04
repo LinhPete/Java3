@@ -32,4 +32,14 @@
     <servlet-name>NewsCrudServlet</servlet-name>
     <url-pattern>/NewsCrudServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CateCrudServlet</display-name>
+    <servlet-name>CateCrudServlet</servlet-name>
+    <servlet-class>CateCrudServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CateCrudServlet</servlet-name>
+    <url-pattern>/CateCrudServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
