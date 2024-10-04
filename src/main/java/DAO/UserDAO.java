@@ -14,8 +14,9 @@ public class UserDAO {
 //        this.connection = connection;
 //    }
 
-    public static void addUser(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO USERS (Id, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	public static void addUser(String id, String password, String fullname, Date birthday, boolean gender,
+			String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
+		String sql = "INSERT INTO USERS (Id, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, id);
 //            stmt.setString(2, password);
@@ -27,11 +28,18 @@ public class UserDAO {
 //            stmt.setBoolean(8, role);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id, password, fullname, birthday, gender, mobile, email, role);
-    }
+		DataSourceFactory.IUD(sql, id, password, fullname, birthday, gender, mobile, email, role);
+	}
 
-    public static void updateUser(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE USERS SET Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
+	public static void addUser(String email, String password, boolean role)
+			throws SQLException, ClassNotFoundException {
+		String sql = "INSERT INTO USERS (Email, Password, Role) VALUES (?, ?, ?)";
+		DataSourceFactory.IUD(sql, email, password, role);
+	}
+
+	public static void updateUser(String id, String password, String fullname, Date birthday, boolean gender,
+			String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
+		String sql = "UPDATE USERS SET Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, password);
 //            stmt.setString(2, fullname);
@@ -43,28 +51,36 @@ public class UserDAO {
 //            stmt.setString(8, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, password, fullname, birthday, gender, mobile, email, role, id);
-    }
+		DataSourceFactory.IUD(sql, password, fullname, birthday, gender, mobile, email, role, id);
+	}
 
-    public static void deleteUser(String id) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM USERS WHERE Id = ?";
+	public static void deleteUser(String id) throws SQLException, ClassNotFoundException {
+		String sql = "DELETE FROM USERS WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id);
-    }
+		DataSourceFactory.IUD(sql, id);
+	}
 
-    public static List<Users> getAllUsers() throws SQLException {
-    	String sql = "SELECT * FROM USERS";
-        List<Users> users = DataSourceFactory.getResultList(Users.class, sql);
+	public static List<Users> getAllUsers() throws SQLException {
+		String sql = "SELECT * FROM USERS";
+		List<Users> users = DataSourceFactory.getResultList(Users.class, sql);
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
 //            while (rs.next()) {
 //                users.add(rs.getString("Fullname"));
 //            }
 //        }
-        return users;
-    }
-}
+		return users;
+	}
 
+	public static Users getUserByEmail(String email) throws SQLException, ClassNotFoundException {
+		String sql = "SELECT * FROM USERS WHERE Email = ?";
+		List<Users> users = DataSourceFactory.getResultList(Users.class, sql, email);
+		if (!users.isEmpty()) {
+			return users.get(0);
+		}
+		return null; // null nếu không tìm thấy user
+	}
+}

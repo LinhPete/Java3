@@ -202,4 +202,16 @@ public final class XJdbc {
 		}
 		return null;
 	}
+
+	public static void main(String[] args) {
+		try (Connection connection = DriverManager.getConnection(url, username, "123456789")) {
+			if (connection != null) {
+				System.out.println("Kết nối cơ sở dữ liệu thành công!");
+			} else {
+				System.out.println("Kết nối cơ sở dữ liệu thất bại!");
+			}
+		} catch (SQLException e) {
+			System.err.println("Lỗi kết nối: " + e.getMessage());
+		}
+	}
 }

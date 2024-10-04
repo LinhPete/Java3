@@ -26,14 +26,11 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4" style="width: 25rem;">
             <h2 class="text-center">Đăng ký tài khoản</h2>
-            <form action="registerServlet" method="post">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Tên đăng nhập</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
-                </div>
+            <form action="register" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
+                    <h3 style="color: red;">${errorEmail}</h3>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Mật khẩu</label>
@@ -42,6 +39,7 @@
                 <div class="mb-3">
                     <label for="confirmPassword" class="form-label">Xác nhận mật khẩu</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                    <h3 style="color: red;">${errorPassword}</h3>
                 </div>
                 <div class="form-check mb-3">
 				    <input class="form-check-input" type="checkbox" id="authorCheck" name="authorCheck">
@@ -52,6 +50,7 @@
 					<label class="form-check-label" for="newsCheck">Đăng ký làm nhận tin mới nhất</label>
 				</div>
                 <button type="submit" class="btn btn-primary w-100">Xác thực</button>
+                <h3 style="color: red;">${error}</h3>
             </form>
         </div>
     </div>

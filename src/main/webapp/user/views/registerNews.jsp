@@ -26,7 +26,8 @@
                             <option value="business">Kinh doanh</option>
                             <option value="health">Sức khỏe</option>
                         </select>
-                        <small class="form-text text-muted">Giữ Ctrl (hoặc Cmd trên Mac) để chọn nhiều chủ đề.</small>
+                        
+                        <small class="form-text text-muted">Giữ Ctrl để chọn nhiều chủ đề.</small>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
                 </form>

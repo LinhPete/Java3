@@ -12,7 +12,11 @@ public class Users {
     private String email;
     private boolean role; // true = Admin, false = Reporter
 
-    public Users(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) {
+    public Users() {
+		super();
+	}
+
+	public Users(String id, String password, String fullname, Date birthday, boolean gender, String mobile, String email, boolean role) {
         this.id = id;
         this.password = password;
         this.fullname = fullname;
