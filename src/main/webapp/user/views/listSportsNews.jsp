@@ -41,7 +41,7 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="/SOF203_ASM/user/views/SportsNewsDetail1.jsp" class="text-primary">Lê Tuấn Minh - người hùng thầm lặng của Việt Nam ở Olympiad cờ vua</a>
+                    <a href="/SOF203_ASM/user/views/sportsNewsDetail4.jsp" class="text-primary">Lê Tuấn Minh - người hùng thầm lặng của Việt Nam ở Olympiad cờ vua</a>
                 </h5>
                 <p class="text-muted">
                     Đại kiện tướng Lê Tuấn Minh lần đầu dự Olympiad cờ vua ở tuổi 28, nhưng đoạt HC đồng và nhiều lần giành điểm quyết định cho Việt Nam.
@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="SOF203_ASM/user/views/SportsNewsDetail1.jsp" class="text-primary">Pháp, Iran bị tố 'không muốn thắng' để gặp Thái Lan ở Futsal World Cup</a>
+                    <a href="/SOF203_ASM/user/views/sportsNewsDetail4.jsp" class="text-primary">Pháp, Iran bị tố 'không muốn thắng' để gặp Thái Lan ở Futsal World Cup</a>
                 </h5>
                 <p class="text-muted">
                     Pháp và Iran bị chỉ trích về thái độ thi đấu, khi gặp nhau ở lượt cuối bảng F FIFA futsal World Cup 2024 ở Uzbekistan tối 22/9.
@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="/SOF203_ASM/user/views/SportsNewsDetail1.jsp" class="text-primary">Tân binh Mazraoui: 'Man Utd danh tiếng hơn Bayern'</a>
+                    <a href="/SOF203_ASM/user/views/sportsNewsDetail4.jsp" class="text-primary">Tân binh Mazraoui: 'Man Utd danh tiếng hơn Bayern'</a>
                 </h5>
                 <p class="text-muted">
                     Hậu vệ Noussair Mazraoui giải thích việc chia tay Bayern Munich sau hai năm để chuyển tới Man Utd vì muốn tìm kiếm thử thách mới.
@@ -95,7 +95,7 @@
             </div>
             <div class="col-md-10">
                 <h5>
-                    <a href="news-detail3.html" class="text-primary">Quyết Chiến, Phương Vinh ra quân World Championship</a>
+                    <a href="/SOF203_ASM/user/views/sportsNewsDetail4.jsp" class="text-primary">Quyết Chiến, Phương Vinh ra quân World Championship</a>
                 </h5>
                 <p class="text-muted">
                     Các cơ thủ hàng đầu Việt Nam sẽ ra quân ở giải billiards carom 3 băng vô địch thế giới - World Championship 2024 tại Phan Thiết, hôm nay.

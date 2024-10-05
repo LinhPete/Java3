@@ -12,4 +12,9 @@ public class PasswordUtil {
         String hashedInputPassword = SHA256.hashPassword(inputPassword, salt);
         return storedHashedPassword.equals(hashedInputPassword);
     }
+    public static void main(String[] args) {
+    	 System.out.println(SHA256.hashPassword("1234"));
+    	 // M2Egks4ZEJsZUvlTsdQ2bg==:cWQB3ODHHrGjIV3oML7l1MyJqGo96SfmYxdpIcHGlnY=
+    	 System.out.println(checkPassword("123","M2Egks4ZEJsZUvlTsdQ2bg==:cWQB3ODHHrGjIV3oML7l1MyJqGo96SfmYxdpIcHGlnY="));
+	}
 }

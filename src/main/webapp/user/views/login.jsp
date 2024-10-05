@@ -11,7 +11,7 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4" style="width: 25rem;">
             <h2 class="text-center"></h2>
-            <form action="loginServlet" method="post">
+            <form action="login" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="text" class="form-control" id="email" name="email" required>
@@ -21,6 +21,7 @@
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+              	<p style="color: red;">${error}</p>
             </form>
             <div class="mt-3 text-center">
                 <p>Chưa có tài khoản? <a href="register.jsp">Đăng ký ngay</a></p>
