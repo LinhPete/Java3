@@ -38,7 +38,7 @@ public class UserDAO {
 	}
 
 	public static void updateUser(String password, String fullname, Date birthday, boolean gender,
-			String mobile, String email, boolean role) throws SQLException, ClassNotFoundException {
+			String mobile, String email, boolean role, int id) throws SQLException, ClassNotFoundException {
 		String sql = "UPDATE USERS SET Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
 //        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 //            stmt.setString(1, password);

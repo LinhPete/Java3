@@ -202,7 +202,7 @@ public final class XJdbc {
 	}
 
 	public static void main(String[] args) {
-		try (Connection connection = DriverManager.getConnection(url, username, "123456789")) {
+		try (Connection connection = DriverManager.getConnection(url, "sa", "123456789")) {
 			if (connection != null) {
 				System.out.println("Kết nối cơ sở dữ liệu thành công!");
 			} else {
