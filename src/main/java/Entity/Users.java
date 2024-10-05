@@ -98,7 +98,7 @@ public class Users {
 	public boolean isRole() {
 		return role;
 	}
-	
+
 	public boolean getRole() {
 		return role;
 	}

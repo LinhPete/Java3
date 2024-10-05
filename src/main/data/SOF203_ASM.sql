@@ -11,13 +11,13 @@ CREATE TABLE CATEGORIES (
 DROP TABLE IF EXISTS USERS;
 CREATE TABLE USERS (
     Id int IDENTITY(1,1) PRIMARY KEY,
-	Username NVARCHAR(255) not null unique,
+    Email NVARCHAR(255) UNIQUE,
     Password NVARCHAR(255) NOT NULL,
     Fullname NVARCHAR(255),
+    Username NVARCHAR(255) UNIQUE,
     Birthday DATE,
     Gender BIT,
-    Mobile NVARCHAR(50),
-    Email NVARCHAR(255),
+    Mobile NVARCHAR(50) UNIQUE,
     Role BIT -- true là quản trị, false là phóng viên
 );
 
@@ -46,21 +46,24 @@ CREATE TABLE NEWSLETTERS (
 -----------------
 INSERT INTO CATEGORIES (Name) VALUES
 (N'Văn hoá'),
+(N'Kinh tế'),
 (N'Pháp luật'),
 (N'Thể thao'),
 (N'Du lịch');
 
-INSERT INTO USERS (Username, Password, Fullname, Birthday, Gender, Mobile, Email, Role) VALUES
-('user001','123456', N'Nguyễn Đàm Hoàng Linh', '1985-05-15', 1, '0905123456', 'ndhl@example.com', 1),
-('user002','123', N'Lê Thị Nhàng', '1990-07-10', 0, '0906789123', 'ltn@example.com', 0),
-('user003','123', N'Trần Văn Công', '1992-03-22', 1, '0908765432', 'tvc@example.com', 0),
-('user004','123', N'Phạm Minh Dương', '1988-11-30', 1, '0909876543', 'pmd@example.com', 0),
-('user005','123456', N'Nguyễn Phan Lâm Hùng', '1986-04-16', 1, '0906543210', 'nplh@example.com', 1),
-('user006','123', N'Võ Văn Toàn', '1995-09-12', 1, '0905432123', 'vvt@example.com', 0),
-('user007','123', N'Đỗ Thị Giang Anh', '1991-06-05', 0, '0902123456', 'dtga@example.com', 0),
-('user008','123', N'Lý Văn Hiệp', '1987-01-21', 1, '0909876123', 'lvh@example.com', 1),
-('user009','123', N'Ngô Thị Thu Nhi', '1993-02-18', 0, '0908761234', 'nttn@example.com', 0),
-('user010','123', N'Bùi Văn Quyết', '1994-12-03', 1, '0906549876', 'bvq@example.com', 0);
+INSERT INTO USERS (Email, Password, Fullname, Username, Birthday, Gender, Mobile, Role) 
+VALUES
+('ndhl@example.com', '123', N'Nguyễn Đàm Hoàng Linh', 'user001', '1985-05-15', 1, '0905123456', 1),
+('nplh@example.com', '123', N'Nguyễn Phan Lâm Hùng', 'user002', '1986-04-16', 1, '0906543210', 1),
+('ltn@example.com', '1234', N'Lê Thị Nhàng', 'user003', '1990-07-10', 0, '0906789123', 0),
+('tvc@example.com', '1234', N'Trần Văn Công', 'user004', '1992-03-22', 1, '0908765432', 0),
+('pmd@example.com', '1234', N'Phạm Minh Dương', 'user005', '1988-11-30', 1, '0909876543', 0),
+('vvt@example.com', '1234', N'Võ Văn Toàn', 'user006', '1995-09-12', 1, '0905432123', 0),
+('dtga@example.com', '1234', N'Đỗ Thị Giang Anh', 'user007', '1991-06-05', 0, '0902123456', 0),
+('lvh@example.com', '1234', N'Lý Văn Hiệp', 'user008', '1987-01-21', 1, '0909876123', 1),
+('nttn@example.com', '1234', N'Ngô Thị Thu Nhi', 'user009', '1993-02-18', 0, '0908761234', 0),
+('bvq@example.com', '1234', N'Bùi Văn Quyết', 'user010', '1994-12-03', 1, '0906549876', 0);
+
 
 INSERT INTO NEWS (Title, Content, Image, PostedDate, Author, ViewCount, CategoryId, Home) VALUES
 (N'Làn sóng sa thải Gen Z Mỹ', N'Báo cáo tháng 8 của hãng nghiên cứu thị trường lao động Intelligent.com cho thấy các công ty đang cắt giảm nhân sự Gen Z "nhiều đến mức đáng lo ngại" sau vài tháng tuyển dụng.', N'culture1.jpg', '2024-09-01', 1, 120, 1, 1),
