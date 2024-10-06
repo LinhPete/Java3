@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
 				if (user != null) {
 					if (PasswordUtil.checkPassword(password, user.getPassword())) {
 						request.getSession().setAttribute("currUser", user);
-						response.sendRedirect("/user/views/home.jsp");
+						request.getRequestDispatcher("/user/views/home.jsp").forward(request, response);
 					} else {
 						request.setAttribute("error", "Mật khẩu không đúng");
 						request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);

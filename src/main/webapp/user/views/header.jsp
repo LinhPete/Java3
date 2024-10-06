@@ -27,6 +27,7 @@
 }
 </style>
 </head>
+
 <body>
 	<div class="container">
 		<div class="row align-items-center">
@@ -88,8 +89,8 @@
 		<a href="NewsServlet?page=law" class="text-decoration-none mx-2">Pháp luật</a> 
 		<a href="NewsServlet?page=sports" class="text-decoration-none mx-2">Thể thao</a> 
 		<a href="NewsServlet?page=travel" class="text-decoration-none mx-2">Du lịch</a>
+		<a href="NewsServlet?page=tech" class="text-decoration-none mx-2">Công nghệ</a>
 	</nav>
-
 </body>
 
 </html>
