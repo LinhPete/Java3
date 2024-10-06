@@ -17,21 +17,26 @@
 					<tr>
 
 						<td>${cate.repId}</td>
-						<td><input type="text" name="${cate.repId}" value="${cate.name}"></td>
+						<td><input type="text" name="${cate.repId}"
+							value="${cate.name}"></td>
 						<td><input type="button"
-							formaction="CateCrudServlet/update?id=${cate.id}" value="Sửa"></td>
+							formaction="CateCrudServlet?id=${cate.id}&action=1" value="Sửa"></td>
 						<td><input type="button"
-							formaction="CateCrudServlet/delete?id=${cate.id}" value="Xóa"></td>
+							formaction="CateCrudServlet?id=${cate.id}&action=2" value="Xóa"></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<a href="CateCrudServlet?id=new">Thêm thể loại</a>
-		<c:if test="${param.id=='new'}">
-			<label for="newCate">Loại tin: </label>
-			<input type="text" name="name" id="newCate">
-			<input type="button" formaction="CateCrudServlet/insert" value="Thêm">
-		</c:if>
 	</form>
+	<a href="CateCrudServlet?action=0">Thêm thể loại</a>
+	<c:if test="${param.action=='0'}">
+		<br>
+		<form action="">
+			<label for="newCate">Loại tin: </label> <input type="text"
+				name="newCate" id="newCate"> <input type="button"
+				formaction="CateCrudServlet/insert" value="Thêm">
+		</form>
+	</c:if>
+
 
 </div>

@@ -5,8 +5,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import DAO.CategoryDAO;
 import DAO.NewsDAO;
@@ -24,7 +27,7 @@ public class CateCrudServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
@@ -41,8 +44,11 @@ public class CateCrudServlet extends HttpServlet {
 				request.setAttribute("category", category);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Logger.getLogger(CateCrudServlet.class.getName()).log(Level.SEVERE, null, e);
 			}
+		}
+		if(request.getMethod().equalsIgnoreCase("post")) {
+			doPost(request, response);
 		}
 		request.setAttribute("dst", "category");
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
@@ -55,8 +61,21 @@ public class CateCrudServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String uri = request.getRequestURI();
-//		if(uri)
+		int action = Integer.parseInt(request.getParameter("action"));
+		switch (action) {
+		case 0:
+			String name = request.getParameter("newCate");
+			Categories newcate = new Categories();
+			newcate.setName(name);
+			try {
+				CategoryDAO.addCategory(newcate);
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+//		request.setAttribute("dst", "category");
+//		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
 	}
 
 }
