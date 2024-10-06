@@ -4,6 +4,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.encrypt.PasswordUtil;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -45,10 +47,10 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		if (email != null && password != null) {
 			try {
-				Users user = new UserDAO().getUserByEmail(email);
+				Users user = UserDAO.getUserByEmail(email);
 				if (user != null) {
-					if (password.equals(user.getPassword())) {
-						request.getSession().setAttribute(email, password);
+					if (PasswordUtil.checkPassword(password, user.getPassword())) {
+						request.getSession().setAttribute("currUser", user);
 						response.sendRedirect("/user/views/home.jsp");
 					} else {
 						request.setAttribute("error", "Mật khẩu không đúng");
