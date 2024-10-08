@@ -17,7 +17,7 @@
 	<div class="container mt-3">
 		<nav class="nav justify-content-center mb-4">
 			<a class="nav-link"	href="NewsCrudServlet">Tin tức</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="AdminServlet?dst=category">Loại tin</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="CateCrudServlet">Loại tin</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=user">Người dùng</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=letter">Newsletter</a>
 		</nav>
@@ -30,13 +30,16 @@
 			<%@ include file="/admin/views/newsDetail.jsp"%>
 		</c:when>
 		<c:when test="${dst=='category'}">
-			<%@ include file="/admin/views/categoryList.jsp"%>
+			<%@ include file="/admin/views/category.jsp"%>
 		</c:when>
-		<c:when test="${dst=='user'}">
+		<c:when test="${dst=='userList'}">
 			<%@ include file="/admin/views/userList.jsp"%>
 		</c:when>
+		<c:when test="${dst=='userDetail'}">
+			<%@ include file="/admin/views/userDetail.jsp"%>
+		</c:when>
 		<c:when test="${dst=='letter'}">
-			<%@ include file="/admin/views/letterList.jsp"%>
+			<%@ include file="/admin/views/letter.jsp"%>
 		</c:when>
 		<c:otherwise><%@ include file="/admin/views/newsList.jsp"%></c:otherwise>
 	</c:choose>

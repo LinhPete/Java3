@@ -109,4 +109,14 @@ public class NewsDAO {
 //        }
         return newsList;
     }
+    
+    public static List<News> searchNews(String keyword) throws SQLException {
+    	String sql = "SELECT * FROM NEWS WHERE Title like ?";
+    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%");
+    	sql = "SELECT NEWS.* FROM NEWS JOIN USERS ON NEWS.Author = USERS.Id WHERE USERS.Fullname like ?";
+    	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
+    	sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE CATEGORIES.Name like ?";
+    	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
+        return newsList;
+    }
 }

@@ -95,8 +95,12 @@ public class Users {
 		this.email = email;
 	}
 
-	public boolean isRole() {
+	public boolean isAdmin() {
 		return role;
+	}
+	
+	public boolean isReporter() {
+		return !role;
 	}
 
 	public boolean getRole() {

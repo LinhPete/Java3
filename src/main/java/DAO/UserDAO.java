@@ -37,22 +37,6 @@ public class UserDAO {
 		DataSourceFactory.IUD(sql, email, password, role);
 	}
 
-	public static void updateUser(String password, String fullname, Date birthday, boolean gender,
-			String mobile, String email, boolean role, int id) throws SQLException, ClassNotFoundException {
-		String sql = "UPDATE USERS SET Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
-//        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-//            stmt.setString(1, password);
-//            stmt.setString(2, fullname);
-//            stmt.setDate(3, birthday);
-//            stmt.setBoolean(4, gender);
-//            stmt.setString(5, mobile);
-//            stmt.setString(6, email);
-//            stmt.setBoolean(7, role);
-//            stmt.setString(8, id);
-//            stmt.executeUpdate();
-//        }
-		DataSourceFactory.IUD(sql, password, fullname, birthday, gender, mobile, email, role, id);
-	}
     public static void updateUser(Users user) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE USERS SET Username = ?, Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
         DataSourceFactory.IUD(sql, user.toUpdateData());
