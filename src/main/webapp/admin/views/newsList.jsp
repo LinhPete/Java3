@@ -25,7 +25,7 @@
 					<td>${news.postedDate}</td>
 					<td>${news.viewCount}</td>
 					<td><a
-						href="NewsCrudServlet?id=${news.id}" target="_blank">Xem
+						href="/SOF203_ASM/news?id=${news.id}" target="_blank">Xem
 							chi tiết...</a></td>
 				</tr>
 
