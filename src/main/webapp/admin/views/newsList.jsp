@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<body>
+<div>
 	<table class="table table-bordered">
 		<thead class="table-light">
 			<tr>
@@ -25,11 +25,11 @@
 					<td>${news.postedDate}</td>
 					<td>${news.viewCount}</td>
 					<td><a
-						href="/SOF203_ASM/news?id=${news.id}" target="_blank">Xem
+						href="/SOF203_ASM/admin/news?id=${news.id}" target="_blank">Xem
 							chi tiết...</a></td>
 				</tr>
 
 			</c:forEach>
 		</tbody>
 	</table>
-</body>
+</div>

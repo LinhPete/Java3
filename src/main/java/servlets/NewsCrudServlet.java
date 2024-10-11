@@ -22,7 +22,7 @@ import Entity.Users;
 /**
  * Servlet implementation class NewsCrudServlet
  */
-@WebServlet("/news")
+@WebServlet({"/admin/news"})
 public class NewsCrudServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private News news;
@@ -61,7 +61,7 @@ public class NewsCrudServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("dst", "newsList");
+			request.setAttribute("path", "/admin/views/newsList.jsp");
 		}
 		else {
 			try {
@@ -73,7 +73,7 @@ public class NewsCrudServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("dst", "newsDetail");
+			request.setAttribute("path", "/admin/views/newsDetail.jsp");
 		}
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
 	}

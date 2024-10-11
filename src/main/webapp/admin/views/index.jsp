@@ -16,33 +16,13 @@
 	</div>
 	<div class="container mt-3">
 		<nav class="nav justify-content-center mb-4">
-			<a class="nav-link"	href="/SOF203_ASM/news">Tin tức</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="/SOF203_ASM/category">Loại tin</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="AdminServlet?dst=user">Người dùng</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="AdminServlet?dst=letter">Newsletter</a>
+			<a class="nav-link"	href="/SOF203_ASM/admin/news">Tin tức</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="/SOF203_ASM/admin/category">Loại tin</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="/SOF203_ASM/admin/user">Người dùng</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="/SOF203_ASM/admin/letter">Newsletter</a>
 		</nav>
 	</div>
-	<c:choose>
-		<c:when test="${dst=='newsList'}">
-			<%@ include file="/admin/views/newsList.jsp"%>
-		</c:when>
-		<c:when test="${dst=='newsDetail'}">
-			<%@ include file="/admin/views/newsDetail.jsp"%>
-		</c:when>
-		<c:when test="${dst=='category'}">
-			<%@ include file="/admin/views/category.jsp"%>
-		</c:when>
-		<c:when test="${dst=='userList'}">
-			<%@ include file="/admin/views/userList.jsp"%>
-		</c:when>
-		<c:when test="${dst=='userDetail'}">
-			<%@ include file="/admin/views/userDetail.jsp"%>
-		</c:when>
-		<c:when test="${dst=='letter'}">
-			<%@ include file="/admin/views/letter.jsp"%>
-		</c:when>
-		<c:otherwise><%@ include file="/admin/views/newsList.jsp"%></c:otherwise>
-	</c:choose>
+	<jsp:include page="${path}"/>
 	<div class="footer text-center">
 		<h2>Welcome [Họ và tên]</h2>
 		<a href="NewsServlet">Về trang chủ</a>

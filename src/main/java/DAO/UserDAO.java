@@ -84,4 +84,9 @@ public class UserDAO {
 		}
 		return null; // null nếu không tìm thấy user
 	}
+	
+	public static int generateNewId() throws ClassNotFoundException, SQLException {
+		String sql = "select count(*) from USERS";
+		return (int) DataSourceFactory.getValue(sql) +1;
+	}
 }
