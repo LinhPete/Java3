@@ -6,24 +6,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import DAO.NewsDAO;
+import Entity.News;
 
 /**
  * Servlet implementation class NewsServlet
  */
-@WebServlet({
-			"/user/home",
-			"/user/culture",
-			"/user/law",
-			"/user/sports",
-			"/user/travel",
-			"/user/tech",
-			"/user/login",
-			"/user/register"})
+@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
+		"/user/register" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private NewsDAO newsDAO = new NewsDAO(); // Tạo đối tượng DAO để truy xuất dữ liệu từ DB
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -34,47 +30,66 @@ public class NewsServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uri = req.getRequestURI();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String uri = request.getRequestURI();
+		List<News> newsList = null;
 
 		if (uri.contains("home")) {
-			req.setAttribute("view", "/user/views/home.jsp");
-			
+			request.setAttribute("view", "/user/views/home.jsp");
+
 		} else if (uri.contains("culture")) {
-			req.setAttribute("view", "/user/views/listCultureNews.jsp");
+			request.setAttribute("view", "/user/views/listCultureNews.jsp");
 
 		} else if (uri.contains("law")) {
-			req.setAttribute("view", "/user/views/listLawNews.jsp");
+			request.setAttribute("view", "/user/views/listLawNews.jsp");
 
 		} else if (uri.contains("sports")) {
-			req.setAttribute("view", "/user/views/listSportsNews.jsp");
+			request.setAttribute("view", "/user/views/listSportsNews.jsp");
 
 		} else if (uri.contains("travel")) {
-			req.setAttribute("view", "/user/views/listTravelNews.jsp");
+			request.setAttribute("view", "/user/views/listTravelNews.jsp");
 
 		} else if (uri.contains("tech")) {
-			req.setAttribute("view", "/user/views/listTechNews.jsp");
+			request.setAttribute("view", "/user/views/listTechNews.jsp");
 
-		} else if (uri.contains("register")) { 
-			req.setAttribute("view", "/user/views/register.jsp");
+		} else if (uri.contains("register")) {
+			request.setAttribute("view", "/user/views/register.jsp");
 
 		} else if (uri.contains("login")) {
-			req.setAttribute("view", "/user/views/login.jsp");
-		} 
-			req.getRequestDispatcher("/index.jsp").forward(req, resp);
-	} 
+			request.setAttribute("view", "/user/views/login.jsp");
+		}
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+		try {
+			newsList = newsDAO.getAllNews(); // Lấy tất cả tin từ DB
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		request.setAttribute("newsList", newsList); // Truyền danh sách tin tức vào request
+		request.setAttribute("newsList", newsList); // Đặt dữ liệu vào request để truyền tới JSP
+		request.getRequestDispatcher("/news-list.jsp").forward(request, response);
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Xử lý logic khi nhấn vào chi tiết tin tức 
 		String id = request.getParameter("id");
 		if (id != null) {
-//			NewsServlet news = NewsDAO.getNewsById(Integer.parseInt(id));
-//			request.setAttribute("news", news);
+			try {
+				News news = newsDAO.getNewsById(Integer.parseInt(id));
+				request.setAttribute("news", news);
+				request.getRequestDispatcher("/user/views/newsDetail.jsp").forward(request, response);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				((HttpServletResponse) request).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+						"Lỗi khi lấy chi tiết tin tức.");
+			}
+		} else {
+			((HttpServletResponse) request).sendError(HttpServletResponse.SC_BAD_REQUEST, "Yêu cầu không hợp lệ.");
 		}
-		request.getRequestDispatcher("/views/newsDetail.jsp").forward(request, response);
 	}
 }

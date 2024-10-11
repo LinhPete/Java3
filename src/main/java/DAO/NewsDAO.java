@@ -121,4 +121,28 @@ public class NewsDAO {
     	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
         return newsList;
     }
+    
+    public static List<News> getNewsByCategory(String categoryName) throws SQLException {
+        String sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE CATEGORIES.Name = ?";
+        List<News> newsList = DataSourceFactory.getResultList(News.class, sql, categoryName);
+        return newsList;
+    }
+    
+    public static List<News> getNewsByDateRange(Date startDate, Date endDate) throws SQLException {
+        String sql = "SELECT * FROM NEWS WHERE PostedDate BETWEEN ? AND ?";
+        List<News> newsList = DataSourceFactory.getResultList(News.class, sql, startDate, endDate);
+        return newsList;
+    }
+
+    public static List<News> getTopNewsByViews(int limit) throws SQLException {
+        String sql = "SELECT * FROM NEWS ORDER BY ViewCount DESC LIMIT ?";
+        List<News> newsList = DataSourceFactory.getResultList(News.class, sql, limit);
+        return newsList;
+    }
+    
+    public List<News> getRelatedNews(int categoryId, int newsId) throws SQLException {
+        List<News> relatedNewsList = new ArrayList<>();
+        String sql = "SELECT * FROM News WHERE categoryId = ? AND id != ? LIMIT 5"; 
+        return relatedNewsList;
+    }
 }

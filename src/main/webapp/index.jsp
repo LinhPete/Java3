@@ -83,16 +83,6 @@
 	</div>
 	</div>
 
-	<!-- Nav 
-	<nav class="bg-light text-center py-2">
-		<a href="NewsServlet?page=home" class="text-decoration-none mx-2">Trang chủ</a> 
-		<a href="NewsServlet?page=culture" class="text-decoration-none mx-2">Văn hóa</a> 
-		<a href="NewsServlet?page=law" class="text-decoration-none mx-2">Pháp luật</a> 
-		<a href="NewsServlet?page=sports" class="text-decoration-none mx-2">Thể thao</a> 
-		<a href="NewsServlet?page=travel" class="text-decoration-none mx-2">Du lịch</a>
-		<a href="NewsServlet?page=tech" class="text-decoration-none mx-2">Công nghệ</a>
-	</nav>
-	-->
 	<c:url value="/user" var="path" />
 	<nav class="bg-light text-center py-2">
 		<a href="${path}/home" class="text-decoration-none mx-2">Trang chủ</a> 
