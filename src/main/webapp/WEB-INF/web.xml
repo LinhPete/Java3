@@ -42,4 +42,7 @@
     <servlet-name>CateCrudServlet</servlet-name>
     <url-pattern>/CateCrudServlet</url-pattern>
   </servlet-mapping>
+  <listener>
+    <listener-class>listeners.AppContextListener</listener-class>
+  </listener>
 </web-app>

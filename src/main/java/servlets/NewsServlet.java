@@ -13,7 +13,15 @@ import DAO.NewsDAO;
 /**
  * Servlet implementation class NewsServlet
  */
-@WebServlet("/home")
+@WebServlet({
+			"/user/home",
+			"/user/culture",
+			"/user/law",
+			"/user/sports",
+			"/user/travel",
+			"/user/tech",
+			"/user/login",
+			"/user/register"})
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,33 +33,36 @@ public class NewsServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		  String page = request.getParameter("page");
-		  String id = request.getParameter("id");
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String uri = req.getRequestURI();
 
-        if (page == null || page.equals("home")) {
-            request.getRequestDispatcher("/user/views/home.jsp").forward(request, response);
-        } else if (page.equals("culture")) {
-            request.getRequestDispatcher("/user/views/listCultureNews.jsp").forward(request, response);
-        } else if (page.equals("law")) {
-            request.getRequestDispatcher("/user/views/listLawNews.jsp").forward(request, response);
-        } else if (page.equals("sports")) {
-            request.getRequestDispatcher("/user/views/listSportsNews.jsp").forward(request, response);
-        } else if (page.equals("travel")) {
-            request.getRequestDispatcher("/user/views/listTravelNews.jsp").forward(request, response);
-        } else if (page.equals("tech")){
-            request.getRequestDispatcher("/user/views/listTechNews.jsp").forward(request, response);
-        }else if (page.equals("register")){
-            request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
-        }else if (page.equals("login")){
-            request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
-        }
-	}
+		if (uri.contains("home")) {
+			req.setAttribute("view", "/user/views/home.jsp");
+			
+		} else if (uri.contains("culture")) {
+			req.setAttribute("view", "/user/views/listCultureNews.jsp");
+
+		} else if (uri.contains("law")) {
+			req.setAttribute("view", "/user/views/listLawNews.jsp");
+
+		} else if (uri.contains("sports")) {
+			req.setAttribute("view", "/user/views/listSportsNews.jsp");
+
+		} else if (uri.contains("travel")) {
+			req.setAttribute("view", "/user/views/listTravelNews.jsp");
+
+		} else if (uri.contains("tech")) {
+			req.setAttribute("view", "/user/views/listTechNews.jsp");
+
+		} else if (uri.contains("register")) { 
+			req.setAttribute("view", "/user/views/register.jsp");
+
+		} else if (uri.contains("login")) {
+			req.setAttribute("view", "/user/views/login.jsp");
+		} 
+			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+	} 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

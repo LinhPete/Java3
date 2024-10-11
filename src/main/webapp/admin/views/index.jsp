@@ -16,8 +16,8 @@
 	</div>
 	<div class="container mt-3">
 		<nav class="nav justify-content-center mb-4">
-			<a class="nav-link"	href="NewsCrudServlet">Tin tức</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="CateCrudServlet">Loại tin</a> <span class="nav-link">:</span>
+			<a class="nav-link"	href="/SOF203_ASM/news">Tin tức</a> <span class="nav-link">:</span>
+			<a class="nav-link" href="/SOF203_ASM/category">Loại tin</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=user">Người dùng</a> <span class="nav-link">:</span>
 			<a class="nav-link" href="AdminServlet?dst=letter">Newsletter</a>
 		</nav>
