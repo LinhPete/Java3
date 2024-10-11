@@ -20,7 +20,7 @@ import Entity.News;
 /**
  * Servlet implementation class CateCrudServlet
  */
-@WebServlet({"/category" })
+@WebServlet({"/admin/category" })
 public class CateCrudServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +51,7 @@ public class CateCrudServlet extends HttpServlet {
 		if(request.getMethod().equalsIgnoreCase("post")) {
 			doPost(request, response);
 		}
-		request.setAttribute("dst", "category");
+		request.setAttribute("path", "/admin/views/category.jsp");
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
 	}
 
