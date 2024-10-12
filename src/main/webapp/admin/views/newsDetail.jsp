@@ -9,7 +9,7 @@
 
 	<form action="${url}" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
-			<c:if test="${user==null || user.role=='true'}">
+			<c:if test="${sessionScope.user.role=='true'}">
 				<h4>Loại tin: ${news.categoryName}</h4>
 			</c:if>
 			<c:if test="${sessionScope.user.role=='false'}">
@@ -26,21 +26,17 @@
 		<div class="mb-3">
 			<label for="title" class="form-label">Tiêu đề</label> <input
 				name="title" type="text" id="title" class="form-control"
-				value="${news.title}" ${user==null||user.role=='true'?'readonly':''}>
+				value="${news.title}"
+				${sessionScope.user.role=='true'?'readonly':''}>
 		</div>
 
 		<div class="mb-3">
-			<label for="img" class="form-label">Chọn ảnh</label>
+			<label class="form-label">Hình ảnh</label>
 			<div>
-				<c:if test="${news==null}">
-					<input type="file" name="img" id="file">
-					<br>
-				</c:if>
-				<c:if test="${news!=null}">
-					<img alt="${news.image}" src="/uploads/${news.image}"
-						class="img-fluid mb-2">
-					<br>
-				</c:if>
+				<img alt="${news.image}" src="/uploads/${news.image}"
+					class="img-fluid mb-2" id="preview"> <br> <input
+					type="file" name="img" id="file" accept="image/*"
+					onchange="previewImage(event)" ${sessionScope.user.role==true?'hidden':''}> <br>
 			</div>
 		</div>
 
@@ -54,11 +50,33 @@
 			<label>Cho phép lên trang chủ?</label>
 			<br>
 		</c:if>
-		<c:if test="${user.role=='false'}">
-			<button formaction="${url}/insert" class="btn btn-primary">Đăng
-				bài</button>
+		<c:if test="${sessionScope.user.role=='false'}">
+			<div class="text-center">
+				<button formaction="${url}/create" ${action=='edit'?'hidden':''}
+					class="btn btn-success">Tạo</button>
+				<button formaction="${url}/update" ${action=='create'?'hidden':''}
+					class="btn btn-warning">Sửa</button>
+				<button formaction="${url}/delete" ${action=='create'?'hidden':''}
+					class="btn btn-danger">Xóa</button>
+				<button formaction="${url}/reset" class="btn btn-secondary">Làm
+					mới</button>
+			</div>
 		</c:if>
-		<button formaction="${url}/update?id=${news.id}"
-			class="btn btn-primary">Cập nhật</button>
+
 	</form>
 </div>
+<script>
+	function previewImage(event) {
+		const preview = document.getElementById('preview');
+		const file = event.target.files[0];
+		const reader = new FileReader();
+
+		reader.onload = function() {
+			preview.src = reader.result;
+		}
+
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+	}
+</script>

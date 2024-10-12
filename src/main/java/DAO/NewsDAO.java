@@ -121,4 +121,9 @@ public class NewsDAO {
     	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
         return newsList;
     }
+    
+    public static int generateNewId() throws ClassNotFoundException, SQLException {
+		String sql = "select count(*) from NEWS";
+		return (int) DataSourceFactory.getValue(sql) +1;
+	}
 }

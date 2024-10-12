@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div>
+	<form action="/admin/news/search">
+	<input type="search" name="search" placeholder="Tìm theo tiêu đề, nội dung, thể loại, tác giả">
+	<input type="submit" value="🔍">
+	</form>
 	<table class="table table-bordered">
 		<thead class="table-light">
 			<tr>
