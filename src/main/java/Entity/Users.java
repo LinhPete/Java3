@@ -54,7 +54,7 @@ public class Users {
 	}
 
 	public void setPassword(String password) {
-		this.password = PasswordUtil.hashPassword(password);
+		this.password = password;
 	}
 
 	public String getFullname() {
