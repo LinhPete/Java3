@@ -107,3 +107,5 @@ INSERT INTO NEWSLETTERS (Email, Enabled) VALUES
 ('email18@example.com', 0),
 ('email19@example.com', 1),
 ('email20@example.com', 1);
+
+SELECT TOP 2* FROM NEWS ORDER BY ViewCount DESC 

@@ -15,7 +15,8 @@ import Entity.News;
 /**
  * Servlet implementation class NewsServlet
  */
-@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/detail/*" })
+@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
+		"/user/register", "/user/demo", "/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,25 +31,62 @@ public class NewsServlet extends HttpServlet {
 		List<News> newsList = null;
 
 		if (uri.contains("home")) {
+			try {
+				newsList = NewsDAO.getAllHomeNews();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
 			String logout = request.getParameter("logout");
 			if(Boolean.parseBoolean(logout)) {
 				request.getSession().setAttribute("currUser", null);
 			}
 			request.setAttribute("view", "/user/views/home.jsp");
+  
 		} else if (uri.contains("culture")) {
-			request.setAttribute("view", "/user/views/listCultureNews.jsp");
+			try {
+				newsList = NewsDAO.getNewsByCategory("Văn hoá");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
+			request.setAttribute("view", "/user/views/newsList.jsp");
 
 		} else if (uri.contains("law")) {
-			request.setAttribute("view", "/user/views/listLawNews.jsp");
+			try {
+				newsList = NewsDAO.getNewsByCategory("Pháp luật");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
+			request.setAttribute("view", "/user/views/newsList.jsp");
 
 		} else if (uri.contains("sports")) {
-			request.setAttribute("view", "/user/views/listSportsNews.jsp");
+			try {
+				newsList = NewsDAO.getNewsByCategory("Thể thao");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
+			request.setAttribute("view", "/user/views/newsList.jsp");
 
 		} else if (uri.contains("travel")) {
-			request.setAttribute("view", "/user/views/listTravelNews.jsp");
+			try {
+				newsList = NewsDAO.getNewsByCategory("Du lịch");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
+			request.setAttribute("view", "/user/views/newsList.jsp");
 
 		} else if (uri.contains("tech")) {
-			request.setAttribute("view", "/user/views/listTechNews.jsp");
+			try {
+				newsList = NewsDAO.getNewsByCategory("Công nghệ");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
+			request.setAttribute("view", "/user/views/newsList.jsp");
 
 		} else if (uri.contains("register")) {
 			request.setAttribute("view", "/user/views/register.jsp");

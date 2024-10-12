@@ -135,14 +135,14 @@ public class NewsDAO {
     }
 
     public static List<News> getTopNewsByViews(int limit) throws SQLException {
-        String sql = "SELECT * FROM NEWS ORDER BY ViewCount DESC LIMIT ?";
+        String sql = "SELECT TOP ?* FROM NEWS ORDER BY ViewCount DESC";
         List<News> newsList = DataSourceFactory.getResultList(News.class, sql, limit);
         return newsList;
     }
     
     public static List<News> getRelatedNews(int categoryId, int newsId) throws SQLException {
         List<News> relatedNewsList = new ArrayList<>();
-        String sql = "SELECT top 5 * FROM News WHERE categoryId = ? AND id NOT IN ?"; 
+        String sql = "SELECT TOP 5 * FROM News WHERE categoryId = ? AND id NOT IN ?"; 
         return relatedNewsList;
     }
 
