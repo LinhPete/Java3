@@ -11,43 +11,34 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div class="bg-dark text-white text-center py-4">
-		<h1>CÔNG CỤ QUẢN TRỊ TIN TỨC</h1>
-	</div>
-	<div class="container mt-3">
-		<nav class="nav justify-content-center mb-4">
-			<a class="nav-link"	href="/SOF203_ASM/news">Tin tức</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="/SOF203_ASM/category">Loại tin</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="AdminServlet?dst=user">Người dùng</a> <span class="nav-link">:</span>
-			<a class="nav-link" href="AdminServlet?dst=letter">Newsletter</a>
-		</nav>
-	</div>
-	<c:choose>
-		<c:when test="${dst=='newsList'}">
-			<%@ include file="/admin/views/newsList.jsp"%>
-		</c:when>
-		<c:when test="${dst=='newsDetail'}">
-			<%@ include file="/admin/views/newsDetail.jsp"%>
-		</c:when>
-		<c:when test="${dst=='category'}">
-			<%@ include file="/admin/views/category.jsp"%>
-		</c:when>
-		<c:when test="${dst=='userList'}">
-			<%@ include file="/admin/views/userList.jsp"%>
-		</c:when>
-		<c:when test="${dst=='userDetail'}">
-			<%@ include file="/admin/views/userDetail.jsp"%>
-		</c:when>
-		<c:when test="${dst=='letter'}">
-			<%@ include file="/admin/views/letter.jsp"%>
-		</c:when>
-		<c:otherwise><%@ include file="/admin/views/newsList.jsp"%></c:otherwise>
-	</c:choose>
-	<div class="footer text-center">
-		<h2>Welcome [Họ và tên]</h2>
-		<a href="NewsServlet">Về trang chủ</a>
-	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<c:if test="${sessionScope.user!=null}">
+		<div class="bg-dark text-white text-center py-4">
+			<h1>CÔNG CỤ QUẢN TRỊ TIN TỨC</h1>
+		</div>
+		<c:if test="${sessionScope.user.role==true}">
+			<div class="container mt-3">
+				<nav class="nav justify-content-center mb-4">
+					<a class="nav-link" href="/SOF203_ASM/admin/news">Tin tức</a> <span
+						class="nav-link">:</span> <a class="nav-link"
+						href="/SOF203_ASM/admin/category">Loại tin</a> <span
+						class="nav-link">:</span> <a class="nav-link"
+						href="/SOF203_ASM/admin/user">Người dùng</a> <span
+						class="nav-link">:</span> <a class="nav-link"
+						href="/SOF203_ASM/admin/letter">Newsletter</a>
+				</nav>
+			</div>
+		</c:if>
+		<jsp:include page="${path}" />
+		<div class="footer text-center">
+			<h2>Welcome ${sessionScope.user}</h2>
+			<a href="NewsServlet">Về trang chủ</a>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	</c:if>
+	<c:if test="${sessionScope.user.role!=true}">
+	<h1>Cần đăng nhập để tiếp tục</h1>
+	<a href="/SOF203_ASM/login">Nhấn vào đây để đăng nhập</a>
+	</c:if>
 </body>
 </html>

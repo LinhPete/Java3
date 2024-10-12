@@ -13,28 +13,6 @@
 <body>
 	<div class="container my-4">
 		<h1 class="mb-4"></h1>
-		<c:forEach var="news" items="${newsList}">
-			<div class="row mb-3">
-				<div class="col-md-2">
-					<a href="NewsServlet?id=${news.id}"> 
-					<img
-						src="${news.imagePath}" class="img-fluid rounded" alt="Ảnh"
-						style="max-width: 100%;">
-					</a>
-				</div>
-				<div class="col-md-10">
-					<h5>
-						<a href="NewsDetailServlet?id=${news.id}">${news.title}</a>
-					</h5>
-					<p class="text-muted">${news.excerpt}</p>
-					<small class="text-muted"> Ngày đăng: ${news.postedDate} | Tác giả: ${news.author} </small>
-				</div>
-		</c:forEach>
-	</div>
-	<hr>
-
-
-
 	<div class="row mb-3">
 		<div class="col-md-2">
 			<img src="/SOF203_ASM/photo/sport2.jpg" class="img-fluid rounded"

@@ -91,6 +91,7 @@
 		<a href="${path}/sports" class="text-decoration-none mx-2">Thể thao</a> 
 		<a href="${path}/travel" class="text-decoration-none mx-2">Du lịch</a>
 		<a href="${path}/tech" class="text-decoration-none mx-2">Công nghệ</a>
+		<a href="${path}/demo" class="text-decoration-none mx-2">demo</a>
 	</nav>
 	<hr>
 	<main>

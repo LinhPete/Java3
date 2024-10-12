@@ -16,17 +16,12 @@ import Entity.News;
  * Servlet implementation class NewsServlet
  */
 @WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
-		"/user/register" })
+		"/user/register", "/user/demo" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private NewsDAO newsDAO = new NewsDAO(); // Tạo đối tượng DAO để truy xuất dữ liệu từ DB
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	
 	public NewsServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -58,18 +53,20 @@ public class NewsServlet extends HttpServlet {
 
 		} else if (uri.contains("login")) {
 			request.setAttribute("view", "/user/views/login.jsp");
+			
+		}else if (uri.contains("demo")) {
+			request.setAttribute("view", "/user/views/newsList.jsp");
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 
 		try {
-			newsList = newsDAO.getAllNews(); // Lấy tất cả tin từ DB
+			newsList = NewsDAO.getAllNews(); // Lấy tất cả tin từ DB
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		request.setAttribute("newsList", newsList); // Truyền danh sách tin tức vào request
-		request.setAttribute("newsList", newsList); // Đặt dữ liệu vào request để truyền tới JSP
-		request.getRequestDispatcher("/news-list.jsp").forward(request, response);
+		request.setAttribute("newsList", newsList);
+		request.getRequestDispatcher("/user/views/newsList.jsp").forward(request, response);
 	}
 
 	@Override
@@ -77,9 +74,10 @@ public class NewsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Xử lý logic khi nhấn vào chi tiết tin tức 
 		String id = request.getParameter("id");
+		System.out.println(id);
 		if (id != null) {
 			try {
-				News news = newsDAO.getNewsById(Integer.parseInt(id));
+				News news = NewsDAO.getNewsById(Integer.parseInt(id));
 				request.setAttribute("news", news);
 				request.getRequestDispatcher("/user/views/newsDetail.jsp").forward(request, response);
 

@@ -1,5 +1,7 @@
 package Entity;
 
+import util.encrypt.PasswordUtil;
+
 import java.sql.Date;
 
 public class Users {
@@ -52,7 +54,7 @@ public class Users {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = PasswordUtil.hashPassword(password);
 	}
 
 	public String getFullname() {
