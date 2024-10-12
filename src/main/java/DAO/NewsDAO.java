@@ -145,4 +145,9 @@ public class NewsDAO {
         String sql = "SELECT top 5 * FROM News WHERE categoryId = ? AND id NOT IN ?"; 
         return relatedNewsList;
     }
+
+    public static int generateNewId() throws ClassNotFoundException, SQLException {
+		String sql = "select count(*) from NEWS";
+		return (int) DataSourceFactory.getValue(sql) +1;
+	}
 }
