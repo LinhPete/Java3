@@ -4,10 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container mt-3">
 	<c:url var="root" value="/admin/user" />
+	<c:if test="${sessionScope.currUser.id!=item.id}">
 	<div class="mb-4">
 		<a href="/SOF203_ASM/admin/user" class="btn btn-secondary">Trở về
 			danh sách</a>
 	</div>
+	</c:if>
 	<div class="card p-4">
 		<h2 class="text-center mb-4">Thông Tin Người Dùng</h2>
 		<form method="post">
@@ -72,9 +74,9 @@
 					class="btn btn-success">Tạo</button>
 				<button formaction="${root}/update" ${action=='create'?'hidden':''}
 					class="btn btn-warning">Sửa</button>
-				<button formaction="${root}/delete" ${action=='create'?'hidden':''}
+				<button formaction="${root}/delete" ${(action=='create'||sessionScope.currUser.id==item.id)?'hidden':''}
 					class="btn btn-danger">Xóa</button>
-				<button formaction="${root}/reset" class="btn btn-secondary">Làm
+				<button formaction="${root}/reset" class="btn btn-secondary" ${sessionScope.currUser.id==item.id?'hidden':''}>Làm
 					mới</button>
 			</div>
 		</form>

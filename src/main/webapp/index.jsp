@@ -30,8 +30,8 @@
 </style>
 </head>
 <body>
-<c:url value="/user" var="path" />
-<div class="container">
+	<c:url value="/user" var="path" />
+	<div class="container">
 		<div class="row align-items-center">
 			<!-- Newspaper Name -->
 			<div class="col-md-4 text-start">
@@ -68,13 +68,19 @@
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						<c:if test="${sessionScope.currUser==null}">
-							<li><a class="dropdown-item" href="${path}/login">Đăng nhập</a></li>
-							<li><a class="dropdown-item" href="${path}/register">Đăng ký</a></li>
+							<li><a class="dropdown-item" href="${path}/login">Đăng
+									nhập</a></li>
+							<li><a class="dropdown-item" href="${path}/register">Đăng
+									ký</a></li>
 						</c:if>
 						<c:if test="${sessionScope.currUser!=null}">
-							<li>${sessionScope.currUser.fullname}</li>
-							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang quản trị</a></li>
-							<li><a class="dropdown-item" href="${path}/home?logout=true">Đăng xuất</a></li>
+							<li><a class="dropdown-item" href="/SOF203_ASM/admin/user/edit/${sessionScope.currUser.id}">Trang
+									cá nhân</a></li>
+							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang
+									quản trị</a></li>
+									<li><a class="dropdown-item" href="/SOF203_ASM/admin/changePass">Đổi mật khẩu</a></li>
+							<li><a class="dropdown-item" href="${path}/home?logout=true">Đăng
+									xuất</a></li>
 						</c:if>
 					</ul>
 				</div>
@@ -89,24 +95,25 @@
 			</div>
 		</div>
 	</div>
-	</div>
 
 	<nav class="bg-light text-center py-2">
-		<a href="${path}/home" class="text-decoration-none mx-2">Trang chủ</a> 
-		<a href="${path}/culture" class="text-decoration-none mx-2">Văn hóa</a> 
-		<a href="${path}/law" class="text-decoration-none mx-2">Pháp luật</a> 
-		<a href="${path}/sports" class="text-decoration-none mx-2">Thể thao</a> 
-		<a href="${path}/travel" class="text-decoration-none mx-2">Du lịch</a>
-		<a href="${path}/tech" class="text-decoration-none mx-2">Công nghệ</a>
+		<a href="${path}/home" class="text-decoration-none mx-2">Trang chủ</a>
+		<a href="${path}/culture" class="text-decoration-none mx-2">Văn
+			hóa</a> <a href="${path}/law" class="text-decoration-none mx-2">Pháp
+			luật</a> <a href="${path}/sports" class="text-decoration-none mx-2">Thể
+			thao</a> <a href="${path}/travel" class="text-decoration-none mx-2">Du
+			lịch</a> <a href="${path}/tech" class="text-decoration-none mx-2">Công
+			nghệ</a>
 	</nav>
 	<hr>
 	<main>
-		<jsp:include page="${view}"/>
+		<jsp:include page="${view}" />
 	</main>
 	<div class="bg-dark text-white text-center py-3 mt-5">
-    	<p>&copy; 2024 Website Tin Tức. All rights reserved.</p>
+		<p>&copy; 2024 Website Tin Tức. All rights reserved.</p>
 	</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

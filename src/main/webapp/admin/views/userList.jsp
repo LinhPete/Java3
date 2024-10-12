@@ -14,22 +14,23 @@
 		</thead>
 		<tbody>
 			<c:forEach var="user" items="${list}">
-				<tr>
-
-					<td>${user.repId}</td>
-					<td>${user.username}</td>
-					<td>${user.fullname}</td>
-					<td>${user.birthday}</td>
-					<td>${user.gender==true?'Nam':'Nữ'}</td>
-					<td>${user.mobile}</td>
-					<td>${user.email}</td>
-					<td>${user.role==true?'Admin':'Ký giả'}</td>
-					<td><a href="/SOF203_ASM/admin/user/edit/${user.id}">Xem
-							chi tiết...</a></td>
-				</tr>
-
+				<c:if test="${sessionScope.currUser.id!=user.id}">
+					<tr>
+						<td>${user.repId}</td>
+						<td>${user.username}</td>
+						<td>${user.fullname}</td>
+						<td>${user.birthday}</td>
+						<td>${user.gender==true?'Nam':'Nữ'}</td>
+						<td>${user.mobile}</td>
+						<td>${user.email}</td>
+						<td>${user.role==true?'Admin':'Ký giả'}</td>
+						<td><a href="/SOF203_ASM/admin/user/edit/${user.id}">Xem
+								chi tiết...</a></td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="/SOF203_ASM/admin/user/blank" class="btn btn-primary">Thêm user</a>
+	<a href="/SOF203_ASM/admin/user/blank" class="btn btn-primary">Thêm
+		user</a>
 </div>

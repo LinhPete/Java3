@@ -56,6 +56,12 @@ public class NewsLettersDAO {
         return result;
     }
     
+    public static List<Newsletters> getAllNewsletter(){
+    	String sql = "SELECT * FROM NEWSLETTERS order by Enabled";
+    	List<Newsletters> list = XJdbc.getResultList(Newsletters.class, sql);
+    	return list;
+    }
+    
     public static List<String> getEnabledEmailList(){
     	String sql = "SELECT Email FROM NEWSLETTERS WHERE Enabled = true";
     	List<String> list = XJdbc.getResultList(String.class, sql);

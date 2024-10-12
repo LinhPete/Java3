@@ -45,4 +45,24 @@
   <listener>
     <listener-class>listeners.AppContextListener</listener-class>
   </listener>
+  <servlet>
+    <description></description>
+    <display-name>NewsLetterServlet</display-name>
+    <servlet-name>NewsLetterServlet</servlet-name>
+    <servlet-class>servlets.NewsLetterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewsLetterServlet</servlet-name>
+    <url-pattern>/NewsLetterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PasswordServlet</display-name>
+    <servlet-name>PasswordServlet</servlet-name>
+    <servlet-class>servlets.PasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PasswordServlet</servlet-name>
+    <url-pattern>/PasswordServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
