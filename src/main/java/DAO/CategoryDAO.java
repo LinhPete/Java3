@@ -7,6 +7,7 @@ import java.util.List;
 import Entity.Categories;
 import Entity.News;
 import util.other.DataSourceFactory;
+import util.other.XJdbc;
 
 public class CategoryDAO {
 //    private Connection connection;
@@ -22,7 +23,7 @@ public class CategoryDAO {
 //            stmt.setString(2, name);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql,cate.toInsertData());
+        XJdbc.IUD(sql,cate.toInsertData());
     }
 
     public static void updateCategory(Categories cate) throws SQLException, ClassNotFoundException {
@@ -32,7 +33,7 @@ public class CategoryDAO {
 //            stmt.setString(2, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, cate.toUpdateData());
+        XJdbc.IUD(sql, cate.toUpdateData());
     }
 
     public static void deleteCategory(int id) throws SQLException, ClassNotFoundException {
@@ -41,12 +42,12 @@ public class CategoryDAO {
 //            stmt.setString(1, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id);
+        XJdbc.IUD(sql, id);
     }
     
     public static Categories getCategoryById(int id) throws SQLException {
     	String sql = "SELECT * FROM CATEGORIES WHERE Id=?";
-    	Categories cate = DataSourceFactory.getSingleResult(Categories.class, sql, id);
+    	Categories cate = XJdbc.getSingleResult(Categories.class, sql, id);
         
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
@@ -59,7 +60,7 @@ public class CategoryDAO {
 
     public static List<Categories> getAllCategories() throws SQLException {
     	String sql = "SELECT * FROM CATEGORIES";
-        List<Categories> categories = DataSourceFactory.getResultList(Categories.class, sql);
+        List<Categories> categories = XJdbc.getResultList(Categories.class, sql);
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
 //            while (rs.next()) {
