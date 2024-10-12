@@ -16,10 +16,10 @@ import Entity.News;
  * Servlet implementation class NewsServlet
  */
 @WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
-		"/user/register", "/user/demo" })
+		"/user/register", "/user/demo", "/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	public NewsServlet() {
 		super();
 	}
@@ -53,26 +53,47 @@ public class NewsServlet extends HttpServlet {
 
 		} else if (uri.contains("login")) {
 			request.setAttribute("view", "/user/views/login.jsp");
-			
-		}else if (uri.contains("demo")) {
+
+		} else if (uri.contains("demo")) {
+			try {
+				newsList = NewsDAO.getAllNews();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
 			request.setAttribute("view", "/user/views/newsList.jsp");
+		}
+
+		else if (uri.contains("detail")) {
+			String id = request.getPathInfo().substring(1);
+			try {
+				News news = NewsDAO.getNewsById(Integer.parseInt(id));
+				request.setAttribute("news", news);
+
+				List<News> relatedNews = NewsDAO.getRelatedNews(news.getCategoryId(), news.getId());
+				request.setAttribute("relatedNewsList", relatedNews);
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("view", "/user/views/newsDetail.jsp");
+
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 
-		try {
-			newsList = NewsDAO.getAllNews(); // Lấy tất cả tin từ DB
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		request.setAttribute("newsList", newsList);
-		request.getRequestDispatcher("/user/views/newsList.jsp").forward(request, response);
+//		try {
+//			newsList = NewsDAO.getAllNews(); // Lấy tất cả tin từ DB
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		request.setAttribute("newsList", newsList);
+//		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Xử lý logic khi nhấn vào chi tiết tin tức 
+		// Xử lý logic khi nhấn vào chi tiết tin tức
 		String id = request.getParameter("id");
 		System.out.println(id);
 		if (id != null) {
