@@ -1,9 +1,12 @@
 package listeners;
 
+import java.sql.SQLException;
+
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 import util.other.DataSourceFactory;
+import util.other.XJdbc;
 
 /**
  * Application Lifecycle Listener implementation class AppContextListener
@@ -31,6 +34,12 @@ public class AppContextListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
     	DataSourceFactory.closeDataSource();
+    	try {
+			XJdbc.closeConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 	
 }

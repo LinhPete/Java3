@@ -37,34 +37,40 @@ public final class XJdbc {
 
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	private static String url = "jdbc:sqlserver://localhost:1433;database=SOF203_ASM;encrypt=false;";
+	private static Connection con = null;
 
 	static {
 		try {
 			Class.forName(DRIVER);
-		} catch (ClassNotFoundException ex) {
+			openConnection();
+		} catch (ClassNotFoundException | SQLException ex) {
 			throw new RuntimeException(ex);
+		}
+	}
+
+	private static final void openConnection() throws SQLException {
+		if(con==null||con.isClosed()) {
+			con = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword());
 		}
 	}
 
 	public static final List<Map<String, Object>> select(String sql, Object... args)
 			throws SQLException, ClassNotFoundException {
 		List<Map<String, Object>> maps = new ArrayList<>();
-		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
-			try (PreparedStatement pst = connection.prepareStatement(sql)) {
-				if (args.length > 0) {
-					for (int i = 0; i < args.length; i++) {
-						pst.setObject(i + 1, args[i]);
-					}
+		try (PreparedStatement pst = con.prepareStatement(sql)) {
+			if (args.length > 0) {
+				for (int i = 0; i < args.length; i++) {
+					pst.setObject(i + 1, args[i]);
 				}
-				try (ResultSet rs = pst.executeQuery()) {
-					while (rs.next()) {
-						Map<String, Object> map = new HashMap<>();
-						ResultSetMetaData data = rs.getMetaData();
-						for (int i = 0; i < data.getColumnCount(); i++) {
-							map.put(data.getColumnName(i + 1), rs.getObject(i + 1));
-						}
-						maps.add(map);
+			}
+			try (ResultSet rs = pst.executeQuery()) {
+				while (rs.next()) {
+					Map<String, Object> map = new HashMap<>();
+					ResultSetMetaData data = rs.getMetaData();
+					for (int i = 0; i < data.getColumnCount(); i++) {
+						map.put(data.getColumnName(i + 1), rs.getObject(i + 1));
 					}
+					maps.add(map);
 				}
 			}
 		}
@@ -80,52 +86,47 @@ public final class XJdbc {
 	}
 
 	public static final int IUD(String sql, Object... args) throws SQLException, ClassNotFoundException {
-		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
-			try (PreparedStatement pst = connection.prepareStatement(sql)) {
-				if (args.length > 0) {
-					for (int i = 0; i < args.length; i++) {
-						pst.setObject(i + 1, args[i]);
-					}
+		try (PreparedStatement pst = con.prepareStatement(sql)) {
+			if (args.length > 0) {
+				for (int i = 0; i < args.length; i++) {
+					pst.setObject(i + 1, args[i]);
 				}
-				return pst.executeUpdate();
 			}
+			return pst.executeUpdate();
 		}
 	}
 
 	public static final Object callNoOutput(String sql, Object... args) throws SQLException, ClassNotFoundException {
 		boolean result;
-		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
-			try (CallableStatement cst = connection.prepareCall(sql)) {
-				if (args.length > 0) {
-					for (int i = 0; i < args.length; i++) {
-						cst.setObject(i + 1, args[i]);
-					}
+		try (CallableStatement cst = con.prepareCall(sql)) {
+			if (args.length > 0) {
+				for (int i = 0; i < args.length; i++) {
+					cst.setObject(i + 1, args[i]);
 				}
-				result = cst.execute();
-				Object packedRs = cst.getResultSet();
-				Integer updateCount = cst.getUpdateCount();
-				return result ? packedRs : updateCount;
 			}
+			result = cst.execute();
+			Object packedRs = cst.getResultSet();
+			Integer updateCount = cst.getUpdateCount();
+			return result ? packedRs : updateCount;
 		}
 	}
 
 	public static final Object callWithOutput(String sql, Object[] args, int output, SQLType sqlType)
 			throws SQLException, ClassNotFoundException {
 		boolean result;
-		try (Connection connection = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword())) {
-			try (CallableStatement cst = connection.prepareCall(sql)) {
-				if (args.length > 0) {
-					for (int i = 0; i < args.length; i++) {
-						cst.setObject(i + 1, args[i]);
-					}
-					cst.registerOutParameter(output, sqlType);
+		try (CallableStatement cst = con.prepareCall(sql)) {
+			if (args.length > 0) {
+				for (int i = 0; i < args.length; i++) {
+					cst.setObject(i + 1, args[i]);
 				}
-				result = cst.execute();
-				Object packedRs = cst.getResultSet();
-				Integer updateCount = cst.getUpdateCount();
-				return result ? packedRs : updateCount;
+				cst.registerOutParameter(output, sqlType);
 			}
+			result = cst.execute();
+			Object packedRs = cst.getResultSet();
+			Integer updateCount = cst.getUpdateCount();
+			return result ? packedRs : updateCount;
 		}
+
 	}
 
 	/**
@@ -200,16 +201,19 @@ public final class XJdbc {
 		}
 		return null;
 	}
+	
+	public static void closeConnection() throws SQLException {
+		if(con!=null&&!con.isClosed()) {
+			con.close();
+		}
+	}
 
 	public static void main(String[] args) {
-		try (Connection connection = DriverManager.getConnection(url, "sa", "123456789")) {
-			if (connection != null) {
+
+			if (con != null) {
 				System.out.println("Kết nối cơ sở dữ liệu thành công!");
 			} else {
 				System.out.println("Kết nối cơ sở dữ liệu thất bại!");
 			}
-		} catch (SQLException e) {
-			System.err.println("Lỗi kết nối: " + e.getMessage());
-		}
 	}
 }

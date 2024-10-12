@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entity.News;
-import util.other.DataSourceFactory;
+import util.other.XJdbc;
 import util.other.XJdbc;
 
 public class NewsDAO {
@@ -29,7 +29,7 @@ public class NewsDAO {
 //            stmt.setBoolean(9, home);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, news.toInsertData());
+        XJdbc.IUD(sql, news.toInsertData());
     }
 
     public static void updateNews(News news) throws SQLException, ClassNotFoundException {
@@ -46,7 +46,7 @@ public class NewsDAO {
 //            stmt.setString(9, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, news.toUpdateData());
+        XJdbc.IUD(sql, news.toUpdateData());
     }
 
     public static void deleteNews(int id) throws SQLException, ClassNotFoundException {
@@ -55,12 +55,12 @@ public class NewsDAO {
 //            stmt.setString(1, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id);
+        XJdbc.IUD(sql, id);
     }
     
     public static News getNewsById(int id) throws SQLException {
     	String sql = "SELECT * FROM NEWS WHERE Id=?";
-    	News news = DataSourceFactory.getSingleResult(News.class, sql, id);
+    	News news = XJdbc.getSingleResult(News.class, sql, id);
         
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
@@ -73,7 +73,7 @@ public class NewsDAO {
 
     public static List<News> getAllNews() throws SQLException {
     	String sql = "SELECT * FROM NEWS";
-    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql);
+    	List<News> newsList = XJdbc.getResultList(News.class, sql);
         
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
@@ -86,7 +86,7 @@ public class NewsDAO {
     
     public static List<News> getAllHomeNews() throws SQLException {
     	String sql = "SELECT * FROM NEWS WHERE HOME = 1";
-    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql);
+    	List<News> newsList = XJdbc.getResultList(News.class, sql);
         
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
@@ -99,7 +99,7 @@ public class NewsDAO {
     
     public static List<News> getAllNewsByAuthor(int authorID) throws SQLException {
     	String sql = "SELECT * FROM NEWS WHERE Author = ?";
-    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql, authorID);
+    	List<News> newsList = XJdbc.getResultList(News.class, sql, authorID);
         
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
@@ -112,31 +112,31 @@ public class NewsDAO {
     
     public static List<News> searchNews(String keyword) throws SQLException {
     	String sql = "SELECT * FROM NEWS WHERE Title like ?";
-    	List<News> newsList = DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%");
+    	List<News> newsList = XJdbc.getResultList(News.class, sql, "%" + keyword + "%");
     	sql = "SELECT * FROM NEWS WHERE Content like ?";
-    	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
+    	newsList.addAll(XJdbc.getResultList(News.class, sql, "%" + keyword + "%"));
     	sql = "SELECT NEWS.* FROM NEWS JOIN USERS ON NEWS.Author = USERS.Id WHERE USERS.Fullname like ?";
-    	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
+    	newsList.addAll(XJdbc.getResultList(News.class, sql, "%" + keyword + "%"));
     	sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE CATEGORIES.Name like ?";
-    	newsList.addAll(DataSourceFactory.getResultList(News.class, sql, "%" + keyword + "%"));
+    	newsList.addAll(XJdbc.getResultList(News.class, sql, "%" + keyword + "%"));
         return newsList;
     }
     
     public static List<News> getNewsByCategory(String categoryName) throws SQLException {
         String sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE CATEGORIES.Name = ?";
-        List<News> newsList = DataSourceFactory.getResultList(News.class, sql, categoryName);
+        List<News> newsList = XJdbc.getResultList(News.class, sql, categoryName);
         return newsList;
     }
     
     public static List<News> getNewsByDateRange(Date startDate, Date endDate) throws SQLException {
         String sql = "SELECT * FROM NEWS WHERE PostedDate BETWEEN ? AND ?";
-        List<News> newsList = DataSourceFactory.getResultList(News.class, sql, startDate, endDate);
+        List<News> newsList = XJdbc.getResultList(News.class, sql, startDate, endDate);
         return newsList;
     }
 
     public static List<News> getTopNewsByViews(int limit) throws SQLException {
         String sql = "SELECT TOP ?* FROM NEWS ORDER BY ViewCount DESC";
-        List<News> newsList = DataSourceFactory.getResultList(News.class, sql, limit);
+        List<News> newsList = XJdbc.getResultList(News.class, sql, limit);
         return newsList;
     }
     
@@ -148,6 +148,6 @@ public class NewsDAO {
 
     public static int generateNewId() throws ClassNotFoundException, SQLException {
 		String sql = "select count(*) from NEWS";
-		return (int) DataSourceFactory.getValue(sql) +1;
+		return (int) XJdbc.getValue(sql) +1;
 	}
 }

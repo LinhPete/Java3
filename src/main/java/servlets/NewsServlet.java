@@ -15,8 +15,8 @@ import Entity.News;
 /**
  * Servlet implementation class NewsServlet
  */
-@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
-		"/user/register", "/user/demo", "/user/detail/*" })
+@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech",
+		"/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

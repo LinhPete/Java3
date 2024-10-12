@@ -72,7 +72,7 @@
 							<li><a class="dropdown-item" href="${path}/register">Đăng ký</a></li>
 						</c:if>
 						<c:if test="${sessionScope.currUser!=null}">
-							<li>sessionScope.currUser.fullname</li>
+							<li>${sessionScope.currUser.fullname}</li>
 							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang quản trị</a></li>
 							<li><a class="dropdown-item" href="${path}/home?logout=true">Đăng xuất</a></li>
 						</c:if>

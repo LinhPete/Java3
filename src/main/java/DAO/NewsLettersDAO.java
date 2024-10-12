@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.List;
 
 import Entity.Newsletters;
-import util.other.DataSourceFactory;
+import util.other.XJdbc;
 
 public class NewsLettersDAO {
 //    private Connection connection;
@@ -20,7 +20,7 @@ public class NewsLettersDAO {
 //            stmt.setBoolean(2, enabled);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, letter.toInsertData());
+        XJdbc.IUD(sql, letter.toInsertData());
     }
 
     public static void updateNewsletter(Newsletters letter) throws SQLException, ClassNotFoundException {
@@ -30,7 +30,7 @@ public class NewsLettersDAO {
 //            stmt.setString(2, email);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, letter.toUpdateData());
+        XJdbc.IUD(sql, letter.toUpdateData());
     }
 
     public static void deleteNewsletter(String email) throws SQLException, ClassNotFoundException {
@@ -39,7 +39,7 @@ public class NewsLettersDAO {
 //            stmt.setString(1, email);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, email);
+        XJdbc.IUD(sql, email);
     }
 
     public static boolean isNewsletterEnabled(String email) throws SQLException, ClassNotFoundException {
@@ -52,13 +52,13 @@ public class NewsLettersDAO {
 //                }
 //            }
 //        }
-        boolean result = DataSourceFactory.getValue(sql, email)!=null;
+        boolean result = XJdbc.getValue(sql, email)!=null;
         return result;
     }
     
     public static List<String> getEnabledEmailList(){
     	String sql = "SELECT Email FROM NEWSLETTERS WHERE Enabled = true";
-    	List<String> list = DataSourceFactory.getResultList(String.class, sql);
+    	List<String> list = XJdbc.getResultList(String.class, sql);
     	return list;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 import Entity.News;
 import Entity.Users;
-import util.other.DataSourceFactory;
+import util.other.XJdbc;
 
 public class UserDAO {
 //    private Connection connection;
@@ -28,18 +28,18 @@ public class UserDAO {
 //            stmt.setBoolean(8, role);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, user.toInsertData());
+        XJdbc.IUD(sql, user.toInsertData());
     }
 
 	public static void addUser(String email, String password, boolean role)
 			throws SQLException, ClassNotFoundException {
 		String sql = "INSERT INTO USERS (Email, Password, Role) VALUES (?, ?, ?)";
-		DataSourceFactory.IUD(sql, email, password, role);
+		XJdbc.IUD(sql, email, password, role);
 	}
 
     public static void updateUser(Users user) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE USERS SET Username = ?, Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
-        DataSourceFactory.IUD(sql, user.toUpdateData());
+        XJdbc.IUD(sql, user.toUpdateData());
     }
 
     public static void deleteUser(int id) throws SQLException, ClassNotFoundException {
@@ -48,12 +48,12 @@ public class UserDAO {
 //            stmt.setString(1, id);
 //            stmt.executeUpdate();
 //        }
-        DataSourceFactory.IUD(sql, id);
+        XJdbc.IUD(sql, id);
     }
 
     public static Users getUserById(int id) throws SQLException {
     	String sql = "SELECT * FROM USERS WHERE Id=?";
-    	Users user = DataSourceFactory.getSingleResult(Users.class, sql, id);
+    	Users user = XJdbc.getSingleResult(Users.class, sql, id);
 
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
@@ -66,7 +66,7 @@ public class UserDAO {
 
 	public static List<Users> getAllUsers() throws SQLException {
 		String sql = "SELECT * FROM USERS";
-		List<Users> users = DataSourceFactory.getResultList(Users.class, sql);
+		List<Users> users = XJdbc.getResultList(Users.class, sql);
 //        try (PreparedStatement stmt = connection.prepareStatement(sql);
 //             ResultSet rs = stmt.executeQuery()) {
 //            while (rs.next()) {
@@ -78,7 +78,7 @@ public class UserDAO {
 
 	public static Users getUserByEmail(String email) throws SQLException, ClassNotFoundException {
 		String sql = "SELECT * FROM USERS WHERE Email = ?";
-		List<Users> users = DataSourceFactory.getResultList(Users.class, sql, email);
+		List<Users> users = XJdbc.getResultList(Users.class, sql, email);
 		if (!users.isEmpty()) {
 			return users.get(0);
 		}
@@ -87,6 +87,6 @@ public class UserDAO {
 	
 	public static int generateNewId() throws ClassNotFoundException, SQLException {
 		String sql = "select count(*) from USERS";
-		return (int) DataSourceFactory.getValue(sql) +1;
+		return (int) XJdbc.getValue(sql) +1;
 	}
 }
