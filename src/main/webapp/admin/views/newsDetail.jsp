@@ -9,10 +9,10 @@
 
 	<form action="${url}" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
-			<c:if test="${sessionScope.user.role=='true'}">
+			<c:if test="${sessionScope.currUser.role=='true'}">
 				<h4>Loại tin: ${news.categoryName}</h4>
 			</c:if>
-			<c:if test="${sessionScope.user.role=='false'}">
+			<c:if test="${sessionScope.currUser.role=='false'}">
 				<label for="category" class="form-label">Chọn loại tin</label>
 				<select name="category" id="category" class="form-select">
 					<c:forEach var="cate" items="${categories}">
@@ -27,7 +27,7 @@
 			<label for="title" class="form-label">Tiêu đề</label> <input
 				name="title" type="text" id="title" class="form-control"
 				value="${news.title}"
-				${sessionScope.user.role=='true'?'readonly':''}>
+				${sessionScope.currUser.role=='true'?'readonly':''}>
 		</div>
 
 		<div class="mb-3">
@@ -36,21 +36,21 @@
 				<img alt="${news.image}" src="/uploads/${news.image}"
 					class="img-fluid mb-2" id="preview"> <br> <input
 					type="file" name="img" id="file" accept="image/*"
-					onchange="previewImage(event)" ${sessionScope.user.role==true?'hidden':''}> <br>
+					onchange="previewImage(event)" ${sessionScope.currUser.role==true?'hidden':''}> <br>
 			</div>
 		</div>
 
 		<div class="mb-3">
 			<label for="content" class="form-label">Nội dung</label>
 			<textarea rows="10" name="content" id="content" class="form-control"
-				${sessionScope.user.role=='true'?'readonly':''}>${news.content}</textarea>
+				${sessionScope.currUser.role=='true'?'readonly':''}>${news.content}</textarea>
 		</div>
-		<c:if test="${sessionScope.user.role=='true'}">
+		<c:if test="${sessionScope.currUser.role=='true'}">
 			<input type="checkbox" name="home">
 			<label>Cho phép lên trang chủ?</label>
 			<br>
 		</c:if>
-		<c:if test="${sessionScope.user.role=='false'}">
+		<c:if test="${sessionScope.currUser.role=='false'}">
 			<div class="text-center">
 				<button formaction="${url}/create" ${action=='edit'?'hidden':''}
 					class="btn btn-success">Tạo</button>

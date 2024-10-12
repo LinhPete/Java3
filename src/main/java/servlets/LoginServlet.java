@@ -16,7 +16,7 @@ import Entity.Users;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet("/user/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
+		request.setAttribute("view", "/user/views/login.jsp");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	/**
@@ -52,22 +53,23 @@ public class LoginServlet extends HttpServlet {
 				if (user != null) {
 					if (PasswordUtil.checkPassword(password, user.getPassword())) {
 						request.getSession().setAttribute("currUser", user);
-						request.getRequestDispatcher("/user/views/home.jsp").forward(request, response);
+						request.setAttribute("view", "/user/views/home.jsp");
 					} else {
 						request.setAttribute("error", "Mật khẩu không đúng");
-						request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
+						request.setAttribute("view", "/user/views/login.jsp");
 					}
 				} else {
 					request.setAttribute("error", "Email không tồn tại");
-					request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
+					request.setAttribute("view", "/user/views/login.jsp");
 				}
 			} catch (SQLException | ClassNotFoundException ex) {
 				request.setAttribute("error", "Có lỗi xảy ra");
-				request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
+				request.setAttribute("view", "/user/views/login.jsp");
 			}
 		} else {
 			request.setAttribute("error", "Vui lòng điền đầy đủ thông tin");
-			request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
+			request.setAttribute("view", "/user/views/login.jsp");
 		}
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 }

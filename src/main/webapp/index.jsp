@@ -30,6 +30,7 @@
 </style>
 </head>
 <body>
+<c:url value="/user" var="path" />
 <div class="container">
 		<div class="row align-items-center">
 			<!-- Newspaper Name -->
@@ -66,8 +67,15 @@
                         </svg>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<li><a class="dropdown-item" href="NewsServlet?page=login">Đăng nhập</a></li>
-						<li><a class="dropdown-item" href="NewsServlet?page=register">Đăng ký</a></li>
+						<c:if test="${sessionScope.currUser==null}">
+							<li><a class="dropdown-item" href="${path}/login">Đăng nhập</a></li>
+							<li><a class="dropdown-item" href="${path}/register">Đăng ký</a></li>
+						</c:if>
+						<c:if test="${sessionScope.currUser!=null}">
+							<li>sessionScope.currUser.fullname</li>
+							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang quản trị</a></li>
+							<li><a class="dropdown-item" href="${path}/home?logout=true">Đăng xuất</a></li>
+						</c:if>
 					</ul>
 				</div>
 
@@ -83,7 +91,6 @@
 	</div>
 	</div>
 
-	<c:url value="/user" var="path" />
 	<nav class="bg-light text-center py-2">
 		<a href="${path}/home" class="text-decoration-none mx-2">Trang chủ</a> 
 		<a href="${path}/culture" class="text-decoration-none mx-2">Văn hóa</a> 
@@ -91,7 +98,6 @@
 		<a href="${path}/sports" class="text-decoration-none mx-2">Thể thao</a> 
 		<a href="${path}/travel" class="text-decoration-none mx-2">Du lịch</a>
 		<a href="${path}/tech" class="text-decoration-none mx-2">Công nghệ</a>
-		<a href="${path}/demo" class="text-decoration-none mx-2">demo</a>
 	</nav>
 	<hr>
 	<main>
