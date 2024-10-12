@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +29,8 @@
 }
 </style>
 </head>
-
 <body>
-	<div class="container">
+<div class="container">
 		<div class="row align-items-center">
 			<!-- Newspaper Name -->
 			<div class="col-md-4 text-start">
@@ -82,15 +83,24 @@
 	</div>
 	</div>
 
-	<!-- Nav -->
+	<c:url value="/user" var="path" />
 	<nav class="bg-light text-center py-2">
-		<a href="NewsServlet?page=home" class="text-decoration-none mx-2">Trang chủ</a> 
-		<a href="NewsServlet?page=culture" class="text-decoration-none mx-2">Văn hóa</a> 
-		<a href="NewsServlet?page=law" class="text-decoration-none mx-2">Pháp luật</a> 
-		<a href="NewsServlet?page=sports" class="text-decoration-none mx-2">Thể thao</a> 
-		<a href="NewsServlet?page=travel" class="text-decoration-none mx-2">Du lịch</a>
-		<a href="NewsServlet?page=tech" class="text-decoration-none mx-2">Công nghệ</a>
+		<a href="${path}/home" class="text-decoration-none mx-2">Trang chủ</a> 
+		<a href="${path}/culture" class="text-decoration-none mx-2">Văn hóa</a> 
+		<a href="${path}/law" class="text-decoration-none mx-2">Pháp luật</a> 
+		<a href="${path}/sports" class="text-decoration-none mx-2">Thể thao</a> 
+		<a href="${path}/travel" class="text-decoration-none mx-2">Du lịch</a>
+		<a href="${path}/tech" class="text-decoration-none mx-2">Công nghệ</a>
+		<a href="${path}/demo" class="text-decoration-none mx-2">demo</a>
 	</nav>
+	<hr>
+	<main>
+		<jsp:include page="${view}"/>
+	</main>
+	<div class="bg-dark text-white text-center py-3 mt-5">
+    	<p>&copy; 2024 Website Tin Tức. All rights reserved.</p>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

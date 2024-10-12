@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/user/views/header.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +14,7 @@
         <div class="row">
             <!-- Img -->
             <div class="col-md-4">
-                <img src="path/to/image-detail.jpg" class="img-fluid rounded" alt="Ảnh chi tiết" style="max-width: 100%;">
+                <img src="/SOF203_ASM/photo/sport4.jpg" class="img-fluid rounded" alt="Ảnh chi tiết" style="max-width: 100%;">
             </div>
             
             <!-- Content -->
@@ -54,7 +53,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-3">
-                        <img src="path/to/related1.jpg" class="card-img-top" alt="Tin tức liên quan 1">
+                        <img src="/SOF203_ASM/photo/sport4.jpg" class="card-img-top" alt="Tin tức liên quan 1">
                         <div class="card-body">
                             <h5 class="card-title">Tiêu đề tin 1</h5>
                             <p class="card-text">Mô tả ngắn gọn về tin tức liên quan 1.</p>
@@ -64,7 +63,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-3">
-                        <img src="path/to/related2.jpg" class="card-img-top" alt="Tin tức liên quan 2">
+                        <img src="/SOF203_ASM/photo/sport4.jpg" class="card-img-top" alt="Tin tức liên quan 2">
                         <div class="card-body">
                             <h5 class="card-title">Tiêu đề tin 2</h5>
                             <p class="card-text">Mô tả ngắn gọn về tin tức liên quan 2.</p>
@@ -74,7 +73,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-3">
-                        <img src="path/to/related3.jpg" class="card-img-top" alt="Tin tức liên quan 3">
+                        <img src="/SOF203_ASM/photo/sport4.jpg" class="card-img-top" alt="Tin tức liên quan 3">
                         <div class="card-body">
                             <h5 class="card-title">Tiêu đề tin 3</h5>
                             <p class="card-text">Mô tả ngắn gọn về tin tức liên quan 3.</p>
@@ -84,7 +83,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-3">
-                        <img src="path/to/related4.jpg" class="card-img-top" alt="Tin tức liên quan 4">
+                        <img src="/SOF203_ASM/photo/sport4.jpg" class="card-img-top" alt="Tin tức liên quan 4">
                         <div class="card-body">
                             <h5 class="card-title">Tiêu đề tin 4</h5>
                             <p class="card-text">Mô tả ngắn gọn về tin tức liên quan 4.</p>
@@ -94,7 +93,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-3">
-                        <img src="path/to/related5.jpg" class="card-img-top" alt="Tin tức liên quan 5">
+                        <img src="/SOF203_ASM/photo/sport4.jpg" class="card-img-top" alt="Tin tức liên quan 5">
                         <div class="card-body">
                             <h5 class="card-title">Tiêu đề tin 5</h5>
                             <p class="card-text">Mô tả ngắn gọn về tin tức liên quan 5.</p>
@@ -112,5 +111,4 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<%@ include file="/user/views/footer.jsp" %>
 </html>

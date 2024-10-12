@@ -6,64 +6,109 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import DAO.NewsDAO;
+import Entity.News;
 
 /**
  * Servlet implementation class NewsServlet
  */
-@WebServlet("/home")
+@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
+		"/user/register", "/user/demo", "/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public NewsServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		  String page = request.getParameter("page");
-		  String id = request.getParameter("id");
+		String uri = request.getRequestURI();
+		List<News> newsList = null;
 
-        if (page == null || page.equals("home")) {
-            request.getRequestDispatcher("/user/views/home.jsp").forward(request, response);
-        } else if (page.equals("culture")) {
-            request.getRequestDispatcher("/user/views/listCultureNews.jsp").forward(request, response);
-        } else if (page.equals("law")) {
-            request.getRequestDispatcher("/user/views/listLawNews.jsp").forward(request, response);
-        } else if (page.equals("sports")) {
-            request.getRequestDispatcher("/user/views/listSportsNews.jsp").forward(request, response);
-        } else if (page.equals("travel")) {
-            request.getRequestDispatcher("/user/views/listTravelNews.jsp").forward(request, response);
-        } else if (page.equals("tech")){
-            request.getRequestDispatcher("/user/views/listTechNews.jsp").forward(request, response);
-        }else if (page.equals("register")){
-            request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
-        }else if (page.equals("login")){
-            request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
-        }
+		if (uri.contains("home")) {
+			request.setAttribute("view", "/user/views/home.jsp");
+
+		} else if (uri.contains("culture")) {
+			request.setAttribute("view", "/user/views/listCultureNews.jsp");
+
+		} else if (uri.contains("law")) {
+			request.setAttribute("view", "/user/views/listLawNews.jsp");
+
+		} else if (uri.contains("sports")) {
+			request.setAttribute("view", "/user/views/listSportsNews.jsp");
+
+		} else if (uri.contains("travel")) {
+			request.setAttribute("view", "/user/views/listTravelNews.jsp");
+
+		} else if (uri.contains("tech")) {
+			request.setAttribute("view", "/user/views/listTechNews.jsp");
+
+		} else if (uri.contains("register")) {
+			request.setAttribute("view", "/user/views/register.jsp");
+
+		} else if (uri.contains("login")) {
+			request.setAttribute("view", "/user/views/login.jsp");
+
+		} else if (uri.contains("demo")) {
+			try {
+				newsList = NewsDAO.getAllNews();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("newsList", newsList);
+			request.setAttribute("view", "/user/views/newsList.jsp");
+		}
+
+		else if (uri.contains("detail")) {
+			String id = request.getPathInfo().substring(1);
+			try {
+				News news = NewsDAO.getNewsById(Integer.parseInt(id));
+				request.setAttribute("news", news);
+
+				List<News> relatedNews = NewsDAO.getRelatedNews(news.getCategoryId(), news.getId());
+				request.setAttribute("relatedNewsList", relatedNews);
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("view", "/user/views/newsDetail.jsp");
+
+		}
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+//		try {
+//			newsList = NewsDAO.getAllNews(); // Lấy tất cả tin từ DB
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//		request.setAttribute("newsList", newsList);
+//		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Xử lý logic khi nhấn vào chi tiết tin tức
 		String id = request.getParameter("id");
+		System.out.println(id);
 		if (id != null) {
-//			NewsServlet news = NewsDAO.getNewsById(Integer.parseInt(id));
-//			request.setAttribute("news", news);
+			try {
+				News news = NewsDAO.getNewsById(Integer.parseInt(id));
+				request.setAttribute("news", news);
+				request.getRequestDispatcher("/user/views/newsDetail.jsp").forward(request, response);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				((HttpServletResponse) request).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+						"Lỗi khi lấy chi tiết tin tức.");
+			}
+		} else {
+			((HttpServletResponse) request).sendError(HttpServletResponse.SC_BAD_REQUEST, "Yêu cầu không hợp lệ.");
 		}
-		request.getRequestDispatcher("/views/newsDetail.jsp").forward(request, response);
 	}
 }

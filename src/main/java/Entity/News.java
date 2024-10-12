@@ -128,4 +128,14 @@ public class News {
 		Object[] data = { title, content, image, postedDate, author, viewCount, categoryId, home, id };
 		return data;
 	}
+	
+	public String getImagePath() {
+	    return "/SOF203_ASM/photo/" + this.image;
+	}
+
+	public String getExcerpt() {
+	    // Lấy 100 ký tự đầu tiên của nội dung
+	    return this.content.length() > 100 ? this.content.substring(0, 100) + "..." : this.content;
+	}
+
 }
