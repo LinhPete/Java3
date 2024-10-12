@@ -6,13 +6,13 @@ import java.sql.Date;
 
 public class Users {
 	private int id;
-	private String username;
+	private String email;
 	private String password;
 	private String fullname;
+	private String username;
 	private Date birthday;
 	private boolean gender;
 	private String mobile;
-	private String email;
 	private boolean role; // true = Admin, false = Reporter
 
 	public Users() {
@@ -118,12 +118,12 @@ public class Users {
 	}
 
 	public Object[] toInsertData() {
-		Object[] data = { password, fullname, birthday, gender, mobile, email, role };
+		Object[] data = { email, password, fullname, username, birthday, gender, mobile, role };
 		return data;
 	}
 
 	public Object[] toUpdateData() {
-		Object[] data = { password, fullname, birthday, gender, mobile, email, role, id };
+		Object[] data = { email, password, fullname, username, birthday, gender, mobile, role, id };
 		return data;
 	}
 }

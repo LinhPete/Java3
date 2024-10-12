@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,8 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="card p-4" style="width: 25rem;">
             <h2 class="text-center"></h2>
-            <form action="login" method="post">
+            <c:url var="url" value="/user"/>
+            <form action="${url}/login" method="post">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="text" class="form-control" id="email" name="email" required>
@@ -24,7 +26,7 @@
               	<p style="color: red;">${error}</p>
             </form>
             <div class="mt-3 text-center">
-                <p>Chưa có tài khoản? <a href="register.jsp">Đăng ký ngay</a></p>
+                <p>Chưa có tài khoản? <a href="${url}/register">Đăng ký ngay</a></p>
             </div>
         </div>
     </div>

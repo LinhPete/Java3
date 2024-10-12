@@ -19,7 +19,7 @@ import Entity.Users;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet("/register")
+@WebServlet("/user/register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,8 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
+		request.setAttribute("view", "/user/views/register.jsp");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	/**
@@ -57,32 +58,32 @@ public class RegisterServlet extends HttpServlet {
 				Users existingUser = UserDAO.getUserByEmail(email);
 				if (existingUser != null) {
 					request.setAttribute("errorEmail", "Email đã tồn tại, vui lòng sử dụng email khác");
-					request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
-					return;
+					request.setAttribute("view", "/user/views/register.jsp");
 				}
 
-				if (!password.equals(confirmPassword)) {
+				else if (!password.equals(confirmPassword)) {
 					request.setAttribute("errorPassword", "Mật khẩu và mật khẩu xác nhận không khớp");
-					request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
-					return;
+					request.setAttribute("view", "/user/views/register.jsp");
 				}
+				else {
+					// Mã hóa mật khẩu với SHA-256
+					String hashedPassword = PasswordUtil.hashPassword(password);
 
-				// Mã hóa mật khẩu với SHA-256
-				String hashedPassword = PasswordUtil.hashPassword(password);
+					// Lưu thông tin người dùng vào cơ sở dữ liệu
+					UserDAO.addUser(email, hashedPassword, false);
 
-				// Lưu thông tin người dùng vào cơ sở dữ liệu
-				UserDAO.addUser(email, hashedPassword, false);
-
-				// Điều hướng đến trang đăng ký thành công
-				request.getRequestDispatcher("/user/views/login.jsp").forward(request, response);
+					// Điều hướng đến trang đăng ký thành công
+					request.setAttribute("view", "/user/views/register.jsp");
+				}
 			} catch (SQLException | ClassNotFoundException e) {
 				e.printStackTrace();
 				request.setAttribute("error", "Có lỗi xảy ra, vui lòng thử lại sau");
-				request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
+				request.setAttribute("view", "/user/views/register.jsp");
 			}
 		} else {
 			request.setAttribute("error", "Vui lòng điền đầy đủ thông tin");
-			request.getRequestDispatcher("/user/views/register.jsp").forward(request, response);
+			request.setAttribute("view", "/user/views/register.jsp");
 		}
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 }

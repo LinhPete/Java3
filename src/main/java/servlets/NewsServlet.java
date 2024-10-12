@@ -37,6 +37,10 @@ public class NewsServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			request.setAttribute("newsList", newsList);
+			String logout = request.getParameter("logout");
+			if(Boolean.parseBoolean(logout)) {
+				request.getSession().setAttribute("currUser", null);
+			}
 			request.setAttribute("view", "/user/views/home.jsp");
   
 		} else if (uri.contains("culture")) {
