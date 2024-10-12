@@ -15,8 +15,8 @@ import Entity.News;
 /**
  * Servlet implementation class NewsServlet
  */
-@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech", "/user/login",
-		"/user/register", "/user/demo", "/user/detail/*" })
+@WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech",
+		 "/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -119,15 +119,6 @@ public class NewsServlet extends HttpServlet {
 
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
-
-//		try {
-//			newsList = NewsDAO.getAllNews(); // Lấy tất cả tin từ DB
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		request.setAttribute("newsList", newsList);
-//		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 
 	@Override
