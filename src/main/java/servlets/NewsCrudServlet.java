@@ -187,11 +187,11 @@ public class NewsCrudServlet extends HttpServlet {
 	}
 	
 	private void upload(HttpServletRequest request, Part img) throws IOException {
-		File saveDir = new File(request.getServletContext().getRealPath("/uploads"));
+		File saveDir = new File(request.getServletContext().getRealPath("/photo"));
 		if(!saveDir.exists()) {
 			saveDir.mkdirs();
 		}
-		String path = "/uploads/" + img.getSubmittedFileName();
+		String path = "/photo/" + img.getSubmittedFileName();
 		String fileName = request.getServletContext().getRealPath(path);
 		img.write(fileName);
 	}

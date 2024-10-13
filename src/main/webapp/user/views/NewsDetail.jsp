@@ -18,7 +18,7 @@
                 <img src="${news.imagePath}" class="img-fluid rounded" alt="Ảnh chi tiết" style="max-width: 100%;">
             </div>
             <div class="col-md-8">
-                <h5 class="text-primary">${news.title}</h5>
+                <h5 class="text-primary" style="text-decoration: none;">${news.title}</h5>
                 <p class="text-muted">${news.content}</p>
                 <small class="text-muted">
                     <strong>Ngày đăng:</strong> ${news.postedDate} | <strong>Tác giả:</strong> ${news.author}

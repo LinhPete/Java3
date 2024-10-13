@@ -23,7 +23,7 @@ import Entity.News;
 		"/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String UPLOAD_DIRECTORY = "uploads";
+    private static final String UPLOAD_DIRECTORY = "photo";
     News form = new News();
 
 	public NewsServlet() {
@@ -141,28 +141,6 @@ public class NewsServlet extends HttpServlet {
 
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// Xử lý logic khi nhấn vào chi tiết tin tức
-		String id = request.getParameter("id");
-		System.out.println(id);
-		if (id != null) {
-			try {
-				News news = NewsDAO.getNewsById(Integer.parseInt(id));
-				request.setAttribute("news", news);
-				request.getRequestDispatcher("/user/views/newsDetail.jsp").forward(request, response);
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-				((HttpServletResponse) request).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-						"Lỗi khi lấy chi tiết tin tức.");
-			}
-		} else {
-			((HttpServletResponse) request).sendError(HttpServletResponse.SC_BAD_REQUEST, "Yêu cầu không hợp lệ.");
-		}
 	}
 	
 }
