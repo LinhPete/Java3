@@ -5,6 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +23,8 @@ import Entity.News;
 		"/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+    private static final String UPLOAD_DIRECTORY = "uploads";
+    News form = new News();
 
 	public NewsServlet() {
 		super();
@@ -160,4 +164,5 @@ public class NewsServlet extends HttpServlet {
 			((HttpServletResponse) request).sendError(HttpServletResponse.SC_BAD_REQUEST, "Yêu cầu không hợp lệ.");
 		}
 	}
+	
 }

@@ -13,12 +13,12 @@
 </head>
 <body>
 	<div class="container my-4">
-		<h1 class="mb-4">Danh sách tin ${category}</h1>
+		<h1 class="mb-4">${category}</h1>
 		<c:forEach var="news" items="${newsList}">
 			<div class="row mb-3">
 				<div class="col-md-2">
 					<a href="/user/detail/${news.id}"> 
-						<img src="/uploads/${news.imagePath}" class="img-fluid rounded" alt="Ảnh"
+						<img src="${news.imagePath}" class="img-fluid rounded" alt="Ảnh"
 							 style="max-width: 100%;">
 					</a>
 				</div>

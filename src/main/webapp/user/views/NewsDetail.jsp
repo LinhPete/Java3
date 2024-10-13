@@ -15,7 +15,7 @@
         <h1 class="mb-4 text-center">Chi tiết Bản Tin</h1>
         <div class="row">
             <div class="col-md-4">
-                <img src="/photo/${news.imagePath}" class="img-fluid rounded" alt="Ảnh chi tiết" style="max-width: 100%;">
+                <img src="${news.imagePath}" class="img-fluid rounded" alt="Ảnh chi tiết" style="max-width: 100%;">
             </div>
             <div class="col-md-8">
                 <h5 class="text-primary">${news.title}</h5>
