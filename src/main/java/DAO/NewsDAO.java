@@ -156,7 +156,7 @@ public class NewsDAO {
 
 	public static List<News> getRelatedNews(int categoryId, int newsId) throws SQLException {
 		List<News> relatedNewsList = new ArrayList<>();
-		String sql = "SELECT TOP 5 * FROM News WHERE categoryId = ? AND id NOT IN ?";
+		String sql = "SELECT TOP 5 * FROM News WHERE categoryId = ? AND id <> ?";
 		return relatedNewsList;
 	}
 

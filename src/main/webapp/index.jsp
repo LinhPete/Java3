@@ -29,7 +29,7 @@
 }
 </style>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<c:url value="/user" var="path" />
 	<div class="container">
 		<div class="row align-items-center">
@@ -109,7 +109,7 @@
 	<main>
 		<jsp:include page="${view}" />
 	</main>
-	<div class="bg-dark text-white text-center py-3 mt-5">
+	<div class="bg-dark text-white text-center py-3 mt-5 mt-auto">
 		<p>&copy; 2024 Website Tin Tức. All rights reserved.</p>
 	</div>
 	<script

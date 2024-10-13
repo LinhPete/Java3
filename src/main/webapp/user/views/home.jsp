@@ -17,13 +17,12 @@
 					data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<c:forEach var="slider" items="${homePageList}" varStatus="status">
-
 							<div class="carousel-item ${status.index == 0 ? 'active' : ''}">
 								<img src="${slider.imagePath}" class="d-block w-100"
 									alt="${slider.title}">
 								<div class="carousel-caption d-none d-md-block">
 									<h5>
-										<a href="/user/${slider.id}">${slider.title}</a>
+										<a href="/user/${slider.id}" style="text-decoration: none;">${slider.title}</a>
 									</h5>
 								</div>
 							</div>
@@ -51,17 +50,17 @@
 				<div class="card-header bg-secondary text-white">5 bản tin mới
 					nhất</div>
 				<ul class="list-group list-group-flush">
-					<c:forEach var="lastest" items="${lastestList}">
+					<c:forEach var="lastest" items="${latestList}">
 						<div class="row mb-3">
 							<div class="col-md-2">
 								<a href="/user/${lastest.id}"> <img
-									src="/SOF203_ASM/uploads/${lastest.image}"
+									src="${lastest.imagePath}"
 									class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
 								</a>
 							</div>
 							<div class="col-md-10">
 								<h5>
-									<a href="/user/${lastest.id}">${lastest.title}</a>
+									<a href="/user/${lastest.id}" style="text-decoration: none;">${lastest.title}</a>
 								</h5>
 							</div>
 						</div>
@@ -79,19 +78,21 @@
 			<div class="card-body">
 				<div class="row mb-3">
 					<c:forEach var="mostViewd" items="${mostViewdList}">
+						
 						<div class="row mb-3">
 							<div class="col-md-2">
 								<a href="/user/${mostViewd.id}"> <img
 									src="${mostViewd.imagePath}"
-									class="img-fluid rounded" alt="Ảnh" style="max-width: 80%;">
+									class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
 								</a>
 							</div>
 							<div class="col-md-10">
 								<h5>
-									<a href="/user/${mostViewd.id}">${mostViewd.title}</a>
+									<a href="/user/${mostViewd.id}" style="text-decoration: none;">${mostViewd.title}</a>
 								</h5>
 							</div>
 						</div>
+						
 					</c:forEach>
 				</div>
 			</div>

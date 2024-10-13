@@ -17,14 +17,14 @@
 		<c:forEach var="news" items="${newsList}">
 			<div class="row mb-3">
 				<div class="col-md-2">
-					<a href="/user/detail/${news.id}"> 
+					<a href="/user/detail/${news.id}" > 
 						<img src="${news.imagePath}" class="img-fluid rounded" alt="Ảnh"
 							 style="max-width: 100%;">
 					</a>
 				</div>
 				<div class="col-md-10">
 					<h5>
-						<a href="/user/detail/${news.id}">${news.title}</a>
+						<a href="/user/detail/${news.id}" style="text-decoration: none;">${news.title}</a>
 					</h5>
 					<p class="text-muted">${news.excerpt}</p>
 					<small class="text-muted"> Ngày đăng: ${news.postedDate} |
