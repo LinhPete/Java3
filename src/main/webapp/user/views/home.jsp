@@ -53,28 +53,28 @@
 			</div>
 		</div>
 
-		<!-- Latest Articles -->
-		<div class="col-md-3">
-			<div class="card mb-4">
-				<div class="card-header bg-secondary text-white">5 bản tin mới nhất</div>
-				<ul class="list-group list-group-flush">
-					<c:forEach var="lastest" items="${lastestList}">
-						<div class="row mb-3">
-							<div class="col-md-2">
-								<a href="/user/${lastest.id}"> 
-								<img src="/uploads/${lastest.imagePath}" class="img-fluid rounded"
-									 alt="Ảnh" style="max-width: 100%;">
-								</a>
-							</div>
-							<div class="col-md-10">
-								<h5><a href="/user/${lastest.id}">${lastest.title}</a></h5>
-							</div>
-						</div>
-					</c:forEach>
-				</ul>
-			</div>
-		</div>
+	<!-- Latest Articles -->
+	<div class="col-md-3">
+	    <div class="card mb-4">
+	        <div class="card-header bg-secondary text-white">5 bản tin mới nhất</div>
+	        <ul class="list-group list-group-flush">
+	            <c:forEach var="lastest" items="${lastestList}">
+	                <div class="row mb-3">
+	                    <div class="col-md-2">
+	                        <a href="/user/${lastest.id}"> 
+	                            <img src="/uploads/${lastest.image}" class="img-fluid rounded"
+	                                 alt="Ảnh" style="max-width: 100%;">
+	                        </a>
+	                    </div>
+	                    <div class="col-md-10">
+	                        <h5><a href="/user/${lastest.id}">${lastest.title}</a></h5>
+	                    </div>
+	                </div>
+	            </c:forEach>
+	        </ul>
+	    </div>
 	</div>
+
 
 
 	<!--Most Viewed Articles -->

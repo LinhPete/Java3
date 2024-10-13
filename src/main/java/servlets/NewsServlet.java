@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+
 import DAO.NewsDAO;
 import Entity.News;
 
@@ -19,30 +20,47 @@ import Entity.News;
 		"/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 
 	public NewsServlet() {
 		super();
+
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String uri = request.getRequestURI();
 		List<News> newsList = null;
-
+		List<News> homePageList = null;
+		List<News> latestList = null;
+		List<News> mostViewdList = null;
+		List<News> ViewdList = null;
+		
 		if (uri.contains("home")) {
 			try {
 				newsList = NewsDAO.getAllHomeNews();
+				homePageList = NewsDAO.getAllHomeNews();
+				latestList = NewsDAO.getLatestNews();
+				mostViewdList = NewsDAO.getTopNewsByViews();
+//				ViewdList = NewsDAO.getRecentlyViewedNewsByUser();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			request.setAttribute("newsList", newsList);
+			request.setAttribute("homePageList", homePageList);
+			request.setAttribute("latestList", latestList);
+			request.setAttribute("mostViewdList", mostViewdList);
+//			request.setAttribute("ViewdList", ViewdList);
+
 			String logout = request.getParameter("logout");
-			if(Boolean.parseBoolean(logout)) {
+			if (Boolean.parseBoolean(logout)) {
 				request.getSession().setAttribute("currUser", null);
 			}
 			request.setAttribute("view", "/user/views/home.jsp");
-  
+
 		} else if (uri.contains("culture")) {
 			try {
 				newsList = NewsDAO.getNewsByCategory("Văn hoá");
