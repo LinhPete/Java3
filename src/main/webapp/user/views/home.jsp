@@ -22,13 +22,14 @@
 									alt="${slider.title}">
 								<div class="carousel-caption d-none d-md-block">
 									<h5>
-										<a href="/SOF203_ASM/user/detail/${slider.id}" style="text-decoration: none;">${slider.title}</a>
+										<a href="/SOF203_ASM/user/detail/${slider.id}"
+											style="text-decoration: none;">${slider.title}</a>
 									</h5>
 								</div>
 							</div>
 						</c:forEach>
 					</div>
-				
+
 					<!-- Controls -->
 					<button class="carousel-control-prev" type="button"
 						data-bs-target="#articleSlider" data-bs-slide="prev">
@@ -54,13 +55,14 @@
 						<div class="row mb-3">
 							<div class="col-md-2">
 								<a href="/SOF203_ASM/user/detail/${lastest.id}"> <img
-									src="${lastest.imagePath}"
-									class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
+									src="${lastest.imagePath}" class="img-fluid rounded" alt="Ảnh"
+									style="max-width: 100%;">
 								</a>
 							</div>
 							<div class="col-md-10">
 								<h5>
-									<a href="/SOF203_ASM/user/detail/${lastest.id}" style="text-decoration: none;">${lastest.title}</a>
+									<a href="/SOF203_ASM/user/detail/${lastest.id}"
+										style="text-decoration: none;">${lastest.title}</a>
 								</h5>
 							</div>
 						</div>
@@ -78,21 +80,22 @@
 			<div class="card-body">
 				<div class="row mb-3">
 					<c:forEach var="mostViewd" items="${mostViewdList}">
-						
+
 						<div class="row mb-3">
 							<div class="col-md-2">
 								<a href="/SOF203_ASM/user/detail/${mostViewd.id}"> <img
-									src="${mostViewd.imagePath}"
-									class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
+									src="${mostViewd.imagePath}" class="img-fluid rounded"
+									alt="Ảnh" style="max-width: 100%;">
 								</a>
 							</div>
 							<div class="col-md-10">
 								<h5>
-									<a href="/SOF203_ASM/user/detail/${mostViewd.id}" style="text-decoration: none;">${mostViewd.title}</a>
+									<a href="/SOF203_ASM/user/detail/${mostViewd.id}"
+										style="text-decoration: none;">${mostViewd.title}</a>
 								</h5>
 							</div>
 						</div>
-						
+
 					</c:forEach>
 				</div>
 			</div>
@@ -107,8 +110,8 @@
 					<div class="row mb-3">
 						<div class="col-md-2">
 							<a href="/SOF203_ASM/user/detail/${viewd.id}"> <img
-								src="${viewd.imagePath}"
-								class="img-fluid rounded" alt="Ảnh" style="max-width: 60%;">
+								src="${viewd.imagePath}" class="img-fluid rounded" alt="Ảnh"
+								style="max-width: 60%;">
 							</a>
 						</div>
 						<div class="col-md-10">
@@ -131,5 +134,6 @@
 		</div>
 
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</div>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

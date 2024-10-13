@@ -9,29 +9,58 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<style>
+.dropdown:hover 
+    .dropdown-menu {
+	display: block;
+	min-width: auto;
+	width: max-content;
+	padding: 0;
+}
+
+.dropdown-item {
+	display: block;
+	width: 100%;
+	padding: 8px 16px;
+	text-align: left;
+	white-space: nowrap;
+}
+</style>
 </head>
 <body>
 	<c:if test="${sessionScope.currUser!=null}">
-		<div class="bg-dark text-white text-center py-4">
-			<h1>CÔNG CỤ QUẢN TRỊ TIN TỨC</h1>
-			<div class="dropdown d-inline-block mx-2">
-					<button class="btn btn-light account-icon" type="button"
-						id="dropdownMenuButton" data-bs-toggle="dropdown"
-						aria-expanded="false">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-							fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                            <path
-								d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                        </svg>
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<li><a class="dropdown-item" href="/SOF203_ASM/admin/user/edit/${sessionScope.currUser.id}">Trang
-									cá nhân</a></li>
-									<li><a class="dropdown-item" href="/SOF203_ASM/admin/changePass">Đổi mật khẩu</a></li>
-							<li><a class="dropdown-item" href="/SOF203_ASM/user/home?logout=true">Đăng
-									xuất</a></li>
-					</ul>
+		<div class="container-fluid bg-dark text-white">
+			<div class="row align-items-center">
+				<!-- Newspaper Name -->
+				<div class="col-md-5 text-center">
+					<h1>CÔNG CỤ QUẢN TRỊ TIN TỨC</h1>
 				</div>
+				<div class="col-md-6 text-end">
+					<!-- User Icon -->
+					<div class="dropdown d-inline-block mx-1">
+						<button class="btn btn-light account-icon" type="button"
+							id="dropdownMenuButton" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+								fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path
+									d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                    </svg>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-end"
+							aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item"
+								href="/SOF203_ASM/admin/user/edit/${sessionScope.currUser.id}">Trang cá nhân</a></li>
+							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang
+									quản trị</a></li>
+							<li><a class="dropdown-item"
+								href="/SOF203_ASM/admin/changePass">Đổi mật khẩu</a></li>
+							<li><a class="dropdown-item" href="/SOF203_ASM/user/logout">Đăng
+									xuất</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 		<c:if test="${sessionScope.currUser.role==true}">
 			<div class="container mt-3">

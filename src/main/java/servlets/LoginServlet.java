@@ -16,7 +16,7 @@ import Entity.Users;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/user/login")
+@WebServlet({"/user/login", "/user/logout"})
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,8 +35,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String path = request.getServletPath();
+		if(path.contains("login")) {
 		request.setAttribute("view", "/user/views/login.jsp");
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		}
+		else if(path.contains("logout")) {
+				request.getSession().setAttribute("currUser", null);
+				response.sendRedirect("/SOF203_ASM/user/home");
+		}
 	}
 
 	/**
@@ -53,7 +60,9 @@ public class LoginServlet extends HttpServlet {
 				if (user != null) {
 					if (PasswordUtil.checkPassword(password, user.getPassword())) {
 						request.getSession().setAttribute("currUser", user);
-						request.setAttribute("view", "/user/views/home.jsp");
+//						request.setAttribute("view", "/user/views/home.jsp");
+						response.sendRedirect("/SOF203_ASM/user/home");
+						return;
 					} else {
 						request.setAttribute("error", "Mật khẩu không đúng");
 						request.setAttribute("view", "/user/views/login.jsp");

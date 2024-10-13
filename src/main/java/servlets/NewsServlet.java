@@ -49,7 +49,7 @@ public class NewsServlet extends HttpServlet {
 				latestList = NewsDAO.getLatestNews();
 				mostViewdList = NewsDAO.getTopNewsByViews();
 //				ViewdList = NewsDAO.getRecentlyViewedNewsByUser();
-
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -57,14 +57,8 @@ public class NewsServlet extends HttpServlet {
 			request.setAttribute("homePageList", homePageList);
 			request.setAttribute("latestList", latestList);
 			request.setAttribute("mostViewdList", mostViewdList);
-//			request.setAttribute("ViewdList", ViewdList);
-
-			String logout = request.getParameter("logout");
-			if (Boolean.parseBoolean(logout)) {
-				request.getSession().setAttribute("currUser", null);
-			}
 			request.setAttribute("view", "/user/views/home.jsp");
-
+//			request.setAttribute("ViewdList", ViewdList);
 		} else if (uri.contains("culture")) {
 			try {
 				newsList = NewsDAO.getNewsByCategory("Văn hoá");
