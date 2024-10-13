@@ -137,8 +137,7 @@ public class NewsServlet extends HttpServlet {
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}
-			request.setAttribute("view", "/user/views/newsDetail.jsp");
-
+			request.setAttribute("view", "/user/views/NewsDetail.jsp");
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}

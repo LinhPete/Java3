@@ -28,7 +28,7 @@
 							<li><a class="dropdown-item" href="/SOF203_ASM/admin/user/edit/${sessionScope.currUser.id}">Trang
 									cá nhân</a></li>
 									<li><a class="dropdown-item" href="/SOF203_ASM/admin/changePass">Đổi mật khẩu</a></li>
-							<li><a class="dropdown-item" href="${path}/home?logout=true">Đăng
+							<li><a class="dropdown-item" href="/SOF203_ASM/user/home?logout=true">Đăng
 									xuất</a></li>
 					</ul>
 				</div>

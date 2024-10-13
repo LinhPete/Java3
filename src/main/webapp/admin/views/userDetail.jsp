@@ -23,11 +23,6 @@
 					class="form-control">
 			</div>
 			<div class="mb-3">
-				<label for="password" class="form-label">Mật khẩu:</label> <input
-					id="password" name="password" value="${item.password}"
-					class="form-control" type="password" readonly>
-			</div>
-			<div class="mb-3">
 				<label for="fullname" class="form-label">Họ tên:</label> <input
 					id="fullname" name="fullname" value="${item.fullname}"
 					class="form-control">
@@ -61,16 +56,16 @@
 				<label class="form-label">Vai trò:</label>
 				<div>
 					<input type="radio" name="role" value="true" id="admin"
-						${item.role==true?'checked':''}> <label for="admin"
+						${item.role==true?'checked':''} disabled> <label for="admin"
 						class="form-label me-2">Admin</label> <input type="radio"
 						name="role" value="false" id="reporter"
-						${item.role==false?'checked':''}> <label for="reporter"
+						${item.role==false?'checked':''} disabled> <label for="reporter"
 						class="form-label">Ký giả</label>
 				</div>
 			</div>
 			<hr>
 			<div class="text-center">
-				<button formaction="${root}/create" ${action=='edit'?'hidden':''}
+				<button formaction="${root}/create" ${(action=='edit'||sessionScope.currUser.id==item.id)?'hidden':''}
 					class="btn btn-success">Tạo</button>
 				<button formaction="${root}/update" ${action=='create'?'hidden':''}
 					class="btn btn-warning">Sửa</button>

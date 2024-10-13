@@ -22,7 +22,7 @@
 									alt="${slider.title}">
 								<div class="carousel-caption d-none d-md-block">
 									<h5>
-										<a href="/user/${slider.id}" style="text-decoration: none;">${slider.title}</a>
+										<a href="/SOF203_ASM/user/detail/${slider.id}" style="text-decoration: none;">${slider.title}</a>
 									</h5>
 								</div>
 							</div>
@@ -53,14 +53,14 @@
 					<c:forEach var="lastest" items="${latestList}">
 						<div class="row mb-3">
 							<div class="col-md-2">
-								<a href="/user/${lastest.id}"> <img
+								<a href="/SOF203_ASM/user/detail/${lastest.id}"> <img
 									src="${lastest.imagePath}"
 									class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
 								</a>
 							</div>
 							<div class="col-md-10">
 								<h5>
-									<a href="/user/${lastest.id}" style="text-decoration: none;">${lastest.title}</a>
+									<a href="/SOF203_ASM/user/detail/${lastest.id}" style="text-decoration: none;">${lastest.title}</a>
 								</h5>
 							</div>
 						</div>
@@ -81,14 +81,14 @@
 						
 						<div class="row mb-3">
 							<div class="col-md-2">
-								<a href="/user/${mostViewd.id}"> <img
+								<a href="/SOF203_ASM/user/detail/${mostViewd.id}"> <img
 									src="${mostViewd.imagePath}"
 									class="img-fluid rounded" alt="Ảnh" style="max-width: 100%;">
 								</a>
 							</div>
 							<div class="col-md-10">
 								<h5>
-									<a href="/user/${mostViewd.id}" style="text-decoration: none;">${mostViewd.title}</a>
+									<a href="/SOF203_ASM/user/detail/${mostViewd.id}" style="text-decoration: none;">${mostViewd.title}</a>
 								</h5>
 							</div>
 						</div>
@@ -106,14 +106,14 @@
 				<c:forEach var="viewd" items="${ViewdList}">
 					<div class="row mb-3">
 						<div class="col-md-2">
-							<a href="/user/${viewd.id}"> <img
+							<a href="/SOF203_ASM/user/detail/${viewd.id}"> <img
 								src="${viewd.imagePath}"
 								class="img-fluid rounded" alt="Ảnh" style="max-width: 60%;">
 							</a>
 						</div>
 						<div class="col-md-10">
 							<h5>
-								<a href="/user/${viewd.id}">${viewd.title}</a>
+								<a href="/SOF203_ASM/user/detail/${viewd.id}">${viewd.title}</a>
 							</h5>
 						</div>
 					</div>
