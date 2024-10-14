@@ -50,7 +50,9 @@ public final class XJdbc {
 
 	private static final void openConnection() throws SQLException {
 		if(con==null||con.isClosed()) {
-			con = DriverManager.getConnection(url, "sa", "123456789");
+//			System.out.println(Accounts.SQL_ACC.getUsername());
+//			System.out.println(Accounts.SQL_ACC.getPassword());
+			con = DriverManager.getConnection(url, Accounts.SQL_ACC.getUsername(), Accounts.SQL_ACC.getPassword());
 		}
 	}
 

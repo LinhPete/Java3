@@ -49,10 +49,10 @@
 						</button>
 						<ul class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="dropdownMenuButton">
+							<li><a class="dropdown-item" href="/SOF203_ASM/user/home">Trang
+									đọc giả</a></li>
 							<li><a class="dropdown-item"
-								href="/SOF203_ASM/admin/user/edit/${sessionScope.currUser.id}">Trang cá nhân</a></li>
-							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang
-									quản trị</a></li>
+								href="/SOF203_ASM/admin/user/edit/${sessionScope.currUser.id}">Trang cá nhân</a></li>							
 							<li><a class="dropdown-item"
 								href="/SOF203_ASM/user/changePass">Đổi mật khẩu</a></li>
 							<li><a class="dropdown-item" href="/SOF203_ASM/user/logout">Đăng
@@ -78,7 +78,6 @@
 		<jsp:include page="${path}" />
 		<div class="footer text-center">
 			<h2>Welcome ${sessionScope.currUser.fullname}</h2>
-			<a href="/SOF203_ASM/user/home">Về trang chủ</a>
 		</div>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

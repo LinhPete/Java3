@@ -25,25 +25,25 @@ public class DataSourceFactory {
 	private static HikariDataSource dataSource;
 	private static final String DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
-	static {
-		try {
-			Class.forName(DRIVER);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		HikariConfig config = new HikariConfig();
-		config.setJdbcUrl("jdbc:sqlserver://localhost:1433;database=SOF203_ASM;encrypt=false;");
-		config.setUsername(Accounts.SQL_ACC.getUsername());
-		config.setPassword(Accounts.SQL_ACC.getPassword());
-		config.setMaximumPoolSize(10); // Số lượng kết nối tối đa
-		config.setMinimumIdle(2); // Số lượng kết nối rảnh tối thiểu
-		config.setIdleTimeout(30000); // Thời gian kết nối không sử dụng trước khi bị đóng
-		config.setConnectionTimeout(30000); // Thời gian chờ kết nối
-		config.setMaxLifetime(1800000); // Thời gian sống tối đa của kết nối
-
-		dataSource = new HikariDataSource(config);
-	}
+//	static {
+//		try {
+//			Class.forName(DRIVER);
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		HikariConfig config = new HikariConfig();
+//		config.setJdbcUrl("jdbc:sqlserver://localhost:1433;database=SOF203_ASM;encrypt=false;");
+//		config.setUsername(Accounts.SQL_ACC.getUsername());
+//		config.setPassword(Accounts.SQL_ACC.getPassword());
+//		config.setMaximumPoolSize(10); // Số lượng kết nối tối đa
+//		config.setMinimumIdle(2); // Số lượng kết nối rảnh tối thiểu
+//		config.setIdleTimeout(30000); // Thời gian kết nối không sử dụng trước khi bị đóng
+//		config.setConnectionTimeout(30000); // Thời gian chờ kết nối
+//		config.setMaxLifetime(1800000); // Thời gian sống tối đa của kết nối
+//
+//		dataSource = new HikariDataSource(config);
+//	}
 //
 //	public static DataSource getDataSource() {
 //		return dataSource;

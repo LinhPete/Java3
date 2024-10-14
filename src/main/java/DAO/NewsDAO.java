@@ -121,6 +121,16 @@ public class NewsDAO {
 		newsList.addAll(XJdbc.getResultList(News.class, sql, "%" + keyword + "%"));
 		return newsList;
 	}
+	
+	public static List<News> searchNewsByAuthor(int authorID, String keyword) throws SQLException {
+		String sql = "SELECT NEWS.* FROM NEWS JOIN USERS ON NEWS.Author = USERS.Id WHERE USERS.Id = ? AND Title like ?";
+		List<News> newsList = XJdbc.getResultList(News.class, sql, "%" + keyword + "%");
+		sql = "SELECT NEWS.* FROM NEWS JOIN USERS ON NEWS.Author = USERS.Id WHERE USERS.Id = ? AND Content like ?";
+		newsList.addAll(XJdbc.getResultList(News.class, sql, "%" + keyword + "%"));
+		sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE USERS.Id = ? AND CATEGORIES.Name like ?";
+		newsList.addAll(XJdbc.getResultList(News.class, sql, "%" + keyword + "%"));
+		return newsList;
+	}
 
 	public static List<News> getNewsByCategory(String categoryName) throws SQLException {
 		String sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE CATEGORIES.Name = ?";

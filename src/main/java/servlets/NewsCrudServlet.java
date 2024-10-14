@@ -34,7 +34,7 @@ import Entity.Users;
 public class NewsCrudServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private News news;
-	private Users user;
+	private static Users user;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,15 +51,26 @@ public class NewsCrudServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<News> list;
 		String path = request.getServletPath();
-		setUser((Users) request.getSession().getAttribute("user"));
+		user = (Users) request.getSession().getAttribute("user");
 		if(path.contains("search") && !request.getParameter("search").isBlank()) {
-			try {
-				list = NewsDAO.searchNews(request.getParameter("search"));
-				request.setAttribute("list", list);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if(user.getRole()) {
+				try {
+					list = NewsDAO.searchNews(request.getParameter("search"));
+					request.setAttribute("list", list);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				try {
+					list = NewsDAO.searchNewsByAuthor(user.getId(),request.getParameter("search"));
+					request.setAttribute("list", list);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
 			request.setAttribute("path", "/admin/views/newsList.jsp");
 		} else if(path.contains("edit")) {
 			String id = request.getPathInfo().substring(1);
@@ -99,9 +110,19 @@ public class NewsCrudServlet extends HttpServlet {
 			}
 			request.setAttribute("path", "/admin/views/newsDetail.jsp");
 		}
-		else {
+		else if(user.getRole()) {
 			try {
 				list = NewsDAO.getAllNews();
+				request.setAttribute("list", list);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("path", "/admin/views/newsList.jsp");
+		}
+		else if(!user.getRole()) {
+			try {
+				list = NewsDAO.getAllNewsByAuthor(user.getId());
 				request.setAttribute("list", list);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -176,14 +197,6 @@ public class NewsCrudServlet extends HttpServlet {
 		}
 		request.setAttribute("path", "/admin/views/newsDetail.jsp");
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
 	}
 	
 	private void upload(HttpServletRequest request, Part img) throws IOException {
