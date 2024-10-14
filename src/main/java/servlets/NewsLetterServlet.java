@@ -65,6 +65,19 @@ public class NewsLetterServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (path.contains("subcribe")) {
+			String email = request.getParameter("email");
+			form = new Newsletters();
+			form.setEmail(email);
+			form.setEnabled(true);
+			
+			try {
+				NewsLettersDAO.addNewsletter(form);
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("item", form);
+		    request.setAttribute("message", "Đăng ký nhận tin thành công!");
 		}
 		request.setAttribute("path", "/admin/views/letter.jsp");
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
