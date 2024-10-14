@@ -27,8 +27,7 @@
 						<a href="/SOF203_ASM/user/detail/${news.id}" style="text-decoration: none;">${news.title}</a>
 					</h5>
 					<p class="text-muted">${news.excerpt}</p>
-					<small class="text-muted"> Ngày đăng: ${news.postedDate} |
-						Tác giả: ${news.authorName} </small>
+					<small class="text-muted"> Ngày đăng: ${news.postedDate} | Tác giả: ${news.authorName} </small>
 				</div>
 			</div>
 		</c:forEach>

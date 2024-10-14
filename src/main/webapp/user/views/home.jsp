@@ -87,14 +87,16 @@
 			<div class="card mb-3">
 				<div class="card-header bg-secondary text-white">Newsletter</div>
 				<div class="card-body">
-					<input  type="text" class="form-control form-control-sm"
-							placeholder="your_email@example.com">
+					<div class="d-flex">
+						<input  type="text" class="form-control form-control-sm me-2" placeholder="email@example.com">
+						<button class="btn btn-primary btn-sm" type="submit">Đăng ký</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-s	<div class="row">
+	<div class="row">
 		<div class="col-12">
 			<!-- Most Viewed Articles -->
 			<div class="card mb-3">
@@ -114,6 +116,13 @@ s	<div class="row">
 										style="text-decoration: none;">${mostViewd.title}</a>
 								</h5>
 								<p class="text-muted">${mostViewd.excerpt}</p>
+								<small class="text-muted"> 
+									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 15 20">
+									  <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+									  <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+									</svg>
+								 ${mostViewd.viewCount} 
+								 </small>
 							</div>
 						</div>
 					</c:forEach>
