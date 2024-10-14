@@ -50,7 +50,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">Email:</label> <input
-					id="email" name="email" value="${item.email}" class="form-control">
+					id="email" name="email" value="${item.email}" class="form-control" readonly>
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Vai trò:</label>

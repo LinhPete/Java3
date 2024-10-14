@@ -8,12 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import util.encrypt.PasswordUtil;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
+import DAO.UserDAO;
 import Entity.Users;
 
 /**
  * Servlet implementation class PasswordServlet
  */
+@WebServlet({"/user/changePass","/user/forgetPass"})
 public class PasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -54,6 +57,12 @@ public class PasswordServlet extends HttpServlet {
 			}
 			else {
 				currUser.setPassword(PasswordUtil.hashPassword(newPass));
+				try {
+					UserDAO.updateUser(currUser);
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				request.setAttribute("view", "/user/views/login.jsp");
 			}
 		}

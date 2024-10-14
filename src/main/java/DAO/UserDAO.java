@@ -38,7 +38,7 @@ public class UserDAO {
 	}
 
     public static void updateUser(Users user) throws SQLException, ClassNotFoundException {
-        String sql = "UPDATE USERS SET Username = ?, Password = ?, Fullname = ?, Birthday = ?, Gender = ?, Mobile = ?, Email = ?, Role = ? WHERE Id = ?";
+        String sql = "UPDATE USERS SET Email = ?, Password = ?, Fullname = ?, Username = ?, Birthday = ?, Gender = ?, Mobile = ?, Role = ? WHERE Id = ?";
         XJdbc.IUD(sql, user.toUpdateData());
     }
 
@@ -86,7 +86,7 @@ public class UserDAO {
 	}
 	
 	public static int generateNewId() throws ClassNotFoundException, SQLException {
-		String sql = "select count(*) from USERS";
+		String sql = "select top 1 Id from USERS order by Id desc";
 		return (int) XJdbc.getValue(sql) +1;
 	}
 }
