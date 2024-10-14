@@ -33,7 +33,7 @@
 			<div class="row align-items-center">
 				<!-- Newspaper Name -->
 				<div class="col-md-5 text-center">
-					<h1>CÔNG CỤ QUẢN TRỊ TIN TỨC</h1>
+					<h1><a href="/SOF203_ASM/admin/news" class="text-decoration-none text-white">CÔNG CỤ QUẢN TRỊ TIN TỨC</a></h1>
 				</div>
 				<div class="col-md-6 text-end">
 					<!-- User Icon -->
@@ -54,7 +54,7 @@
 							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang
 									quản trị</a></li>
 							<li><a class="dropdown-item"
-								href="/SOF203_ASM/admin/changePass">Đổi mật khẩu</a></li>
+								href="/SOF203_ASM/user/changePass">Đổi mật khẩu</a></li>
 							<li><a class="dropdown-item" href="/SOF203_ASM/user/logout">Đăng
 									xuất</a></li>
 						</ul>
@@ -83,9 +83,9 @@
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	</c:if>
-	<c:if test="${sessionScope.currUser.role!=true}">
+	<c:if test="${sessionScope.currUser==null}">
 		<h1>Cần đăng nhập để tiếp tục</h1>
-		<a href="/SOF203_ASM/login">Nhấn vào đây để đăng nhập</a>
+		<a href="/SOF203_ASM/user/login">Nhấn vào đây để đăng nhập</a>
 	</c:if>
 </body>
 </html>

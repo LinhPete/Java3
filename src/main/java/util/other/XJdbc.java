@@ -151,7 +151,9 @@ public final class XJdbc {
 				if (method.getName().startsWith("set")) {
 					String column = method.getName().substring(3);
 					Object value = map.get(column);
-					method.invoke(bean, value);
+					if(value!=null) {
+						method.invoke(bean, value);
+					}
 				}
 			}
 			return bean;

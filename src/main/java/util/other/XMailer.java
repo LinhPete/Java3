@@ -2,70 +2,75 @@ package util.other;
 
 import java.util.Map;
 import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-import javax.mail.internet.MimeMultipart;
 
-/**
- * Lớp tiện ích cung cấp các phương thức gửi email qua Google Mail
- * @author NghiemN
- * @version 1.0
- */
+import jakarta.mail.Authenticator;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMessage.RecipientType;
+import jakarta.mail.internet.MimeMultipart;
+
 public class XMailer {
+	private static final String DEFAULT_HOST_EMAIL = "peterdamlinh1215@gmail.com";
+	private static final String DEFAULT_HOST_PASSWORD = "ziys jute rzbx aixe";
 	private static Properties props = new Properties();
 	static {
 		props.setProperty("mail.smtp.host", "smtp.gmail.com");
 		props.setProperty("mail.smtp.port", "587");
 		props.setProperty("mail.smtp.auth", "true");
-		props.setProperty("mail.smtp.host.starttls.enable", "true");
+		props.setProperty("mail.smtp.starttls.enable", "true");
 	}
-	private static Session getSession() {
+//	private static Session getSession() {
+//		return Session.getDefaultInstance(props , new Authenticator() {
+//			@Override
+//			protected PasswordAuthentication getPasswordAuthentication() {
+//				return new PasswordAuthentication(DEFAULT_HOST_USERNAME, DEFAULT_HOST_PASSWORD);
+//			}
+//		});
+//	}
+	
+	private static Session getSession(String username, String password) {
 		return Session.getDefaultInstance(props , new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				String username = "user@gmail.com";
-				String password = "<appkey>";
 				return new PasswordAuthentication(username, password);
 			}
 		});
 	}
+	
 	/**
 	 * Gửi email
 	 * @param mail đối tượng chứa dữ liệu email
 	 * @exception lỗi gửi mail
 	 */
 	public static void send(MailData mail) {
-		Session session = XMailer.getSession();
+		Session session = XMailer.getSession(DEFAULT_HOST_EMAIL,DEFAULT_HOST_PASSWORD);
 		MimeMessage message = new MimeMessage(session);
 		try {
 			message.setFrom(new InternetAddress(mail.getFrom()));
 			message.setRecipients(RecipientType.TO, mail.getTo());
-			message.setRecipients(RecipientType.CC, mail.getCc());
-			message.setRecipients(RecipientType.BCC, mail.getBcc());
+//			message.setRecipients(RecipientType.CC, mail.getCc());
+//			message.setRecipients(RecipientType.BCC, mail.getBcc());
 			message.setSubject(mail.getSubject(), "utf-8");
 			message.setText(mail.getBody(), "utf-8", "html");
 			message.setReplyTo(message.getFrom());
-			String filenames = mail.getFilenames();
-			if(filenames != null && filenames.trim().length() > 0) {
-				Multipart attachs = new MimeMultipart();
-				for(String filename: filenames.split("[,;]+")) {
-					MimeBodyPart bodyPart = new MimeBodyPart();
-					try {
-						bodyPart.attachFile(filename.trim());
-						attachs.addBodyPart(bodyPart);
-					} catch (Exception e) {
-						System.out.println("Attach error: " + filename);
-					}
-				}
-				message.setContent(attachs);
-			}
+//			String filenames = mail.getFilenames();
+//			if(filenames != null && filenames.trim().length() > 0) {
+//				MimeMultipart attachs = new MimeMultipart();
+//				for(String filename: filenames.split("[,;]+")) {
+//					MimeBodyPart bodyPart = new MimeBodyPart();
+//					try {
+//						bodyPart.attachFile(filename.trim());
+//						attachs.addBodyPart(bodyPart);
+//					} catch (Exception e) {
+//						System.out.println("Attach error: " + filename);
+//					}
+//				}
+//				message.setContent(attachs);
+//			}
 			Transport.send(message);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -78,16 +83,28 @@ public class XMailer {
 	 * @param body nội dung mail
 	 * @exception lỗi gửi mail
 	 */
-	public static void send(String to, String subject, String body) {
-		XMailer.send(new MailData(to, subject, body));
+	public static boolean send(String from, String to, String subject, String body) {
+		try {
+			XMailer.send(new MailData(from, to, subject, body));
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-	/**
-	 * Mô tả dữ liệu mail
-	 * @author NghiemN
-	 * @version 1.0
-	 */
+	
+	public static boolean send(String to, String subject, String body) {
+		try {
+			XMailer.send(new MailData(DEFAULT_HOST_EMAIL, to, subject, body));
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	public static class MailData{
-		String from = "Solo2K <solo2K@gmail.com>";
+		String from;
 		String to;
 		String cc;
 		String bcc;
@@ -100,9 +117,11 @@ public class XMailer {
 		 * @param subject tiên đề mail
 		 * @param body nội dung email
 		 */
-		public MailData(String to, String subject, String body) {
-			this(to, subject, body, Map.of());
-		}
+//		public MailData(String from, String to, String subject, String body) {
+//			this(from, to, subject, body
+//					, Map.of()
+//					);
+//		}
 		/**
 		 * Tạo đối tượng với 3 thuộc tính đơn giản và các thuộc tính tùy chọn
 		 * @param to email người nhận
@@ -110,14 +129,29 @@ public class XMailer {
 		 * @param body nội dung email
 		 * @param others các thuộc tính bổ sung (from, cc, bcc, filenames)
 		 */
-		public MailData(String to, String subject, String body, Map<String, String> others) {
+		public MailData(String from, String to, String subject, String body
+//				, Map<String, String> others
+				) {
+			this.from = from;
 			this.to = to;
 			this.subject = subject;
 			this.body = body;
-			this.from = others.get("from");
-			this.cc = others.get("cc");
-			this.bcc = others.get("bcc");
-			this.filenames = others.get("filenames");
+//			this.from = others.get("from");
+//			this.cc = others.get("cc");
+//			this.bcc = others.get("bcc");
+//			this.filenames = others.get("filenames");
+		}
+		
+		public MailData(String to, String subject, String body
+//				, Map<String, String> others
+				) {
+			this.to = to;
+			this.subject = subject;
+			this.body = body;
+//			this.from = others.get("from");
+//			this.cc = others.get("cc");
+//			this.bcc = others.get("bcc");
+//			this.filenames = others.get("filenames");
 		}
 
 		public String getFrom() {

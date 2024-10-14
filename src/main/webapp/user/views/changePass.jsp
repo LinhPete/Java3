@@ -32,7 +32,7 @@
 			</form>
 			<div class="mt-3 text-center">
 				<p>
-					Chưa có tài khoản? <a href="${url}/register">Đăng ký ngay</a>
+					Quên mật khẩu? <a href="${url}/forgetPass">Khôi phục ngay</a>
 				</p>
 			</div>
 		</div>

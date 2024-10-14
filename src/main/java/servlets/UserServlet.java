@@ -26,6 +26,7 @@ import Entity.Users;
 		"/admin/user/delete", "/admin/user/reset" })
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Users form = null;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -38,7 +39,8 @@ public class UserServlet extends HttpServlet {
 		if (uri.contains("edit")) {
 			String id = request.getPathInfo().substring(1);
 			try {
-				request.setAttribute("item", UserDAO.getUserById(Integer.parseInt(id)));
+				form = UserDAO.getUserById(Integer.parseInt(id));
+				request.setAttribute("item", form);
 			} catch (NumberFormatException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -46,14 +48,14 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("action", "edit");
 			request.setAttribute("path", "/admin/views/userDetail.jsp");
 		} else if (uri.contains("blank")) {
-			Users user = new Users();
+			form = new Users();
 			try {
-				user.setId(UserDAO.generateNewId());
+				form.setId(UserDAO.generateNewId());
 			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			request.setAttribute("item", user);
+			request.setAttribute("item", form);
 			request.setAttribute("action", "create");
 			request.setAttribute("path", "/admin/views/userDetail.jsp");
 		}
@@ -80,11 +82,9 @@ public class UserServlet extends HttpServlet {
 		DateTimeConverter dtc = new DateConverter(new Date());
 		dtc.setPattern("MM/dd/yyyy");
 		ConvertUtils.register(dtc, Date.class);
-		Users form = null;
 		String uri = request.getServletPath();
 		if (uri.contains("create")) {
 			try {
-				form = new Users();
 				BeanUtils.populate(form, request.getParameterMap());
 				UserDAO.addUser(form);
 				request.setAttribute("action", "edit");
@@ -94,10 +94,7 @@ public class UserServlet extends HttpServlet {
 			}
 		} else if (uri.contains("update")) {
 			try {
-				form = new Users();
 				BeanUtils.populate(form, request.getParameterMap());
-				String id = request.getParameter("repId").substring(2);
-				form.setId(Integer.parseInt(id));
 				UserDAO.updateUser(form);
 				request.setAttribute("action", "edit");
 			} catch (IllegalAccessException | InvocationTargetException | ClassNotFoundException | SQLException e) {
@@ -106,13 +103,10 @@ public class UserServlet extends HttpServlet {
 			}
 		} else if (uri.contains("delete")) {
 			try {
-				form = new Users();
-				BeanUtils.populate(form, request.getParameterMap());
-				String id = request.getParameter("repId").substring(2);
-				form.setId(Integer.parseInt(id));
 				UserDAO.deleteUser(form.getId());
-				request.setAttribute("action", "edit");
-			} catch (IllegalAccessException | InvocationTargetException | ClassNotFoundException | SQLException e) {
+				response.sendRedirect("/SOF203_ASM/admin/user");
+				return;
+			} catch (ClassNotFoundException | SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

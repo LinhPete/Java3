@@ -77,7 +77,7 @@
 									cá nhân</a></li>
 							<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang
 									quản trị</a></li>
-									<li><a class="dropdown-item" href="/SOF203_ASM/admin/changePass">Đổi mật khẩu</a></li>
+									<li><a class="dropdown-item" href="/SOF203_ASM/user/changePass">Đổi mật khẩu</a></li>
 							<li><a class="dropdown-item" href="${path}/logout">Đăng
 									xuất</a></li>
 						</c:if>
