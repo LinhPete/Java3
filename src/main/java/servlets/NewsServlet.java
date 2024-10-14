@@ -110,18 +110,9 @@ public class NewsServlet extends HttpServlet {
 		} else if (uri.contains("login")) {
 			request.setAttribute("view", "/user/views/login.jsp");
 
-		} else if (uri.contains("demo")) {
-			try {
-				newsList = NewsDAO.getAllNews();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			request.setAttribute("newsList", newsList);
-			request.setAttribute("view", "/user/views/newsList.jsp");
-		}
-
-		else if (uri.contains("detail")) {
+		} else if (uri.contains("detail")) {
 			String id = request.getPathInfo().substring(1);
+			
 			try {
 				News news = NewsDAO.getNewsById(Integer.parseInt(id));
 				request.setAttribute("news", news);
