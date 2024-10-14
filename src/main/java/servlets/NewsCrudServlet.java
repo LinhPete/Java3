@@ -51,7 +51,7 @@ public class NewsCrudServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<News> list;
 		String path = request.getServletPath();
-		user = (Users) request.getSession().getAttribute("user");
+		user = (Users) request.getSession().getAttribute("currUser");
 		if(path.contains("search") && !request.getParameter("search").isBlank()) {
 			if(user.getRole()) {
 				try {

@@ -39,7 +39,7 @@
 
 		<!-- Search Bar -->
 		<div class="col-md-4 text-center">
-			<form class="d-inline-block w-100">
+			<form class="d-inline-block w-100" action="${path}/search" method="get">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Tìm kiếm">
 					<button class="btn btn-outline-light" type="submit">
@@ -56,21 +56,15 @@
 		<div class="col-md-4 text-end">
 			<!-- User Icon -->
 			<div class="dropdown d-inline-block mx-2">
-				<button class="btn btn-light account-icon" type="button"
-					id="dropdownMenuButton" data-bs-toggle="dropdown"
-					aria-expanded="false">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-						fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                        <path
-							d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+				<button class="btn btn-light account-icon" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
                     </svg>
 				</button>
 				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<c:if test="${sessionScope.currUser==null}">
-						<li><a class="dropdown-item" href="${path}/login">Đăng
-								nhập</a></li>
-						<li><a class="dropdown-item" href="${path}/register">Đăng
-								ký</a></li>
+						<li><a class="dropdown-item" href="${path}/login">Đăng nhập</a></li>
+						<li><a class="dropdown-item" href="${path}/register">Đăng ký</a></li>
 					</c:if>
 					<c:if test="${sessionScope.currUser!=null}">
 						<li><a class="dropdown-item" href="/SOF203_ASM/admin/news">Trang
@@ -87,10 +81,8 @@
 			</div>
 
 			<button class="btn btn-light bell-icon">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-					fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
-                     <path
-						d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                     <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901" />
                 </svg>
 			</button>
 		</div>
@@ -98,12 +90,11 @@
 
 	<nav class="bg-light text-center py-2">
 		<a href="${path}/home" class="text-decoration-none mx-2">Trang chủ</a>
-		<a href="${path}/culture" class="text-decoration-none mx-2">Văn
-			hóa</a> <a href="${path}/law" class="text-decoration-none mx-2">Pháp
-			luật</a> <a href="${path}/sports" class="text-decoration-none mx-2">Thể
-			thao</a> <a href="${path}/travel" class="text-decoration-none mx-2">Du
-			lịch</a> <a href="${path}/tech" class="text-decoration-none mx-2">Công
-			nghệ</a>
+		<a href="${path}/culture" class="text-decoration-none mx-2">Văn hóa</a>
+		<a href="${path}/law" class="text-decoration-none mx-2">Pháp luật</a>
+		<a href="${path}/sports" class="text-decoration-none mx-2">Thể thao</a>
+		<a href="${path}/travel" class="text-decoration-none mx-2">Du lịch</a> 
+		<a href="${path}/tech" class="text-decoration-none mx-2">Công nghệ</a>
 	</nav>
 	<hr>
 	<main>

@@ -132,6 +132,20 @@ public class NewsDAO {
 		return newsList;
 	}
 
+	public static List<News> searchAll(String keyword) throws SQLException {
+	    String sql = "SELECT DISTINCT NEWS.* " +
+	                 "FROM NEWS " +
+	                 "LEFT JOIN USERS ON NEWS.Author = USERS.Id " +
+	                 "LEFT JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id " +
+	                 "WHERE NEWS.Title LIKE ? " +
+	                 "OR NEWS.Content LIKE ? " +
+	                 "OR USERS.Fullname LIKE ? " +
+	                 "OR CATEGORIES.Name LIKE ?";
+
+	    String searchKeyword = "%" + keyword + "%";
+	    return XJdbc.getResultList(News.class, sql, searchKeyword, searchKeyword, searchKeyword, searchKeyword);
+	}
+
 	public static List<News> getNewsByCategory(String categoryName) throws SQLException {
 		String sql = "SELECT NEWS.* FROM NEWS JOIN CATEGORIES ON NEWS.CategoryId = CATEGORIES.Id WHERE CATEGORIES.Name = ?";
 		List<News> newsList = XJdbc.getResultList(News.class, sql, categoryName);
@@ -165,9 +179,8 @@ public class NewsDAO {
 	}
 
 	public static List<News> getRelatedNews(int categoryId, int newsId) throws SQLException {
-		List<News> relatedNewsList = new ArrayList<>();
 		String sql = "SELECT TOP 5 * FROM News WHERE categoryId = ? AND id <> ?";
-		return relatedNewsList;
+		return XJdbc.getResultList(News.class, sql, categoryId, newsId);
 	}
 
 	public static int generateNewId() throws ClassNotFoundException, SQLException {
