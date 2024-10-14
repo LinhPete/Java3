@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-
 import DAO.NewsDAO;
 import Entity.News;
+import Entity.Users;
 
 /**
  * Servlet implementation class NewsServlet
@@ -23,8 +23,8 @@ import Entity.News;
 		"/user/detail/*" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static final String UPLOAD_DIRECTORY = "photo";
-    News form = new News();
+	private static final String UPLOAD_DIRECTORY = "photo";
+	News form = new News();
 
 	public NewsServlet() {
 		super();
@@ -41,6 +41,8 @@ public class NewsServlet extends HttpServlet {
 		List<News> latestList = null;
 		List<News> mostViewdList = null;
 		List<News> ViewdList = null;
+	    String path = request.getServletPath();
+
 		
 		if (uri.contains("home")) {
 			try {
@@ -117,14 +119,27 @@ public class NewsServlet extends HttpServlet {
 				News news = NewsDAO.getNewsById(Integer.parseInt(id));
 				request.setAttribute("news", news);
 
-				List<News> relatedNews = NewsDAO.getRelatedNews(news.getCategoryId(), news.getId());
+				List<News> relatedNews = NewsDAO.getRelatedNews(news.getCategoryId());
 				request.setAttribute("relatedNewsList", relatedNews);
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 			}
-			request.setAttribute("view", "/user/views/NewsDetail.jsp");
+			request.setAttribute("view", "/user/views/newsDetail.jsp");
+			
+		} else if (path.contains("search") && !request.getParameter("search").isBlank()){
+			List<News> list = null;
+		    String searchQuery = request.getParameter("search");
+			if (path.contains("search") && searchQuery != null && !searchQuery.isBlank()) {
+		        try {
+		            list = NewsDAO.searchAll(searchQuery);
+		            request.setAttribute("list", list);
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+		    request.setAttribute("path", "/user/views/newsList.jsp");
+		    request.getRequestDispatcher("/user/views/newsList.jsp").forward(request, response);
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
-	
 }
