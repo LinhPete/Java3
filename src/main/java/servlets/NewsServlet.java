@@ -28,6 +28,7 @@ import Entity.Users;
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "photo";
+	private static String viewdIds = "";
 	News form = new News();
 
 	public NewsServlet() {
@@ -60,7 +61,7 @@ public class NewsServlet extends HttpServlet {
 				if(cookies!=null) {
 					for(int i = 0;i<cookies.length;i++) {
 						if(cookies[i].getName().equals("viewedArticles")) {
-							viewedIds = cookies[i].getValue().split(",");
+							viewedIds = cookies[i].getValue().split("C");
 							break;
 						}
 					}
@@ -141,20 +142,12 @@ public class NewsServlet extends HttpServlet {
 			try {
 				News news = NewsDAO.getNewsById(Integer.parseInt(id));
 				request.setAttribute("news", news);
+				viewdIds+=news.getId()+"C";
 				Cookie viewedArticlesCookie = null;
-				Cookie[] cookies = request.getCookies();
-				for(int i = 0;i<cookies.length;i++) {
-					if(cookies[i].getName().equals("viewedArticles")) {
-						cookies[i].setValue(news.getId()+","+cookies[i].getValue());
-						viewedArticlesCookie = cookies[i];
-						break;
-					}
-				}
-				if(viewedArticlesCookie == null) {
-					viewedArticlesCookie = new Cookie("viewedArticles", news.getId()+"");
+					viewedArticlesCookie = new Cookie("viewedArticles", viewdIds.substring(0, viewdIds.length()-1));
 					viewedArticlesCookie.setMaxAge(60*60*24); // Cookie tồn tại trong 24 giờ
-					response.addCookie(viewedArticlesCookie);
-				}			
+					viewedArticlesCookie.setPath("/SOF203_ASM/user");
+					response.addCookie(viewedArticlesCookie);		
 				
 				List<News> relatedNews = NewsDAO.getRelatedNews(news.getCategoryId(), news.getId());
 				request.setAttribute("relatedNewsList", relatedNews);
