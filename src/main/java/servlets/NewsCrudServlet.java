@@ -34,7 +34,7 @@ import Entity.Users;
 public class NewsCrudServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private News news;
-	private static Users user;
+//	private static Users user;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -51,7 +51,7 @@ public class NewsCrudServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<News> list;
 		String path = request.getServletPath();
-		user = (Users) request.getSession().getAttribute("user");
+		Users user = (Users) request.getSession().getAttribute("currUser");
 		if(path.contains("search") && !request.getParameter("search").isBlank()) {
 			if(user.getRole()) {
 				try {

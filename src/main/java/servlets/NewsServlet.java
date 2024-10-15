@@ -23,7 +23,7 @@ import Entity.Users;
  * Servlet implementation class NewsServlet
  */
 @WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech",
-		"/user/detail/*" })
+		"/user/detail/*", "/user/search" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "photo";
@@ -135,18 +135,15 @@ public class NewsServlet extends HttpServlet {
 			request.setAttribute("view", "/user/views/newsDetail.jsp");
 			
 		} else if (path.contains("search") && !request.getParameter("search").isBlank()){
-			List<News> list = null;
+			List<News> list;
 		    String searchQuery = request.getParameter("search");
-			if (path.contains("search") && searchQuery != null && !searchQuery.isBlank()) {
 		        try {
-		            list = NewsDAO.searchAll(searchQuery);
-		            request.setAttribute("list", list);
+		            list = NewsDAO.searchNews(searchQuery);
+		            request.setAttribute("newsList", list);
 		        } catch (SQLException e) {
 		            e.printStackTrace();
-		        }
 		    }
-		    request.setAttribute("path", "/user/views/newsList.jsp");
-		    request.getRequestDispatcher("/user/views/newsList.jsp").forward(request, response);
+		    request.setAttribute("view", "/user/views/newsList.jsp");
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
