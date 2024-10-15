@@ -19,7 +19,7 @@ import DAO.NewsLettersDAO;
 /**
  * Servlet implementation class NewsLetterServlet
  */
-@WebServlet({"/admin/letter", "/admin/letter/edit/*", "/admin/letter/update", "/admin/letter/delete"})
+@WebServlet({"/admin/letter", "/admin/letter/edit/*", "/admin/letter/update", "/admin/letter/delete", "/admin/subscribe"})
 public class NewsLetterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	List<Newsletters> list;
@@ -65,7 +65,7 @@ public class NewsLetterServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (path.contains("subcribe")) {
+		} else if (path.contains("/admin/subcribe")) {
 			String email = request.getParameter("email");
 			form = new Newsletters();
 			form.setEmail(email);

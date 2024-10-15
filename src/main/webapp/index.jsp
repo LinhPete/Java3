@@ -41,7 +41,7 @@
 		<div class="col-md-4 text-center">
 			<form class="d-inline-block w-100" action="${path}/search" method="get">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Tìm kiếm">
+					<input type="text" class="form-control" placeholder="Tìm kiếm" name="search">
 					<button class="btn btn-outline-light" type="submit">
 						<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25"
 							height="25" viewBox="0 0 50 50">
