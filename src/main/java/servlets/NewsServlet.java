@@ -2,6 +2,7 @@ package servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,6 +11,8 @@ import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import DAO.NewsDAO;
@@ -20,7 +23,7 @@ import Entity.Users;
  * Servlet implementation class NewsServlet
  */
 @WebServlet({ "/user/home", "/user/culture", "/user/law", "/user/sports", "/user/travel", "/user/tech",
-		"/user/detail/*" })
+		"/user/detail/*", "/user/search" })
 public class NewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String UPLOAD_DIRECTORY = "photo";
@@ -35,14 +38,19 @@ public class NewsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+//		String updatedIds = updatedArticleIds(currentIds, newArticleId);
+//		Cookie viewedArticlesCookie = new Cookie("viewedArticles", updatedIds);
+//		viewedArticlesCookie.setMaxAge(60*60*24); // Cookie tồn tại trong 24 giờ
+//		response.addCookie(viewedArticlesCookie);
+
+		
+	    String path = request.getServletPath();
 		String uri = request.getRequestURI();
 		List<News> newsList = null;
 		List<News> homePageList = null;
 		List<News> latestList = null;
 		List<News> mostViewdList = null;
-		List<News> ViewdList = null;
-	    String path = request.getServletPath();
-
+		List<News> viewdList = null;
 		
 		if (uri.contains("home")) {
 			try {
@@ -127,19 +135,36 @@ public class NewsServlet extends HttpServlet {
 			request.setAttribute("view", "/user/views/newsDetail.jsp");
 			
 		} else if (path.contains("search") && !request.getParameter("search").isBlank()){
-			List<News> list = null;
+			List<News> list;
 		    String searchQuery = request.getParameter("search");
-			if (path.contains("search") && searchQuery != null && !searchQuery.isBlank()) {
 		        try {
-		            list = NewsDAO.searchAll(searchQuery);
-		            request.setAttribute("list", list);
+		            list = NewsDAO.searchNews(searchQuery);
+		            request.setAttribute("newsList", list);
 		        } catch (SQLException e) {
 		            e.printStackTrace();
-		        }
 		    }
-		    request.setAttribute("path", "/user/views/newsList.jsp");
-		    request.getRequestDispatcher("/user/views/newsList.jsp").forward(request, response);
+		    request.setAttribute("view", "/user/views/newsList.jsp");
 		}
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
+	
+	public String updatedArticleIds(String currentIds, String newArticleId) {
+	    // Giả sử các ID bài viết được phân tách bằng dấu phẩy ","
+	    List<String> articleIdsList = new ArrayList<>(Arrays.asList(currentIds.split(",")));
+
+	    // Loại bỏ ID bài viết cũ nếu đã tồn tại trong danh sách
+	    articleIdsList.remove(newArticleId);
+
+	    // Thêm bài viết mới lên đầu danh sách
+	    articleIdsList.add(0, newArticleId);
+
+	    // Giới hạn danh sách chỉ chứa tối đa 5 bài viết gần đây
+	    if (articleIdsList.size() > 5) {
+	        articleIdsList = articleIdsList.subList(0, 5);
+	    }
+
+	    // Kết hợp các ID lại thành chuỗi để lưu vào cookie
+	    return String.join(",", articleIdsList);
+	}
+
 }
