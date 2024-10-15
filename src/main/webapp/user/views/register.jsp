@@ -46,8 +46,8 @@
 					<label class="form-check-label" for="authorCheck">Đăng ký làm tác giả</label>
 				</div>
 				<div class="form-check mb-3">
-				    <input class="form-check-input" type="checkbox" id="newsCheck" name="newsCheck">
-					<label class="form-check-label" for="newsCheck">Đăng ký làm nhận tin mới nhất</label>
+				    <input class="form-check-input" type="checkbox" id="newsCheck" name="letterCheck">
+					<label class="form-check-label" for="newsCheck">Đăng ký nhận tin mới nhất</label>
 				</div>
                 <button type="submit" class="btn btn-primary w-100">Xác thực</button>
                 <h3 style="color: red;">${error}</h3>

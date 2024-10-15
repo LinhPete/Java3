@@ -87,7 +87,7 @@
 			<div class="card mb-3">
 				<div class="card-header bg-secondary text-white">Đăng ký nhận tin</div>
 				<div class="card-body">
-					<form action="/SOF203_ASM/admin/letter" method="post" class="d-flex">
+					<form action="/SOF203_ASM/user/subscribe" method="post" class="d-flex">
 						<input name="email" type="email" class="form-control form-control-sm me-2" placeholder="newsletter@example.com">
 						<button class="btn btn-primary btn-sm" type="submit">
 							<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">

@@ -17,7 +17,7 @@
 					<td>${vs.count}</td>
 					<td>${item.email}</td>
 					<td>${item.enabled}</td>
-					<td><a href="/SOF203_ASM/admin/letter/edit/${vs}">Xem
+					<td><a href="/SOF203_ASM/admin/letter/edit/${vs.count}">Xem
 							chi tiết...</a></td>
 				</tr>
 			</c:forEach>
@@ -34,14 +34,12 @@
 			</div>
 			<div class="mb-3">
 				<input id="enabled" name="enabled"
-					${item.enabled==true?'checked':''} class="form-control"> <label
+					${item.enabled==true?'checked':''} class="form-control" type="checkbox"> <label
 					for="enabled" class="form-label">Enabled ?</label>
 			</div>
 			<div class="text-center">
-				<button formaction="${root}/update" ${action=='create'?'hidden':''}
-					class="btn btn-warning">Sửa</button>
-				<button formaction="${root}/delete" ${action=='create'?'hidden':''}
-					class="btn btn-danger">Xóa</button>
+				<button formaction="${root}/update"	class="btn btn-warning">Sửa</button>
+				<button formaction="${root}/delete"	class="btn btn-danger">Xóa</button>
 			</div>
 		</form>
 	</div>

@@ -57,14 +57,28 @@ public class NewsLettersDAO {
     }
     
     public static List<Newsletters> getAllNewsletter(){
-    	String sql = "SELECT * FROM NEWSLETTERS order by Enabled";
+    	String sql = "SELECT * FROM NEWSLETTERS order by Enabled desc";
     	List<Newsletters> list = XJdbc.getResultList(Newsletters.class, sql);
     	return list;
     }
     
     public static List<String> getEnabledEmailList(){
-    	String sql = "SELECT Email FROM NEWSLETTERS WHERE Enabled = true";
+    	String sql = "SELECT Email FROM NEWSLETTERS WHERE Enabled = 1";
     	List<String> list = XJdbc.getResultList(String.class, sql);
     	return list;
+    }
+    
+    public static Boolean checkEnabled(String email){
+    	String sql = "SELECT Enabled FROM NEWSLETTERS where Email = ?";
+    	Newsletters letter = XJdbc.getSingleResult(Newsletters.class, sql, email);
+    	if(letter==null) {
+    		return null;
+    	}
+    	else if (letter.isEnabled()) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 }
