@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import DAO.NewsDAO;
+import DAO.UserDAO;
 import Entity.News;
 import Entity.Users;
 
@@ -38,12 +39,6 @@ public class NewsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-//		String updatedIds = updatedArticleIds(currentIds, newArticleId);
-//		Cookie viewedArticlesCookie = new Cookie("viewedArticles", updatedIds);
-//		viewedArticlesCookie.setMaxAge(60*60*24); // Cookie tồn tại trong 24 giờ
-//		response.addCookie(viewedArticlesCookie);
-
-		
 	    String path = request.getServletPath();
 		String uri = request.getRequestURI();
 		List<News> newsList = null;
@@ -51,15 +46,18 @@ public class NewsServlet extends HttpServlet {
 		List<News> latestList = null;
 		List<News> mostViewdList = null;
 		List<News> viewdList = null;
-		
+		String updatedIds = null;
+
 		if (uri.contains("home")) {
 			try {
 				newsList = NewsDAO.getAllHomeNews();
 				homePageList = NewsDAO.getAllHomeNews();
 				latestList = NewsDAO.getLatestNews();
 				mostViewdList = NewsDAO.getTopNewsByViews();
-//				ViewdList = NewsDAO.getRecentlyViewedNewsByUser();
 				
+				updatedIds = updatedArticleIds( String.valueOf(UserDAO.getUserById(0)), String.valueOf(NewsDAO.getNewsById(0)));
+//				viewdList = NewsDAO.getRecentlyViewedNewsByUser();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -68,7 +66,12 @@ public class NewsServlet extends HttpServlet {
 			request.setAttribute("latestList", latestList);
 			request.setAttribute("mostViewdList", mostViewdList);
 			request.setAttribute("view", "/user/views/home.jsp");
-//			request.setAttribute("ViewdList", ViewdList);
+			
+			Cookie viewedArticlesCookie = new Cookie("viewedArticles", updatedIds);
+			viewedArticlesCookie.setMaxAge(60*60*24); // Cookie tồn tại trong 24 giờ
+			response.addCookie(viewedArticlesCookie);
+
+//			request.setAttribute("viewdList", viewdList);
 		} else if (uri.contains("culture")) {
 			try {
 				newsList = NewsDAO.getNewsByCategory("Văn hoá");

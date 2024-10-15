@@ -170,13 +170,7 @@ public class NewsDAO {
 		return newsList;
 	}
 
-	public static List<News> getRecentlyViewedNewsByUser(int userId, int limit) throws SQLException {
-	    String sql = "SELECT TOP 5 N.* FROM NEWS N " +
-	                 "JOIN USER_VIEWS UV ON N.Id = UV.NewsId " +
-	                 "WHERE UV.UserId = ? " +
-	                 "ORDER BY UV.ViewedDate DESC";
-	    return XJdbc.getResultList(News.class, sql, limit, userId);
-	}
+	
 
 	public static List<News> getRelatedNews(int categoryId, int newsId) throws SQLException {
 		String sql = "SELECT TOP 5 * FROM News WHERE categoryId = ? AND id <> ?";

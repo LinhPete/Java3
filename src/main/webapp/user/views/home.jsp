@@ -41,7 +41,7 @@
 			<div class="card mb-3">
 				<div class="card-header bg-success text-white">5 bản tin bạn đã xem</div>
 				<div class="card-body">
-					<c:forEach var="viewd" items="${ViewdList}">
+					<c:forEach var="viewd" items="${viewdList}">
 						<div class="row mb-3">
 							<div class="col-md-2">
 								<a href="/SOF203_ASM/user/detail/${viewd.id}"> <img
