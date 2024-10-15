@@ -61,7 +61,6 @@ public class LoginServlet extends HttpServlet {
 				if (user != null) {
 					if (PasswordUtil.checkPassword(password, user.getPassword())) {
 						request.getSession().setAttribute("currUser", user);
-						System.out.println(request.getSession().getAttribute("currUser"));
 //						request.setAttribute("view", "/user/views/home.jsp");
 						response.sendRedirect("/SOF203_ASM/user/home");
 						return;
