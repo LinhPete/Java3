@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.other.XMailer;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -19,7 +21,7 @@ import DAO.NewsLettersDAO;
 /**
  * Servlet implementation class NewsLetterServlet
  */
-@WebServlet({"/admin/letter", "/admin/letter/edit/*", "/admin/letter/update", "/admin/letter/delete", "/admin/subscribe"})
+@WebServlet({"/admin/letter", "/admin/letter/edit/*", "/admin/letter/update", "/admin/letter/delete", "/user/subscribe"})
 public class NewsLetterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	List<Newsletters> list;
@@ -65,22 +67,53 @@ public class NewsLetterServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (path.contains("/admin/subcribe")) {
+		} else if (path.contains("/user/subcribe")) {
 			String email = request.getParameter("email");
-			form = new Newsletters();
-			form.setEmail(email);
-			form.setEnabled(true);
-			
-			try {
-				NewsLettersDAO.addNewsletter(form);
-			} catch (ClassNotFoundException | SQLException e) {
-				e.printStackTrace();
+			Boolean check = NewsLettersDAO.checkEnabled(email);
+			if(check) {
+				response.sendRedirect("/SOF203_ASM/user/home");
+				return;
 			}
-			request.setAttribute("item", form);
-		    request.setAttribute("message", "Đăng ký nhận tin thành công!");
+			String key = generateConfirmKey();
+			boolean isSent = XMailer.send(email, "Mã xác nhận", key);
+			if (isSent) {
+				request.getSession().setAttribute("confirmKey", key);
+				request.getSession().setAttribute("newsLetter", email);
+				request.setAttribute("formAction", "/subscribe/confirm");
+				request.getRequestDispatcher("/user/views/confirmEmail.jsp").forward(request, response);
+				return;
+			}
+		} else if (path.contains("/user/subcribe/confirm")) {
+			String email = (String) request.getSession().getAttribute("newsLetter");
+			Boolean check = NewsLettersDAO.checkEnabled(email);
+			if(check==null) {
+				try {
+					NewsLettersDAO.addNewsletter(new Newsletters(email, true));
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if(!check) {
+				try {
+					NewsLettersDAO.updateNewsletter(new Newsletters(email, true));
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		request.setAttribute("path", "/admin/views/letter.jsp");
 		request.getRequestDispatcher("/admin/views/index.jsp").forward(request, response);
 	}
 
+	private String generateConfirmKey() {
+		String allowed = "qwertyuiopasdfghjklzxcvbnmMNBVCXZASDFGHJKLPOIUYTREWQ0123456789";
+		String key = "";
+		for (int i = 0; i < 6; i++) {
+			key += allowed.charAt((int) (Math.random() * allowed.length()));
+		}
+		return key;
+	}
 }
