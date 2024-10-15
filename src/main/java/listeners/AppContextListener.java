@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
-import util.other.DataSourceFactory;
 import util.other.XJdbc;
 
 /**
@@ -33,7 +32,6 @@ public class AppContextListener implements ServletContextListener {
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
-    	DataSourceFactory.closeDataSource();
     	try {
 			XJdbc.closeConnection();
 		} catch (SQLException e) {

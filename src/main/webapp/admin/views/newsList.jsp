@@ -46,6 +46,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="/SOF203_ASM/admin/user/blank" class="btn btn-primary">Tạo
+	<a href="/SOF203_ASM/admin/news/blank" class="btn btn-primary">Tạo
 		tin mới</a>
 </div>
